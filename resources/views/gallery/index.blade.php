@@ -1,10 +1,11 @@
 <x-layout title="Galeri Artisan | Auto-Stitch OS">
-    <div class="bg-surface-0 min-h-screen pt-24 pb-16" x-data="galleryFilter()">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-transparent min-h-screen pt-24 pb-16 relative" x-data="galleryFilter()">
+        <div class="absolute top-20 right-0 w-96 h-96 bg-accent-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Header Section -->
             <div class="text-center mb-12" x-intersect="animateFadeInUp($el)">
-                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">The Artisan's Showcase</h1>
-                <p class="text-slate-500 text-lg max-w-2xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-md">The Artisan's Showcase</h1>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
                     Koleksi mahakarya restorasi interior kami. Dari bus premium hingga mobil mewah, dedikasi kami terlihat pada setiap jahitan.
                 </p>
             </div>
@@ -13,16 +14,16 @@
             <div class="flex flex-wrap justify-center gap-3 mb-12" x-intersect="animateFadeInUp($el)" style="animation-delay: 100ms;">
                 <button 
                     @click="activeCategory = 'all'"
-                    :class="activeCategory === 'all' ? 'bg-slate-900 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                    class="px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 active:scale-95"
+                    :class="activeCategory === 'all' ? 'bg-accent-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.4)] border-accent-400' : 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10'"
+                    class="px-6 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 transform hover:scale-105 active:scale-95 backdrop-blur-sm"
                 >
                     Semua
                 </button>
                 @foreach($categories as $category)
                     <button 
                         @click="activeCategory = '{{ $category->slug }}'"
-                        :class="activeCategory === '{{ $category->slug }}' ? 'bg-slate-900 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                        class="px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 active:scale-95"
+                        :class="activeCategory === '{{ $category->slug }}' ? 'bg-accent-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.4)] border-accent-400' : 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10'"
+                        class="px-6 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 transform hover:scale-105 active:scale-95 backdrop-blur-sm"
                     >
                         {{ $category->name }}
                     </button>
@@ -42,20 +43,21 @@
                         x-transition:leave-end="opacity-0 scale-95"
                         class="group cursor-pointer {{ $index % 3 == 0 ? 'lg:col-span-2 lg:row-span-2' : '' }}"
                     >
-                        <div class="relative overflow-hidden rounded-2xl bg-slate-100 h-64 {{ $index % 3 == 0 ? 'lg:h-[34rem]' : '' }} shadow-sm hover:shadow-xl transition-all duration-500">
+                        <div class="relative overflow-hidden rounded-2xl bg-slate-800 border border-white/5 h-64 {{ $index % 3 == 0 ? 'lg:h-[34rem]' : '' }} shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(249,115,22,0.2)] transition-all duration-500">
                             <img 
                                 src="{{ asset($gallery->image_url) }}" 
                                 alt="{{ $gallery->title ?? 'Gallery image' }}"
                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                                 loading="lazy"
                             >
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="absolute bottom-0 left-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                    <span class="inline-block px-3 py-1 mb-2 text-xs font-semibold text-white bg-copper-500/90 rounded-full backdrop-blur-sm">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="absolute bottom-0 left-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 w-full">
+                                    <div class="w-8 h-1 bg-accent-500 mb-3 rounded-full shadow-[0_0_8px_rgba(249,115,22,0.8)]"></div>
+                                    <span class="inline-block px-3 py-1 mb-2 text-xs font-bold text-white bg-accent-500/90 rounded-full backdrop-blur-sm shadow-md">
                                         {{ $gallery->category->name }}
                                     </span>
                                     @if($gallery->title)
-                                        <h3 class="text-xl font-bold text-white">{{ $gallery->title }}</h3>
+                                        <h3 class="text-xl font-bold text-white drop-shadow-md">{{ $gallery->title }}</h3>
                                     @endif
                                 </div>
                             </div>
