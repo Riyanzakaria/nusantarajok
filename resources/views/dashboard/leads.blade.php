@@ -1,4 +1,4 @@
-<x-layout title="Prospek (Leads) — AUTO-STITCH OS">
+<x-layout title="Prospek (Leads) — Nusantara Jok">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" x-data="convertModal()">
 
     {{-- Header --}}

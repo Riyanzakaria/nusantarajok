@@ -1,4 +1,4 @@
-<x-layout title="Lacak Kendaraan - AUTO-STITCH OS">
+<x-layout title="Lacak Kendaraan - Nusantara Jok">
     <div class="max-w-3xl mx-auto px-4 py-16 relative" x-data="trackerApp()">
         <div class="absolute -top-40 -left-40 w-[40rem] h-[40rem] bg-accent-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
         <div class="text-center mb-16 relative z-10">

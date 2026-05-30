@@ -1,4 +1,4 @@
-<x-layout title="Daftar Harga Material — AUTO-STITCH OS">
+<x-layout title="Daftar Harga Material — Nusantara Jok">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">

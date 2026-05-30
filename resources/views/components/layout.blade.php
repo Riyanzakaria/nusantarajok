@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'AUTO-STITCH OS' }}</title>
+    <title>{{ $title ?? 'Nusantara Jok' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Preload fonts if possible or just rely on CSS -->
 </head>
@@ -21,7 +21,7 @@
                     <path d="M2 17l10 5 10-5"></path>
                     <path d="M2 12l10 5 10-5"></path>
                 </svg>
-                AUTO-STITCH<span class="text-accent-500">.</span>
+                NUSANTARA<span class="text-accent-500"> JOK</span>
             </a>
             
             <div class="flex items-center gap-8">
@@ -64,7 +64,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div class="col-span-1 md:col-span-2">
                     <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-white mb-4 block">
-                        AUTO-STITCH<span class="text-accent-500">.</span>
+                        NUSANTARA<span class="text-accent-500"> JOK</span>
                     </a>
                     <p class="text-slate-400 font-medium leading-relaxed max-w-sm">
                         Modifikasi interior artisan dengan fokus pada kualitas, transparansi digital, dan kepuasan pelanggan kelas atas.
@@ -94,7 +94,7 @@
             </div>
             <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-sm text-slate-500 font-medium">
-                    &copy; {{ date('Y') }} AUTO-STITCH OS. All rights reserved.
+                    &copy; {{ date('Y') }} Nusantara Jok. All rights reserved.
                 </p>
                 <div class="flex gap-4">
                     <!-- Social icons placeholder -->
@@ -118,7 +118,7 @@
     <script>
     (function () {
         const waNumber  = '6281234567890'; // ← Ganti dengan nomor WhatsApp admin
-        const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Admin AUTO-STITCH, saya ingin konsultasi modifikasi interior kendaraan saya. 🚗')}`;
+        const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Admin Nusantara Jok, saya ingin konsultasi modifikasi interior kendaraan saya. 🚗')}`;
 
 
         // ── 1. Inject styles ────────────────────────────────────────────
@@ -312,7 +312,7 @@
                     </svg>
                 </span>
                 <div>
-                    <div id="wa-popup-name">AUTO-STITCH CS</div>
+                    <div id="wa-popup-name">Nusantara Jok CS</div>
                     <div id="wa-popup-status">● Online sekarang</div>
                 </div>
                 <button id="wa-popup-close" aria-label="Tutup">
@@ -321,7 +321,7 @@
             </div>
             <div id="wa-popup-body">
                 <div id="wa-popup-bubble">
-                    Halo! 👋 Selamat datang di <strong>AUTO-STITCH</strong>.<br>
+                    Halo! 👋 Selamat datang di <strong>Nusantara Jok</strong>.<br>
                     Ada yang bisa kami bantu untuk kebutuhan modifikasi interior kendaraan Anda?
                 </div>
                 <div id="wa-popup-time">${timeStr} ✓✓</div>

@@ -443,7 +443,7 @@
                     }
 
                     const namaDisplay = this.customerName ? `*${this.customerName}* — ` : '';
-                    const text = `Halo Admin *AUTO-STITCH OS*, ${namaDisplay}saya ingin konsultasi modifikasi interior kendaraan saya.%0A%0A*Detail Estimasi:*%0A- Kendaraan: ${cat ? cat.name : '-'}%0A- Material: ${mat ? mat.item_name : '-'}%0A- Estimasi Harga: *Rp ${this.formatNumber(this.currentPrice)}*%0A%0AMohon info lebih lanjut mengenai jadwal pengerjaan. Terima kasih!`;
+                    const text = `Halo Admin *Nusantara Jok*, ${namaDisplay}saya ingin konsultasi modifikasi interior kendaraan saya.%0A%0A*Detail Estimasi:*%0A- Kendaraan: ${cat ? cat.name : '-'}%0A- Material: ${mat ? mat.item_name : '-'}%0A- Estimasi Harga: *Rp ${this.formatNumber(this.currentPrice)}*%0A%0AMohon info lebih lanjut mengenai jadwal pengerjaan. Terima kasih!`;
 
                     window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
                 }

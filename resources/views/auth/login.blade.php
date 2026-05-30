@@ -1,10 +1,10 @@
-<x-layout title="Login — AUTO-STITCH OS">
+<x-layout title="Login — Nusantara Jok">
     <div class="max-w-md mx-auto px-4 py-16 relative">
         <div class="absolute top-0 right-0 w-[30rem] h-[30rem] bg-accent-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         
         <div class="relative z-10">
             <h1 class="font-display text-3xl font-bold text-white mb-2 text-center tracking-tight drop-shadow-md">Masuk ke Dashboard</h1>
-            <p class="text-center text-slate-400 mb-8 font-light">Silakan login untuk mengelola AUTO-STITCH OS.</p>
+            <p class="text-center text-slate-400 mb-8 font-light">Silakan login untuk mengelola Nusantara Jok.</p>
 
             <div class="bg-slate-800/80 backdrop-blur-md border border-white/10 p-8 rounded-3xl shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">

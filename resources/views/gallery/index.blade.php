@@ -1,4 +1,4 @@
-<x-layout title="Galeri Artisan | Auto-Stitch OS">
+<x-layout title="Galeri Artisan | Nusantara Jok">
     <div class="bg-transparent min-h-screen pt-24 pb-16 relative" x-data="galleryFilter()">
         <div class="absolute top-20 right-0 w-96 h-96 bg-accent-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
