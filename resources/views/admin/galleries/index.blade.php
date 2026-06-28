@@ -4,9 +4,9 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
             <div>
                 <h1 class="font-display text-3xl font-bold text-slate-900 tracking-tight">Manajemen Galeri</h1>
-                <p class="text-slate-500 mt-1">Unggah foto dan atur showcase homepage.</p>
+                <p class="text-slate-500 dark:text-slate-500 mt-1">Unggah foto dan atur showcase homepage.</p>
             </div>
-            <a href="{{ route('dashboard.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5">
+            <a href="{{ route('dashboard.index') }}" class="text-sm font-semibold text-slate-500 dark:text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Kembali ke Dashboard
             </a>
@@ -42,14 +42,14 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Judul / Deskripsi <span class="text-slate-400 font-normal">(opsional)</span></label>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Judul / Deskripsi <span class="text-slate-500 dark:text-slate-400 font-normal">(opsional)</span></label>
                             <input type="text" name="title" placeholder="Judul singkat..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:ring-accent-500 focus:border-accent-500">
                             @error('title') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-1.5">File Foto (Max 2MB)</label>
-                            <input type="file" name="image" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200" required>
+                            <input type="file" name="image" accept="image/*" class="w-full text-sm text-slate-500 dark:text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200" required>
                             @error('image') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
 
@@ -58,7 +58,7 @@
                             <span class="text-sm">Jadikan Featured (tampil di homepage)</span>
                         </label>
 
-                        <button type="submit" class="w-full px-6 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-accent-500 transition-colors touch-target">
+                        <button type="submit" class="w-full px-6 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-accent-500 transition-colors touch-target">
                             Upload Foto
                         </button>
                     </form>
@@ -81,7 +81,7 @@
                         <div class="p-4 flex items-center justify-between">
                             <div>
                                 <h3 class="font-bold text-slate-900 text-sm">{{ $gallery->title }}</h3>
-                                <p class="text-xs text-slate-500 mt-0.5">{{ $gallery->category->name }}</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">{{ $gallery->category->name }}</p>
                             </div>
                             <form action="{{ route('admin.galleries.destroy', $gallery) }}" method="POST" onsubmit="return confirm('Hapus foto ini?');">
                                 @csrf
@@ -94,8 +94,8 @@
                         </div>
                     </div>
                     @empty
-                    <div class="col-span-full py-12 text-center text-slate-500 bg-white border border-slate-200 rounded-2xl">
-                        <svg class="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <div class="col-span-full py-12 text-center text-slate-500 dark:text-slate-500 bg-white border border-slate-200 rounded-2xl">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         <p class="font-semibold">Belum ada foto di galeri.</p>
                         <p class="text-sm mt-1">Gunakan form di sebelah kiri untuk upload foto pertama.</p>
                     </div>

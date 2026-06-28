@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth" x-data="{ theme: localStorage.getItem('theme') || 'dark' }" :class="{ 'dark': theme === 'dark' }" x-init="$watch('theme', val => localStorage.setItem('theme', val))">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,44 +7,60 @@
     <title>{{ $title ?? 'Nusantara Jok' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Preload fonts if possible or just rely on CSS -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="bg-slate-900 text-slate-300 antialiased min-h-screen flex flex-col selection:bg-accent-500/30 selection:text-accent-300" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
-    <!-- Sleek Navbar V4: Dark Glass -->
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-300 antialiased min-h-screen flex flex-col selection:bg-accent-500/30 selection:text-accent-300" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+    <!-- Sleek Navbar V4: Dual Theme Glass -->
     <header 
         class="fixed top-0 w-full z-50 transition-all duration-300 border-b"
-        :class="scrolled ? 'bg-slate-900/80 backdrop-blur-lg border-white/10 py-3 shadow-lg' : 'bg-transparent border-transparent py-5'"
+        :class="scrolled ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-slate-200 dark:border-white/10 py-3 shadow-lg' : 'bg-transparent border-transparent py-5'"
     >
         <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-white group flex items-center gap-2">
-                <svg class="w-8 h-8 text-accent-500 group-hover:rotate-12 transition-transform duration-300 ease-out drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-slate-900 dark:text-white group flex items-center gap-2">
+                <svg class="w-8 h-8 text-accent-500 group-hover:rotate-12 transition-transform duration-300 ease-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                     <path d="M2 17l10 5 10-5"></path>
                     <path d="M2 12l10 5 10-5"></path>
                 </svg>
-                NUSANTARA<span class="text-accent-500"> JOK</span>
+                <div class="flex flex-col">
+                    <span class="leading-none text-xl">BJN</span>
+                    <span class="text-[0.6rem] font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mt-0.5">Bengkel Jok Nusantara</span>
+                </div>
             </a>
             
-            <div class="flex items-center gap-8">
-                <a href="{{ route('home') }}#layanan" class="text-sm font-semibold text-slate-300 hover:text-accent-400 transition-colors hidden md:block">Layanan</a>
-                <a href="{{ route('home') }}#kalkulator" class="text-sm font-semibold text-slate-300 hover:text-accent-400 transition-colors hidden md:block">Estimasi</a>
-                <a href="{{ route('tracker.index') }}" class="text-sm font-semibold text-slate-300 hover:text-accent-400 transition-colors hidden md:block">Lacak Progres</a>
+            <div class="flex items-center gap-6 lg:gap-8">
+                <!-- Theme Toggle Button -->
+                <button @click="theme = theme === 'dark' ? 'light' : 'dark'" class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-white/20 transition-colors" title="Toggle Theme">
+                    <svg x-show="theme === 'light'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <svg x-show="theme === 'dark'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </button>
+
+                <a href="{{ route('home') }}#layanan" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors hidden md:block">Layanan</a>
+                <a href="{{ route('home') }}#kalkulator" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors hidden md:block">Estimasi</a>
+                <a href="{{ route('tracker.index') }}" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors hidden md:block">Lacak Progres</a>
                 
                 @auth
-                <div class="flex items-center gap-4 border-l border-white/20 pl-6 ml-2">
+                <div class="flex items-center gap-4 border-l border-slate-300 dark:border-white/20 pl-6 ml-2">
                     <div class="flex flex-col items-end hidden sm:flex">
-                        <span class="text-sm font-bold text-white">{{ Auth::user()->name }}</span>
-                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">{{ Auth::user()->role }}</span>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">{{ Auth::user()->name }}</span>
+                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ Auth::user()->role }}</span>
                     </div>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="touch-target rounded-full bg-white/10 border border-white/10 hover:bg-white/20 text-white p-2.5 transition-colors shadow-sm" title="Keluar">
+                        <button type="submit" class="touch-target rounded-full bg-slate-200 dark:bg-white/10 border border-slate-300 dark:border-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-700 dark:text-white p-2.5 transition-colors shadow-sm" title="Keluar">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                         </button>
                     </form>
                 </div>
                 @endauth
                 @guest
-                    <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-300 hover:text-accent-400 transition-colors">Login Admin</a>
+                    <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors">Login Admin</a>
                 @endguest
             </div>
         </nav>
@@ -57,51 +73,59 @@
         {{ $slot }}
     </main>
 
-    <!-- Minimalist Footer V4: Dark Glass -->
-    <footer class="border-t border-white/10 bg-slate-900 mt-auto relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-30 z-0"></div>
+    <!-- Minimalist Footer V4: Dual Theme Glass -->
+    <footer class="border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900 mt-auto relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-10 dark:opacity-30 z-0"></div>
         <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div class="col-span-1 md:col-span-2">
-                    <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-white mb-4 block">
-                        NUSANTARA<span class="text-accent-500"> JOK</span>
+                    <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                        <svg class="w-8 h-8 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                        <div class="flex flex-col">
+                            <span class="leading-none text-xl">BJN</span>
+                            <span class="text-[0.6rem] font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mt-0.5">Bengkel Jok Nusantara</span>
+                        </div>
                     </a>
-                    <p class="text-slate-400 font-medium leading-relaxed max-w-sm">
+                    <p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-sm">
                         Modifikasi interior artisan dengan fokus pada kualitas, transparansi digital, dan kepuasan pelanggan kelas atas.
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-4 uppercase tracking-wider text-sm drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Navigasi</h4>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider text-sm dark:drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Navigasi</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('home') }}#layanan" class="text-slate-400 hover:text-accent-400 transition-colors font-medium">Layanan Kami</a></li>
-                        <li><a href="{{ route('home') }}#kalkulator" class="text-slate-400 hover:text-accent-400 transition-colors font-medium">Kalkulator Harga</a></li>
-                        <li><a href="{{ route('tracker.index') }}" class="text-slate-400 hover:text-accent-400 transition-colors font-medium">Tracker Progres</a></li>
+                        <li><a href="{{ route('home') }}#layanan" class="text-slate-600 dark:text-slate-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors font-medium">Layanan Kami</a></li>
+                        <li><a href="{{ route('home') }}#kalkulator" class="text-slate-600 dark:text-slate-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors font-medium">Kalkulator Harga</a></li>
+                        <li><a href="{{ route('tracker.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors font-medium">Tracker Progres</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-4 uppercase tracking-wider text-sm drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Kontak</h4>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider text-sm dark:drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Kontak</h4>
                     <ul class="space-y-3">
-                        <li class="text-slate-400 font-medium flex items-center gap-2">
+                        <li class="text-slate-600 dark:text-slate-400 font-medium flex items-center gap-2">
                             <svg class="w-4 h-4 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             Jl. Artisan No. 99, Jakarta
                         </li>
-                        <li class="text-slate-400 font-medium flex items-center gap-2">
+                        <li class="text-slate-600 dark:text-slate-400 font-medium flex items-center gap-2">
                             <svg class="w-4 h-4 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                             +62 812-3456-7890
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-slate-500 font-medium">
-                    &copy; {{ date('Y') }} Nusantara Jok. All rights reserved.
+            <div class="border-t border-slate-200 dark:border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-slate-500 dark:text-slate-500 font-medium">
+                    &copy; {{ date('Y') }} BJN (Bengkel Jok Nusantara). All rights reserved.
                 </p>
                 <div class="flex gap-4">
                     <!-- Social icons placeholder -->
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-accent-500 hover:border-accent-500 hover:text-white hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-accent-500 hover:border-accent-500 hover:text-white dark:hover:bg-accent-500 dark:hover:border-accent-500 dark:hover:text-white dark:hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300">
                         IG
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-accent-500 hover:border-accent-500 hover:text-white hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-accent-500 hover:border-accent-500 hover:text-white dark:hover:bg-accent-500 dark:hover:border-accent-500 dark:hover:text-white dark:hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300">
                         WA
                     </a>
                 </div>
@@ -118,7 +142,7 @@
     <script>
     (function () {
         const waNumber  = '6281234567890'; // ← Ganti dengan nomor WhatsApp admin
-        const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Admin Nusantara Jok, saya ingin konsultasi modifikasi interior kendaraan saya. 🚗')}`;
+        const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Admin BJN, saya ingin konsultasi modifikasi interior kendaraan saya. 🚗')}`;
 
 
         // ── 1. Inject styles ────────────────────────────────────────────
@@ -312,7 +336,7 @@
                     </svg>
                 </span>
                 <div>
-                    <div id="wa-popup-name">Nusantara Jok CS</div>
+                    <div id="wa-popup-name">BJN CS</div>
                     <div id="wa-popup-status">● Online sekarang</div>
                 </div>
                 <button id="wa-popup-close" aria-label="Tutup">
@@ -321,7 +345,7 @@
             </div>
             <div id="wa-popup-body">
                 <div id="wa-popup-bubble">
-                    Halo! 👋 Selamat datang di <strong>Nusantara Jok</strong>.<br>
+                    Halo! 👋 Selamat datang di <strong>Bengkel Jok Nusantara (BJN)</strong>.<br>
                     Ada yang bisa kami bantu untuk kebutuhan modifikasi interior kendaraan Anda?
                 </div>
                 <div id="wa-popup-time">${timeStr} ✓✓</div>

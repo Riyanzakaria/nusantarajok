@@ -38,6 +38,8 @@
     --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+@custom-variant dark (&:is(.dark *));
+
 @utility touch-target {
     min-width: 44px;
     min-height: 44px;

@@ -14,17 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ── Public Routes ──────────────────────────────────────────────
-Route::get('/', function () {
-    $featuredGalleries = \App\Models\Gallery::with('category')
-        ->where('is_featured', true)
-        ->latest()
-        ->take(6)
-        ->get();
-        
-    $vehicleCategories = \App\Models\VehicleCategory::with('pricelists')->get();
-        
-    return view('welcome', compact('featuredGalleries', 'vehicleCategories'));
-})->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
 

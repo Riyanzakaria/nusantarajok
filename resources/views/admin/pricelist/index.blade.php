@@ -4,9 +4,9 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
             <div>
                 <h1 class="font-display text-3xl font-bold text-slate-900 tracking-tight">Daftar Harga</h1>
-                <p class="text-slate-500 mt-1">Kelola harga material dan jasa bengkel.</p>
+                <p class="text-slate-500 dark:text-slate-500 mt-1">Kelola harga material dan jasa bengkel.</p>
             </div>
-            <a href="{{ route('dashboard.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5">
+            <a href="{{ route('dashboard.index') }}" class="text-sm font-semibold text-slate-500 dark:text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Kembali ke Dashboard
             </a>
@@ -50,7 +50,7 @@
                             <input type="number" name="price" placeholder="3500000" step="0.01" min="0" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:ring-accent-500 focus:border-accent-500" required>
                             @error('price') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
                         </div>
-                        <button type="submit" class="w-full px-6 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-accent-500 transition-colors touch-target">
+                        <button type="submit" class="w-full px-6 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-accent-500 transition-colors touch-target">
                             Simpan Item
                         </button>
                     </form>
@@ -78,7 +78,7 @@
                                         <td class="px-5 py-4 font-semibold text-slate-900">{{ $item->item_name }}</td>
                                     </template>
                                     <template x-if="!editing">
-                                        <td class="px-5 py-4 hidden md:table-cell text-slate-500">{{ $item->vehicleCategory?->name ?? '—' }}</td>
+                                        <td class="px-5 py-4 hidden md:table-cell text-slate-500 dark:text-slate-500">{{ $item->vehicleCategory?->name ?? '—' }}</td>
                                     </template>
                                     <template x-if="!editing">
                                         <td class="px-5 py-4 text-right font-mono font-semibold text-slate-900">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
@@ -103,11 +103,11 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="flex-1 min-w-[140px]">
-                                                    <label class="block text-xs font-semibold text-slate-500 mb-1">Nama</label>
+                                                    <label class="block text-xs font-semibold text-slate-500 dark:text-slate-500 mb-1">Nama</label>
                                                     <input type="text" name="item_name" value="{{ $item->item_name }}" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:ring-accent-500 focus:border-accent-500" required>
                                                 </div>
                                                 <div class="w-32">
-                                                    <label class="block text-xs font-semibold text-slate-500 mb-1">Kendaraan</label>
+                                                    <label class="block text-xs font-semibold text-slate-500 dark:text-slate-500 mb-1">Kendaraan</label>
                                                     <select name="vehicle_category_id" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:ring-accent-500 focus:border-accent-500" required>
                                                         <option value="">—</option>
                                                         @foreach($categories as $cat)
@@ -116,11 +116,11 @@
                                                     </select>
                                                 </div>
                                                 <div class="w-32">
-                                                    <label class="block text-xs font-semibold text-slate-500 mb-1">Harga</label>
+                                                    <label class="block text-xs font-semibold text-slate-500 dark:text-slate-500 mb-1">Harga</label>
                                                     <input type="number" name="price" value="{{ $item->price }}" step="0.01" min="0" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:ring-accent-500 focus:border-accent-500" required>
                                                 </div>
                                                 <div class="flex gap-2">
-                                                    <button type="submit" class="px-4 py-2 bg-emerald-600 text-white text-sm font-bold rounded-lg hover:bg-emerald-700 transition-colors">Simpan</button>
+                                                    <button type="submit" class="px-4 py-2 bg-emerald-600 text-slate-900 dark:text-white text-sm font-bold rounded-lg hover:bg-emerald-700 transition-colors">Simpan</button>
                                                     <button type="button" @click="editing = false" class="px-4 py-2 bg-slate-100 text-slate-600 text-sm font-bold rounded-lg hover:bg-slate-200 transition-colors">Batal</button>
                                                 </div>
                                             </form>
@@ -129,8 +129,8 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-12 text-center text-slate-500">
-                                        <svg class="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                    <td colspan="6" class="px-6 py-12 text-center text-slate-500 dark:text-slate-500">
+                                        <svg class="w-12 h-12 mx-auto mb-3 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                                         <p class="font-semibold">Belum ada data harga.</p>
                                         <p class="text-sm mt-1">Gunakan form di sebelah kiri untuk menambah item pertama.</p>
                                     </td>

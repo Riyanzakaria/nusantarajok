@@ -5,12 +5,12 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
         <div>
             <div class="flex items-center gap-3 mb-1">
-                <a href="{{ route('dashboard.index') }}" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <a href="{{ route('dashboard.index') }}" class="text-slate-500 dark:text-slate-400 hover:text-slate-600 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 </a>
                 <h1 class="font-display text-3xl font-bold text-slate-900 tracking-tight">Prospek (Leads)</h1>
             </div>
-            <p class="text-slate-500 mt-1">Daftar calon pelanggan dari kalkulator web. Konversi, ubah status, atau hapus data.</p>
+            <p class="text-slate-500 dark:text-slate-500 mt-1">Daftar calon pelanggan dari kalkulator web. Konversi, ubah status, atau hapus data.</p>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <div class="bg-white border border-slate-200 rounded-2xl p-4 text-center shadow-sm">
             <div class="text-2xl font-black text-slate-900">{{ $leads->count() }}</div>
-            <div class="text-xs text-slate-500 font-medium mt-0.5">Total Prospek Aktif</div>
+            <div class="text-xs text-slate-500 dark:text-slate-500 font-medium mt-0.5">Total Prospek Aktif</div>
         </div>
         <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center shadow-sm">
             <div class="text-2xl font-black text-amber-700">{{ $leads->where('status','raw')->count() }}</div>
@@ -46,10 +46,10 @@
     @if($leads->isEmpty())
         <div class="bg-white border border-dashed border-slate-300 rounded-3xl p-16 text-center">
             <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <svg class="w-8 h-8 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             </div>
             <h3 class="font-display text-lg font-black text-slate-900 mb-2">Belum Ada Prospek</h3>
-            <p class="text-slate-500 text-sm">Prospek akan muncul saat calon pelanggan menggunakan kalkulator web.</p>
+            <p class="text-slate-500 dark:text-slate-500 text-sm">Prospek akan muncul saat calon pelanggan menggunakan kalkulator web.</p>
         </div>
     @else
         <div class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
@@ -57,12 +57,12 @@
                 <table class="w-full text-sm">
                     <thead>
                         <tr class="border-b border-slate-100 bg-slate-50">
-                            <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Pelanggan</th>
-                            <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Kendaraan / Material</th>
-                            <th class="text-right px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Est. Harga</th>
-                            <th class="text-center px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
-                            <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Masuk</th>
-                            <th class="text-center px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Aksi</th>
+                            <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Pelanggan</th>
+                            <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Kendaraan / Material</th>
+                            <th class="text-right px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Est. Harga</th>
+                            <th class="text-center px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Status</th>
+                            <th class="text-left px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Masuk</th>
+                            <th class="text-center px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -78,18 +78,18 @@
                                         {{ $lead->whatsapp_number }}
                                     </a>
                                 @else
-                                    <span class="text-xs text-slate-400 italic">Nomor belum diisi</span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400 italic">Nomor belum diisi</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-slate-700 font-medium">{{ $lead->vehicle_type ?? '—' }}</div>
-                                <div class="text-xs text-slate-500 mt-0.5">{{ $lead->material_selected ?? '—' }}</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">{{ $lead->material_selected ?? '—' }}</div>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 @if($lead->calculated_price > 0)
                                     <span class="font-mono font-bold text-slate-900 text-xs">Rp {{ number_format($lead->calculated_price, 0, ',', '.') }}</span>
                                 @else
-                                    <span class="text-slate-400">—</span>
+                                    <span class="text-slate-500 dark:text-slate-400">—</span>
                                 @endif
                             </td>
 
@@ -104,7 +104,7 @@
                                                 'raw'       => 'bg-amber-50 border-amber-200 text-amber-700',
                                                 'follow_up' => 'bg-blue-50 border-blue-200 text-blue-700',
                                                 'dealt'     => 'bg-emerald-50 border-emerald-200 text-emerald-700',
-                                                'dropped'   => 'bg-slate-100 border-slate-300 text-slate-500',
+                                                'dropped'   => 'bg-slate-100 border-slate-300 text-slate-500 dark:text-slate-500',
                                                 default     => 'bg-slate-50 border-slate-200 text-slate-600',
                                             } }}">
                                         <option value="raw"       {{ $lead->status === 'raw'       ? 'selected' : '' }}>🟡 Baru</option>
@@ -116,7 +116,7 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                <span class="text-xs text-slate-500">{{ $lead->created_at->diffForHumans() }}</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-500">{{ $lead->created_at->diffForHumans() }}</span>
                             </td>
 
                             {{-- Action Buttons --}}
@@ -127,7 +127,7 @@
                                     <button
                                         @click="openConvert({{ $lead->id }}, '{{ addslashes($lead->customer_name) }}', '{{ $lead->vehicle_type ?? '' }}', '{{ $lead->material_selected ?? '' }}')"
                                         title="Jadikan Pesanan"
-                                        class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-bold hover:bg-accent-500 transition-colors active:scale-95">
+                                        class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold hover:bg-accent-500 transition-colors active:scale-95">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
                                         Order
                                     </button>
@@ -153,8 +153,8 @@
             </div>
 
             {{-- Pruning Info Footer --}}
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-400">
-                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Data dengan status <strong>Baru</strong> &amp; <strong>Batal</strong> yang berumur lebih dari 30 hari akan dihapus otomatis setiap Minggu pukul 02:00.
                 Jalankan manual: <code class="bg-slate-200 text-slate-600 px-1 py-0.5 rounded font-mono">php artisan leads:prune</code>
             </div>
@@ -167,7 +167,7 @@
     <div x-show="open" x-cloak
          class="fixed inset-0 z-50 flex items-center justify-center p-4"
          @keydown.escape.window="open = false">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" @click="open = false"
+        <div class="absolute inset-0 bg-slate-50/60 dark:bg-slate-900/60 backdrop-blur-sm" @click="open = false"
              x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"></div>
 
         <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden"
@@ -176,9 +176,9 @@
             <div class="flex items-center justify-between px-7 pt-7 pb-5 border-b border-slate-100">
                 <div>
                     <h3 class="font-display text-xl font-black text-slate-900">Jadikan Pesanan</h3>
-                    <p class="text-sm text-slate-500 mt-0.5">Mengkonversi prospek <span class="font-bold text-slate-700" x-text="leadName"></span></p>
+                    <p class="text-sm text-slate-500 dark:text-slate-500 mt-0.5">Mengkonversi prospek <span class="font-bold text-slate-700" x-text="leadName"></span></p>
                 </div>
-                <button @click="open = false" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors">
+                <button @click="open = false" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-500 dark:text-slate-400 hover:text-slate-600 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
@@ -186,9 +186,9 @@
             <form :action="`/dashboard/leads/${leadId}/convert`" method="POST" class="px-7 py-6 space-y-5">
                 @csrf
                 <div class="bg-slate-50 rounded-2xl p-4 space-y-2 text-sm">
-                    <div class="flex justify-between"><span class="text-slate-500">Pelanggan</span><span class="font-bold text-slate-900" x-text="leadName"></span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Kendaraan</span><span class="font-medium text-slate-700" x-text="leadVehicle || '—'"></span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Material</span><span class="font-medium text-slate-700" x-text="leadMaterial || '—'"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500 dark:text-slate-500">Pelanggan</span><span class="font-bold text-slate-900" x-text="leadName"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500 dark:text-slate-500">Kendaraan</span><span class="font-medium text-slate-700" x-text="leadVehicle || '—'"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500 dark:text-slate-500">Material</span><span class="font-medium text-slate-700" x-text="leadMaterial || '—'"></span></div>
                 </div>
 
                 <div>
@@ -225,7 +225,7 @@
 
                 <div class="flex items-center gap-3 pt-2">
                     <button type="button" @click="open = false" class="flex-1 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition-colors">Batal</button>
-                    <button type="submit" class="flex-1 py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-accent-500 transition-colors shadow-lg active:scale-95">Konversi ke Pesanan →</button>
+                    <button type="submit" class="flex-1 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white font-bold text-sm hover:bg-accent-500 transition-colors shadow-lg active:scale-95">Konversi ke Pesanan →</button>
                 </div>
             </form>
         </div>
