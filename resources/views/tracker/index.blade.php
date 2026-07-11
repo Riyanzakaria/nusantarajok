@@ -105,9 +105,9 @@
                 <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 shadow-[0_0_15px_rgba(0,0,0,0.3)]">
                     <div class="w-3 h-3 rounded-full animate-pulse" 
                         :class="{
-                            'bg-red-500': result?.current_status === 'pending',
-                            'bg-amber-500': result?.current_status === 'cutting' || result?.current_status === 'sewing',
-                            'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]': result?.current_status === 'installation' || result?.current_status === 'qc' || result?.current_status === 'completed'
+                            'bg-red-500': result?.current_status === 'antrian',
+                            'bg-amber-500': result?.current_status === 'proses',
+                            'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]': result?.current_status === 'selesai'
                         }">
                     </div>
                     <span class="text-lg font-bold text-slate-600 dark:text-slate-300 capitalize" x-text="formatStatus(result?.current_status)"></span>
@@ -190,12 +190,9 @@
                 
                 formatStatus(status) {
                     const map = {
-                        'pending': 'Menunggu Jadwal',
-                        'cutting': 'Pemotongan Pola',
-                        'sewing': 'Proses Penjahitan',
-                        'installation': 'Pemasangan ke Kendaraan',
-                        'qc': 'Quality Control',
-                        'completed': 'Selesai & Siap Diambil'
+                        'antrian': 'Menunggu Jadwal',
+                        'proses': 'Sedang Diproses',
+                        'selesai': 'Selesai & Siap Diambil'
                     };
                     return map[status] || status;
                 }

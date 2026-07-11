@@ -82,22 +82,37 @@
         </div>
     @endif
 
-    {{-- Kanban Header --}}
-    <div class="relative z-10 flex items-center justify-between mb-6">
+    {{-- Kanban Header & Filters --}}
+    <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
         <div>
             <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white tracking-tight drop-shadow-sm">Work Orders Aktif</h2>
-            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Klik tombol status untuk memajukan progres pengerjaan.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Hanya menampilkan order yang belum selesai.</p>
         </div>
+        
+        <form action="{{ route('dashboard.index') }}" method="GET" class="flex items-center gap-2">
+            <select name="month" onchange="this.form.submit()" class="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-sm font-medium text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-accent-500 outline-none backdrop-blur-sm">
+                @foreach(range(1, 12) as $m)
+                    <option value="{{ str_pad($m, 2, '0', STR_PAD_LEFT) }}" {{ $filterMonth == str_pad($m, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+                        {{ date('F', mktime(0, 0, 0, $m, 1)) }}
+                    </option>
+                @endforeach
+            </select>
+            <select name="year" onchange="this.form.submit()" class="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-sm font-medium text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-accent-500 outline-none backdrop-blur-sm">
+                @foreach(range(date('Y') - 1, date('Y') + 1) as $y)
+                    <option value="{{ $y }}" {{ $filterYear == $y ? 'selected' : '' }}>{{ $y }}</option>
+                @endforeach
+            </select>
+            <a href="{{ route('dashboard.work-orders.history') }}" class="ml-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors backdrop-blur-sm flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Riwayat & Ekspor
+            </a>
+        </form>
     </div>
 
     @php
         $nextStatus = [
-            'antrian'   => 'bongkar',
-            'bongkar'   => 'potong',
-            'potong'    => 'jahit',
-            'jahit'     => 'pasang',
-            'pasang'    => 'finishing',
-            'finishing' => 'selesai',
+            'antrian'   => 'proses',
+            'proses'    => 'selesai',
         ];
         $colorMap = [
             'slate'   => ['bg' => 'bg-slate-100/50 dark:bg-slate-900/50',   'border' => 'border-slate-300 dark:border-slate-700', 'badge' => 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200',  'dot' => 'bg-slate-400'],
@@ -147,8 +162,8 @@
                                 <span class="block text-center text-xs font-bold text-emerald-400 mb-2 drop-shadow-sm">✓ Tahap Akhir</span>
                             @endif
 
-                            {{-- WA Notification Button for finishing column --}}
-                            @if($status === 'finishing' && $order->lead && $order->lead->whatsapp_number !== 'Pending')
+                            {{-- WA Notification Button for proses column --}}
+                            @if($status === 'proses' && $order->lead && $order->lead->whatsapp_number !== 'Pending')
                                 @php
                                     $waName = $order->lead->customer_name;
                                     $waPlat = $order->raw_plat;

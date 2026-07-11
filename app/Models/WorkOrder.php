@@ -27,15 +27,11 @@ class WorkOrder extends Model
      */
     public const STATUS_STEPS = [
         'antrian'   => 0,
-        'bongkar'   => 1,
-        'potong'    => 2,
-        'jahit'     => 3,
-        'pasang'    => 4,
-        'finishing' => 5,
-        'selesai'   => 6,
+        'proses'    => 1,
+        'selesai'   => 2,
     ];
 
-    public const TOTAL_STEPS = 6;
+    public const TOTAL_STEPS = 2;
 
     protected function casts(): array
     {

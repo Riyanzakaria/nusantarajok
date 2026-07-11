@@ -29,11 +29,7 @@ return new class extends Migration
             $table->date('scheduled_at')->comment('Tanggal mulai pengerjaan');
             $table->enum('current_status', [
                 'antrian',    // Menunggu giliran
-                'bongkar',    // Bongkar jok lama
-                'potong',     // Potong pola baru
-                'jahit',      // Proses jahit
-                'pasang',     // Pasang jok baru
-                'finishing',  // QC & finishing
+                'proses',     // Sedang dikerjakan
                 'selesai',    // Siap diambil
             ])->default('antrian');
             $table->timestamps();

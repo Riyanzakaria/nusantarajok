@@ -57,6 +57,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware(['auth', 'role:admin,technician'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('index');
 
+    // History & Export
+    Route::get('/history', [\App\Http\Controllers\DashboardController::class, 'history'])->name('work-orders.history');
+    Route::get('/export-csv', [\App\Http\Controllers\DashboardController::class, 'exportCsv'])->name('work-orders.export');
+
     // Work order status update (technician action)
     Route::patch('/work-orders/{workOrder}/status', [\App\Http\Controllers\DashboardController::class, 'updateStatus'])
         ->name('work-orders.update-status');

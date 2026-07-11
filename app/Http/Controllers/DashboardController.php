@@ -20,13 +20,19 @@ class DashboardController extends Controller
     /**
      * Display the dashboard with active work orders grouped by status.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Add filtering by month/year (default to current month)
+        $filterMonth = $request->input('month', now()->format('m'));
+        $filterYear  = $request->input('year', now()->format('Y'));
+
         // Active statuses for the Kanban board (exclude 'selesai')
-        $activeStatuses = ['antrian', 'bongkar', 'potong', 'jahit', 'pasang', 'finishing'];
+        $activeStatuses = ['antrian', 'proses'];
 
         $workOrders = WorkOrder::with('lead')
             ->whereIn('current_status', $activeStatuses)
+            ->whereMonth('scheduled_at', $filterMonth)
+            ->whereYear('scheduled_at', $filterYear)
             ->orderBy('scheduled_at')
             ->get()
             ->groupBy('current_status');
@@ -38,20 +44,12 @@ class DashboardController extends Controller
 
         $statusLabels = [
             'antrian'   => 'Antrian',
-            'bongkar'   => 'Bongkar',
-            'potong'    => 'Potong Pola',
-            'jahit'     => 'Jahit',
-            'pasang'    => 'Pasang',
-            'finishing' => 'Finishing',
+            'proses'    => 'Sedang Proses',
         ];
 
         $statusColors = [
             'antrian'   => 'slate',
-            'bongkar'   => 'amber',
-            'potong'    => 'blue',
-            'jahit'     => 'violet',
-            'pasang'    => 'emerald',
-            'finishing' => 'orange',
+            'proses'    => 'amber',
         ];
 
         // Data for the "+ Tambah Pesanan Manual" modal
@@ -60,7 +58,7 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact(
             'kanbanColumns', 'statusLabels', 'statusColors',
-            'vehicleCategories', 'rawLeadsCount'
+            'vehicleCategories', 'rawLeadsCount', 'filterMonth', 'filterYear'
         ));
     }
 
@@ -164,7 +162,7 @@ class DashboardController extends Controller
     public function updateStatus(Request $request, WorkOrder $workOrder)
     {
         $validated = $request->validate([
-            'status' => 'required|in:antrian,bongkar,potong,jahit,pasang,finishing,selesai',
+            'status' => 'required|in:antrian,proses,selesai',
         ]);
 
         $workOrder->update(['current_status' => $validated['status']]);
@@ -198,5 +196,69 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard.leads.index')
             ->with('success', "Prospek \"{$name}\" berhasil dihapus.");
+    }
+
+    /**
+     * Display the history of all work orders.
+     */
+    public function history()
+    {
+        $workOrders = WorkOrder::with('lead')
+            ->orderBy('scheduled_at', 'desc')
+            ->paginate(15);
+
+        // Analytics
+        $totalOrders = WorkOrder::count();
+        $completedOrders = WorkOrder::where('current_status', 'selesai')->count();
+        
+        $revenue = WorkOrder::where('current_status', 'selesai')
+            ->whereHas('lead')
+            ->with('lead')
+            ->get()
+            ->sum(function($order) {
+                return $order->lead->calculated_price ?? 0;
+            });
+
+        return view('dashboard.history', compact('workOrders', 'totalOrders', 'completedOrders', 'revenue'));
+    }
+
+    /**
+     * Export all work orders to CSV.
+     */
+    public function exportCsv()
+    {
+        $workOrders = WorkOrder::with('lead')->orderBy('scheduled_at', 'desc')->get();
+
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=riwayat_pesanan_" . date('Y-m-d') . ".csv",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $callback = function() use($workOrders) {
+            $file = fopen('php://output', 'w');
+            
+            // CSV Header
+            fputcsv($file, ['ID', 'Plat Nomor', 'Pelanggan', 'No WhatsApp', 'Tipe Kendaraan', 'Status', 'Tanggal Jadwal', 'Estimasi Harga']);
+
+            foreach ($workOrders as $order) {
+                fputcsv($file, [
+                    $order->id,
+                    $order->raw_plat,
+                    $order->lead->customer_name ?? '-',
+                    $order->lead->whatsapp_number ?? '-',
+                    $order->vehicle_type,
+                    $order->current_status,
+                    $order->scheduled_at->format('Y-m-d'),
+                    $order->lead->calculated_price ?? 0,
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }
