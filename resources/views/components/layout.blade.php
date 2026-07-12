@@ -4,13 +4,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Bengkel Jok Nusantara — Jok Racing Custom PNP, Pasang Sendiri di Rumah' }}</title>
-    <meta name="description" content="BJN Magetan — Spesialis Jok Racing Custom Plug-and-Play (PNP). Ubah interior jadi sporty tanpa perlu titip mobil di bengkel. Pasang sendiri dengan mudah di rumah.">
+    <title>{{ $title ?? 'Bengkel Jok Nusantara — Spesialis Jok Custom Racing PNP Se-Indonesia' }}</title>
+    <meta name="description" content="Bengkel Jok Nusantara melayani pembuatan jok mobil custom racing, PNP (Plug and Play), dan restorasi interior dengan pengiriman ke seluruh Indonesia.">
+    <meta name="keywords" content="jok racing custom, jok mobil PNP, bengkel jok magetan, kirim jok seluruh indonesia, jok mobil custom murah, modifikasi interior mobil">
+    
+    {{-- Canonical URL --}}
+    <link rel="canonical" href="{{ url()->current() }}" />
+
+    {{-- Open Graph / Facebook / WhatsApp --}}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ $title ?? 'Bengkel Jok Nusantara — Jok Custom Racing PNP Se-Indonesia' }}">
+    <meta property="og:description" content="Spesialis jok racing custom PNP tanpa perlu titip mobil. Terima pesanan dan pengiriman aman ke seluruh Indonesia.">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- JSON-LD Structured Data for LocalBusiness & Nationwide Service --}}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "Bengkel Jok Nusantara",
+      "image": "{{ asset('images/logo.png') }}",
+      "@id": "{{ url('/') }}",
+      "url": "{{ url('/') }}",
+      "telephone": "+6281234567890",
+      "description": "Spesialis jok mobil custom racing dan PNP dengan jangkauan pengiriman ke seluruh Indonesia.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Magetan",
+        "addressLocality": "Magetan",
+        "addressRegion": "Jawa Timur",
+        "addressCountry": "ID"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Indonesia"
+      },
+      "priceRange": "$$"
+    }
+    </script>
 </head>
 <body
     class="antialiased min-h-screen flex flex-col overflow-x-hidden"

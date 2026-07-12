@@ -20,6 +20,7 @@ use App\Http\Controllers\WebhookController;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
 
 // Checkout Flow
 Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
