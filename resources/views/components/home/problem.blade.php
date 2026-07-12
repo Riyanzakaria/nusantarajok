@@ -15,14 +15,14 @@
                 style="font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.04; letter-spacing: -0.03em; color: oklch(0.93 0.012 75); max-width: 22ch; text-wrap: balance; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);"
                 :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(24px)' }"
             >
-                Jok Bawaan Pabrik <span style="color: oklch(0.50 0.020 62); font-weight: 700;">Bikin Nyesel.</span>
+                Modif Jok Mobil <span style="color: oklch(0.50 0.020 62); font-weight: 700;">Dulu Bikin Repot.</span>
             </h2>
             <p
                 class="font-sans mt-5"
                 style="font-size: 1.0625rem; line-height: 1.7; color: oklch(0.72 0.025 68); max-width: 50ch; transition: opacity 0.8s 0.12s cubic-bezier(0.16,1,0.3,1);"
                 :style="shown ? { opacity: 1 } : { opacity: 0 }"
             >
-                Jok ori kamu rentan rusak, cepet kotor, dan bikin kabin jadi gerah. Di sini masalahnya:
+                Meninggalkan mobil berhari-hari di bengkel tentu sangat merepotkan. Belum lagi jika hasilnya tidak sesuai ekspektasi. Ini masalah modifikasi cara lama:
             </p>
         </div>
 
@@ -40,9 +40,9 @@
                     :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(20px)' }"
                 >
                     <p class="font-sans text-xs uppercase tracking-[0.14em] mb-5" style="color: oklch(0.50 0.020 62);">01</p>
-                    <h3 class="font-display font-700 uppercase mb-5" style="font-size: 2rem; letter-spacing: -0.01em; color: oklch(0.93 0.012 75);">Panas Terik, Kabin Gerah</h3>
+                    <h3 class="font-display font-700 uppercase mb-5" style="font-size: 2rem; letter-spacing: -0.01em; color: oklch(0.93 0.012 75);">Harus Titip Mobil Berhari-hari</h3>
                     <p class="font-sans leading-relaxed" style="font-size: 1rem; color: oklch(0.72 0.025 68); max-width: 44ch; line-height: 1.7;">
-                        Bahan kain bawaan nyerap panas, bikin duduk lama jadi tidak nyaman apalagi waktu macet siang bolong. Apalagi di cuaca Indonesia yang terik — bisa bikin mood rusak sebelum nyampe tujuan.
+                        Aktivitas harian jadi terganggu karena mobil kesayangan harus tertahan lama di bengkel. Kamu harus naik kendaraan umum atau merepotkan teman untuk bepergian.
                     </p>
                 </div>
             </div>
@@ -59,9 +59,9 @@
                     :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(20px)' }"
                 >
                     <p class="font-sans text-xs uppercase tracking-[0.14em] mb-5" style="color: oklch(0.50 0.020 62);">02</p>
-                    <h3 class="font-display font-700 uppercase mb-4" style="font-size: 1.5rem; letter-spacing: -0.01em; color: oklch(0.93 0.012 75);">Tumpah Langsung Nyerap</h3>
+                    <h3 class="font-display font-700 uppercase mb-4" style="font-size: 1.5rem; letter-spacing: -0.01em; color: oklch(0.93 0.012 75);">Jok Ori Berisiko Rusak</h3>
                     <p class="font-sans leading-relaxed" style="font-size: 0.9rem; color: oklch(0.72 0.025 68); line-height: 1.7;">
-                        Kopi, air mineral, ompol anak — semuanya langsung meresap ke busa. Nodanya susah hilang dan bau.
+                        Modifikasi paten cara lama mengharuskan busa dan cover asli mobil dirobek. Saat mobil kelak mau dijual, harganya bisa anjlok karena orisinalitasnya hilang.
                     </p>
                 </div>
             </div>
@@ -78,9 +78,9 @@
                     :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(20px)' }"
                 >
                     <p class="font-sans text-xs uppercase tracking-[0.14em] mb-5" style="color: oklch(0.50 0.020 62);">03</p>
-                    <h3 class="font-display font-700 uppercase mb-4" style="font-size: 1.8rem; letter-spacing: -0.01em; color: oklch(0.93 0.012 75);">Cepet Rusak, Jual Mobil Rugi</h3>
+                    <h3 class="font-display font-700 uppercase mb-4" style="font-size: 1.8rem; letter-spacing: -0.01em; color: oklch(0.93 0.012 75);">Bosan dengan Desain Standar yang Monoton</h3>
                     <p class="font-sans leading-relaxed max-w-2xl" style="font-size: 1rem; color: oklch(0.72 0.025 68); line-height: 1.7;">
-                        Jok yang lecet, sobek, dan kusam bikin nilai jual mobil second kamu anjlok. Pembeli langsung nawar lebih murah karena lihat kondisi interior.
+                        Interior mobil terasa biasa saja dan kurang berkarakter? Jok bawaan pabrik memang tidak dirancang untuk tampil sporty. Namun, merombak total biayanya mahal dan pengerjaannya ribet.
                     </p>
                 </div>
                 {{-- Decorative seat icon --}}

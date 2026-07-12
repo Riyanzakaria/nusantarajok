@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GallerySeeder::class,
             PricelistSeeder::class,
+            ProductModelSeeder::class,
+            CarVariantSeeder::class,
+            ShippingRateSeeder::class,
             WorkOrderSeeder::class,
         ]);
     }

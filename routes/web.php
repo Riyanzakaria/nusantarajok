@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
+
+// Checkout Flow
+Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+// Payment Page
+Route::get('/payment/{order}', [PaymentController::class, 'show'])->name('payment.show');
+Route::post('/payment/{order}/regenerate', [PaymentController::class, 'regenerate'])->name('payment.regenerate');
+
+// Midtrans Webhook (Make sure to exclude this from CSRF in bootstrap/app.php in Laravel 11)
+Route::post('/api/webhook/midtrans', [WebhookController::class, 'midtrans'])->name('webhook.midtrans');
 
 // ── Tracker (Public, Rate-Limited) ─────────────────────────────
 Route::prefix('tracker')->name('tracker.')->group(function () {
@@ -54,6 +68,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
     Route::resource('galleries', \App\Http\Controllers\Admin\GalleryManagerController::class)->except(['show']);
+    
+    // ── E-Commerce Order Management ──────────────────────────
+    Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
+    Route::patch('orders/{order}/status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
+
+    // --- E-Commerce Master Data ---
+    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except('show');
+    Route::resource('car-variants', \App\Http\Controllers\Admin\CarVariantController::class)->except('show');
+    Route::resource('shipping-rates', \App\Http\Controllers\Admin\ShippingRateController::class)->except('show');
 });
 
 // ── Technician + Admin Routes ──────────────────────────────────
@@ -65,8 +89,7 @@ Route::middleware(['auth', 'role:admin,technician'])->prefix('dashboard')->name(
     Route::get('/export-csv', [\App\Http\Controllers\DashboardController::class, 'exportCsv'])->name('work-orders.export');
 
     // Work order status update (technician action)
-    Route::patch('/work-orders/{workOrder}/status', [\App\Http\Controllers\DashboardController::class, 'updateStatus'])
-        ->name('work-orders.update-status');
+    Route::patch('/work-orders/{work_order}/status', [\App\Http\Controllers\DashboardController::class, 'updateStatus'])->name('work-orders.update-status');
 
     // ── Admin: Manual Order Entry (Offline POS) ─────────────────
     Route::post('/work-orders', [\App\Http\Controllers\DashboardController::class, 'storeOrder'])

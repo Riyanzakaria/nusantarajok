@@ -27,8 +27,8 @@
                 style="font-size: clamp(2.8rem, 7.5vw, 5.5rem); line-height: 1.0; letter-spacing: -0.035em; color: oklch(0.93 0.012 75); text-wrap: balance; transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);"
                 :style="animateIn ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(28px)' }"
             >
-                Bosan Jok Kotor,<br>
-                <span style="color: oklch(0.67 0.13 66);">Gerah &amp; Gampang Sobek?</span>
+                Spesialis Modifikasi Interior &<br>
+                <span style="color: oklch(0.67 0.13 66);">Jok Racing Custom PNP</span>
             </h1>
 
             <p
@@ -36,7 +36,7 @@
                 style="font-size: 1.075rem; line-height: 1.75; color: oklch(0.68 0.022 65); max-width: 50ch; font-weight: 400; transition: opacity 0.9s 0.15s cubic-bezier(0.16,1,0.3,1), transform 0.9s 0.15s cubic-bezier(0.16,1,0.3,1);"
                 :style="animateIn ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(20px)' }"
             >
-                Bengkel Jok Nusantara hadir dengan solusi khusus kondisi jalan &amp; cuaca Indonesia — panas terik, hujan, debu, anak tumpahkan minuman? Aman.
+                Tingkatkan kenyamanan dan gaya interior mobil Anda. Pilih layanan modifikasi cover jok custom di bengkel kami, atau pesan Jok Racing utuh (Plug-and-Play) komplit yang bisa dipasang sendiri di rumah.
             </p>
 
             {{-- CTAs --}}
@@ -46,13 +46,13 @@
                 :style="animateIn ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(16px)' }"
             >
                 <a
-                    href="#kalkulator"
+                    href="#katalog"
                     class="touch-target inline-flex items-center justify-center gap-3 px-8 py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-300"
                     style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55); border: 2px solid oklch(0.67 0.13 66);"
                     onmouseover="this.style.background='oklch(0.75 0.11 67)'; this.style.borderColor='oklch(0.75 0.11 67)'; this.style.transform='translateY(-2px)'"
                     onmouseout="this.style.background='oklch(0.67 0.13 66)'; this.style.borderColor='oklch(0.67 0.13 66)'; this.style.transform='translateY(0)'"
                 >
-                    Cek Estimasi Harga
+                    Lihat Katalog Produk
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
                 <a

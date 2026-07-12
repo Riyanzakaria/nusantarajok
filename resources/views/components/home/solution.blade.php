@@ -16,7 +16,7 @@
                     style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.04; letter-spacing: -0.03em; color: oklch(0.93 0.012 75); text-wrap: balance; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);"
                     :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(24px)' }"
                 >
-                    Keunggulan Jok<br>Nusantara.
+                    Keunggulan Jok<br>Racing PNP.
                 </h2>
 
                 <p
@@ -24,7 +24,7 @@
                     style="font-size: 1.0625rem; line-height: 1.75; color: oklch(0.72 0.025 68); max-width: 44ch; transition: opacity 0.8s 0.12s cubic-bezier(0.16,1,0.3,1);"
                     :style="shown ? { opacity: 1 } : { opacity: 0 }"
                 >
-                    Dibuat khusus untuk kondisi jalan dan cuaca Indonesia. Pas buat Avanza, Innova, Xenia, Brio, Calya, Rush, Ertiga, dan masih banyak lagi — dengan pemasangan semi paten dan paten.
+                    Dibuat khusus untuk kamu yang menginginkan interior sporty dan pemasangan instan. Jok komplit dikirim dalam bentuk utuh (lengkap dengan rangka) — siap pasang dalam hitungan menit.
                 </p>
 
                 {{-- Feature list from copywriting brief --}}
@@ -36,22 +36,22 @@
                     <li style="border-top: 1px solid oklch(0.22 0.02 55); padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: flex-start;">
                         <span class="font-display font-700 shrink-0" style="font-size: 1.25rem; color: oklch(0.67 0.13 66); line-height: 1; margin-top: 2px;">01</span>
                         <div>
-                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Bahan Premium Double Layer</h3>
-                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Kuat, anti sobek, jahitan rapi. Nggak molor walau didudukin tiap hari — tahan lama untuk kondisi pemakaian berat sekalipun.</p>
+                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">100% Plug and Play (PNP)</h3>
+                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Kami mengirimkan satu set jok utuh komplit dengan rangkanya. Tinggal copot jok lama, lalu pasang (baut) jok racing PNP ini di titik dudukan asli mobilmu.</p>
                         </div>
                     </li>
                     <li style="border-top: 1px solid oklch(0.22 0.02 55); padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: flex-start;">
                         <span class="font-display font-700 shrink-0" style="font-size: 1.25rem; color: oklch(0.67 0.13 66); line-height: 1; margin-top: 2px;">02</span>
                         <div>
-                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Water Resistant</h3>
-                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Tumpah kopi, air mineral, ompol anak? Tinggal lap — nggak langsung nyerap ke busa jok. Bebas was-was tiap hari.</p>
+                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Desain Racing Sporty Premium</h3>
+                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Tingkatkan estetika interior dengan jok utuh bergaya bucket-seat. Material premium yang empuk dan rangka kokoh untuk pemakaian harian.</p>
                         </div>
                     </li>
                     <li style="border-top: 1px solid oklch(0.22 0.02 55); border-bottom: 1px solid oklch(0.22 0.02 55); padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: flex-start;">
                         <span class="font-display font-700 shrink-0" style="font-size: 1.25rem; color: oklch(0.67 0.13 66); line-height: 1; margin-top: 2px;">03</span>
                         <div>
-                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Model Universal Nusantara</h3>
-                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Pas buat hampir semua jenis mobil. Jok ori kamu tetap awet, nggak lecet, nggak kotor — nilai jual mobil second tetap tinggi.</p>
+                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Tanpa Merusak Jok Asli (Aman Dijual)</h3>
+                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Simpan jok ori bawaan pabrikmu dengan aman di gudang. Jika suatu saat mobil ingin dijual, cukup pasang kembali jok orinya, dan interior mobil kembali 100% standar pabrik.</p>
                         </div>
                     </li>
                 </ol>
@@ -61,16 +61,16 @@
                      style="transition: opacity 0.8s 0.35s cubic-bezier(0.16,1,0.3,1);"
                      :style="shown ? { opacity: 1 } : { opacity: 0 }">
                     <div class="p-4" style="background: oklch(0.67 0.13 66 / 0.07); border: 1px solid oklch(0.67 0.13 66 / 0.20);">
-                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Jok Ori Awet</p>
-                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Nggak lecet, nggak kotor</p>
+                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Pasang di Rumah</p>
+                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Hemat waktu & bebas repot</p>
                     </div>
                     <div class="p-4" style="background: oklch(0.67 0.13 66 / 0.07); border: 1px solid oklch(0.67 0.13 66 / 0.20);">
-                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Harga Jual Tinggi</p>
-                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Nilai mobil second tetap bagus</p>
+                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Tampilan Sporty</p>
+                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Kabin lebih mewah</p>
                     </div>
                     <div class="p-4" style="background: oklch(0.67 0.13 66 / 0.07); border: 1px solid oklch(0.67 0.13 66 / 0.20);">
-                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Kabin Lebih Adem</p>
-                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Nyaman di cuaca Indonesia</p>
+                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Jok Asli Aman</p>
+                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Tidak robek, simpan di gudang</p>
                     </div>
                 </div>
             </div>
@@ -101,8 +101,8 @@
                 >
                     <div style="width: 2px; height: 2.5rem; background: oklch(0.67 0.13 66); flex-shrink: 0; margin-top: 3px;"></div>
                     <div>
-                        <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Stok Lengkap di Workshop Magetan</p>
-                        <p class="font-sans text-xs mt-1 leading-relaxed" style="color: oklch(0.50 0.020 62);">Ratusan pilihan warna & model tersedia langsung. Pemasangan semi paten dan paten tersedia.</p>
+                        <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Kustomisasi Penuh & Dikirim Ke Rumah</p>
+                        <p class="font-sans text-xs mt-1 leading-relaxed" style="color: oklch(0.50 0.020 62);">Pesan jok racing komplit (lengkap dengan rangka). Pilih warna favoritmu, dan kami kirim langsung dalam bentuk utuh siap pasang.</p>
                     </div>
                 </div>
 

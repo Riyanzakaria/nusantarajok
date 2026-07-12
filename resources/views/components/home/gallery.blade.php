@@ -51,11 +51,12 @@
             @forelse($featuredGalleries as $index => $gallery)
                 @php
                     $colSpan = ($index === 0 && count($featuredGalleries) % 2 !== 0) ? 'lg:col-span-2' : '';
+                    $mobileHidden = $index >= 3 ? 'hidden md:block' : '';
                 @endphp
                 <div
                     x-data="{ shown: false }"
                     x-intersect.once.margin.-10%.0px="shown = true"
-                    class="group {{ $colSpan }} overflow-hidden relative"
+                    class="group {{ $colSpan }} {{ $mobileHidden }} overflow-hidden relative"
                     style="background: oklch(0.12 0.018 55);"
                 >
                     <div
