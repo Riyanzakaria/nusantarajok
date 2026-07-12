@@ -87,8 +87,8 @@
                     :style="shown ? { opacity: 1 } : { opacity: 0 }"
                 >
                     <img
-                        src="{{ asset('images/testimonials/customer_1.png') }}"
-                        alt="Proses pengerjaan jok mobil di Bengkel Jok Nusantara Magetan"
+                        src="{{ asset('images/workshop_jok.jpg') }}"
+                        alt="Gudang stok cover jok mobil Bengkel Jok Nusantara Magetan — ratusan pilihan warna dan model"
                         class="w-full h-full object-cover"
                         style="filter: contrast(1.04) saturate(0.85);"
                     >
@@ -101,8 +101,8 @@
                 >
                     <div style="width: 2px; height: 2.5rem; background: oklch(0.67 0.13 66); flex-shrink: 0; margin-top: 3px;"></div>
                     <div>
-                        <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Dikerjakan di Magetan, Jawa Timur</p>
-                        <p class="font-sans text-xs mt-1 leading-relaxed" style="color: oklch(0.50 0.020 62);">Ratusan mobil sudah dikerjakan. Pemasangan semi paten dan paten tersedia.</p>
+                        <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Stok Lengkap di Workshop Magetan</p>
+                        <p class="font-sans text-xs mt-1 leading-relaxed" style="color: oklch(0.50 0.020 62);">Ratusan pilihan warna & model tersedia langsung. Pemasangan semi paten dan paten tersedia.</p>
                     </div>
                 </div>
 
