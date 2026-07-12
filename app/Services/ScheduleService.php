@@ -39,7 +39,7 @@ class ScheduleService
 
         foreach ($period as $date) {
             $dateString = $date->format('Y-m-d');
-            $isWeekend = $date->isWeekend(); // Sabtu (6) atau Minggu (0)
+            $isWeekend = $date->dayOfWeek === Carbon::SUNDAY; // Hanya Minggu (0) yang libur
 
             if ($isWeekend) {
                 $status = 'closed';

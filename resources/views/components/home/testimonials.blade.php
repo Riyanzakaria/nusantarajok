@@ -1,69 +1,144 @@
-<section class="py-24 bg-white dark:bg-slate-900 relative border-t border-slate-200 dark:border-slate-800" id="testimoni">
+<section
+    class="relative overflow-hidden"
+    id="testimoni"
+    style="padding: 7rem 0 8rem; background: oklch(0.12 0.018 55); border-top: 1px solid oklch(0.22 0.02 55);"
+>
     <div class="container mx-auto px-6 max-w-6xl">
-        <div class="text-center mb-16" x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-            <h2 class="text-sm font-bold text-accent-500 uppercase tracking-widest mb-3 transition-all duration-700 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">TESTIMONI PELANGGAN</h2>
-            <h3 class="text-3xl md:text-5xl font-display font-black text-slate-900 dark:text-white mb-6 transition-all duration-700 delay-100 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">Apa Kata Mereka?</h3>
-            <p class="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto transition-all duration-700 delay-200 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">Kepuasan pelanggan adalah prioritas utama kami. Berikut adalah pengalaman mereka yang telah mempercayakan interior kendaraannya kepada BJN.</p>
+
+        {{-- Header — no eyebrow --}}
+        <div
+            class="mb-14"
+            x-data="{ shown: false }"
+            x-intersect.once.margin.-10%.0px="shown = true"
+        >
+            <h2
+                class="font-display font-700"
+                style="font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.04; letter-spacing: -0.03em; color: oklch(0.93 0.012 75); text-wrap: balance; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);"
+                :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(20px)' }"
+            >
+                Kata Mereka di <span style="color: oklch(0.67 0.13 66);">Google.</span>
+            </h2>
+            <p
+                class="font-sans mt-4 flex items-center gap-2"
+                style="font-size: 1rem; color: oklch(0.72 0.025 68); max-width: 44ch; line-height: 1.7; transition: opacity 0.8s 0.1s cubic-bezier(0.16,1,0.3,1);"
+                :style="shown ? { opacity: 1 } : { opacity: 0 }"
+            >
+                Ratusan pelanggan puas dengan hasil pengerjaan kami.
+                <span class="flex items-center" style="color: #FBBC04;">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <span class="text-sm font-700 ml-1 font-mono" style="color: oklch(0.93 0.012 75);">5.0</span>
+                </span>
+            </p>
         </div>
 
-        <div class="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 snap-x snap-mandatory hide-scrollbar -mx-6 px-6 md:mx-0 md:px-0" style="scroll-padding-left: 1.5rem;">
-            <!-- Testimonial 1 -->
-            <div class="w-[85vw] md:w-auto flex-shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-8 rounded-none border-t-4 border-slate-900 dark:border-white relative shadow-sm" x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-                <div class="text-accent-500 mb-6 transition-all duration-700 transform" :class="shown ? 'scale-100 opacity-100' : 'scale-50 opacity-0'">
-                    <svg class="w-10 h-10 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
-                </div>
-                <p class="text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-8 italic">"Pengerjaannya sangat rapi dan detail. Bahan kulit yang disarankan juga nyaman, tidak panas dipakai perjalanan jauh. Recommended banget buat yang mau upgrade interior!"</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
-                        A
+        {{-- Editorial layout: 1 featured + 2 smaller --}}
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-px" style="background: oklch(0.22 0.02 55);">
+
+            {{-- Featured testimonial — full column --}}
+            <div
+                class="md:col-span-7 p-10 md:p-14 flex flex-col justify-between"
+                style="background: oklch(0.10 0.015 55);"
+                x-data="{ shown: false }"
+                x-intersect.once.margin.-10%.0px="shown = true"
+            >
+                <div
+                    style="transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                >
+                    <div class="flex items-center gap-1 mb-8" style="color: #FBBC04;">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                     </div>
-                    <div>
-                        <h5 class="font-bold text-slate-900 dark:text-white">Andi S.</h5>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Pemilik Innova Zenix</p>
+                    
+                    <blockquote class="font-sans mb-10" style="font-size: 1.25rem; line-height: 1.65; color: oklch(0.88 0.01 75); font-style: normal; font-weight: 400; max-width: 36ch;">
+                        Cover joknya sngt presisi, jahitannya rapi, sangat rekomendasi untuk kalian yg ingin ganti cover jok yg sudah usang atau untuk melindungi cover jok mobil kalian.👍🏻
+                    </blockquote>
+                    <div class="flex items-end justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center font-display font-700 text-lg" style="background: oklch(0.22 0.02 55); color: oklch(0.93 0.012 75);">D</div>
+                            <div>
+                                <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Dhika _Kuchil</p>
+                                <p class="font-sans text-xs mt-1 uppercase tracking-wider flex items-center gap-2" style="color: oklch(0.50 0.020 62);">
+                                    setahun lalu
+                                    <span style="color: oklch(0.28 0.025 55);">|</span>
+                                    <span style="color: #4285F4; text-transform: none;" class="font-700">Google</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div style="width: 3rem; height: 1px; background: oklch(0.67 0.13 66);"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Testimonial 2 -->
-            <div class="w-[85vw] md:w-auto flex-shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-8 rounded-none border-t-4 border-slate-900 dark:border-white relative md:translate-y-6 shadow-sm" x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-                <div class="text-accent-500 mb-6 transition-all duration-700 delay-100 transform" :class="shown ? 'scale-100 opacity-100' : 'scale-50 opacity-0'">
-                    <svg class="w-10 h-10 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
-                </div>
-                <p class="text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-8 italic">"Sistem trackernya ngebantu banget, bisa mantau progress pengerjaan dari rumah. Hasil akhirnya melebihi ekspektasi, jahitan lurus dan pas di body jok."</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
-                        B
+            {{-- Right column: 2 smaller --}}
+            <div class="md:col-span-5 flex flex-col gap-px" style="background: oklch(0.22 0.02 55);">
+
+                {{-- Testimonial 2 --}}
+                <div
+                    class="flex-1 p-8 md:p-10 flex flex-col justify-between"
+                    style="background: oklch(0.14 0.020 55);"
+                    x-data="{ shown: false }"
+                    x-intersect.once.margin.-10%.0px="shown = true"
+                >
+                    <div
+                        style="transition: opacity 0.8s 0.1s cubic-bezier(0.16,1,0.3,1);"
+                        :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                    >
+                        <div class="flex items-center gap-1 mb-5" style="color: #FBBC04;">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <blockquote class="font-sans font-400 mb-8" style="font-size: 0.95rem; line-height: 1.7; color: oklch(0.72 0.025 68); font-style: italic;">
+                            &ldquo;Pelayanan ramah, sabar juga menghadapi kita yg bawel soal bahan dan pilihan warna, cs nya GK cemberut n jutek kita mintain contoh bahan, good service&rdquo;
+                        </blockquote>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center font-display font-700 text-xs" style="background: oklch(0.22 0.02 55); color: oklch(0.93 0.012 75);">G</div>
+                            <div>
+                                <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Gatauakugabut</p>
+                                <p class="font-sans text-[10px] mt-0.5 uppercase tracking-wider" style="color: oklch(0.50 0.020 62);">4 bulan lalu &bull; <span style="color: #4285F4; text-transform: none; font-weight: bold;">Google</span></p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="font-bold text-slate-900 dark:text-white">Budi Santoso</h5>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Pemilik Honda HR-V</p>
+                </div>
+
+                {{-- Testimonial 3 --}}
+                <div
+                    class="flex-1 p-8 md:p-10 flex flex-col justify-between"
+                    style="background: oklch(0.155 0.022 55);"
+                    x-data="{ shown: false }"
+                    x-intersect.once.margin.-10%.0px="shown = true"
+                >
+                    <div
+                        style="transition: opacity 0.8s 0.18s cubic-bezier(0.16,1,0.3,1);"
+                        :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                    >
+                        <div class="flex items-center gap-1 mb-5" style="color: #FBBC04;">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <blockquote class="font-sans font-400 mb-8" style="font-size: 0.95rem; line-height: 1.7; color: oklch(0.72 0.025 68); font-style: italic;">
+                            &ldquo;Puas banget dengan hasilnya.jahitan sangat rapi dan presisi. Cover jok kelihatan lebih elegan. Mantab pokoknya.&rdquo;
+                        </blockquote>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center font-display font-700 text-xs" style="background: oklch(0.22 0.02 55); color: oklch(0.93 0.012 75);">F</div>
+                            <div>
+                                <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Fariz kim</p>
+                                <p class="font-sans text-[10px] mt-0.5 uppercase tracking-wider" style="color: oklch(0.50 0.020 62);">setahun lalu &bull; <span style="color: #4285F4; text-transform: none; font-weight: bold;">Google</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Testimonial 3 -->
-            <div class="w-[85vw] md:w-auto flex-shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-8 rounded-none border-t-4 border-slate-900 dark:border-white relative shadow-sm" x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-                <div class="text-accent-500 mb-6 transition-all duration-700 delay-200 transform" :class="shown ? 'scale-100 opacity-100' : 'scale-50 opacity-0'">
-                    <svg class="w-10 h-10 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
-                </div>
-                <p class="text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-8 italic">"Pelayanan ramah, diajak konsultasi enak banget. Mobil saya jadi keliatan lebih mewah dari sebelumnya. Terimakasih Bengkel Jok Nusantara!"</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
-                        C
-                    </div>
-                    <div>
-                        <h5 class="font-bold text-slate-900 dark:text-white">Citra R.</h5>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">Pemilik Toyota Yaris</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Scroll Indicator Hint -->
-        <div class="flex justify-center md:hidden gap-2 mt-2">
-            <div class="w-12 h-1 rounded-full bg-slate-300 dark:bg-slate-700"></div>
-            <div class="w-4 h-1 rounded-full bg-slate-200 dark:bg-slate-800"></div>
-            <div class="w-4 h-1 rounded-full bg-slate-200 dark:bg-slate-800"></div>
         </div>
     </div>
 </section>

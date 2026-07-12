@@ -1,64 +1,138 @@
-<section class="py-24 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" id="solusi">
+<section
+    class="relative overflow-hidden"
+    id="solusi"
+    style="padding: 7rem 0 8rem; background: oklch(0.12 0.018 55); border-top: 1px solid oklch(0.22 0.02 55);"
+>
     <div class="container mx-auto px-6 max-w-6xl">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            
-            <div x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-                <h2 class="text-sm font-bold text-accent-500 uppercase tracking-widest mb-3 transition-all duration-700 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">SOLUSI KAMI</h2>
-                <h3 class="text-3xl md:text-5xl font-display font-black text-slate-900 dark:text-white mb-6 leading-tight transition-all duration-700 delay-100 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">Modifikasi Premium <br/>Sesuai Standar Pabrik.</h3>
-                <p class="text-lg text-slate-500 dark:text-slate-400 mb-8 transition-all duration-700 delay-200 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">Di Bengkel Jok Nusantara (BJN), kami mengedepankan kualitas material dan detail jahitan presisi untuk memastikan hasil akhir yang tidak hanya estetis, tetapi juga awet dan nyaman untuk penggunaan jangka panjang.</p>
-                
-                <ul class="space-y-6 transition-all duration-700 delay-300 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">
-                    <li class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-accent-500/10 text-accent-500 flex items-center justify-center shrink-0 mt-1">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Material Kulit Asli & Sintetis Premium</h4>
-                            <p class="text-slate-500 dark:text-slate-400">Pilihan bahan tahan lama, mudah dibersihkan, dan memiliki sirkulasi udara baik.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-accent-500/10 text-accent-500 flex items-center justify-center shrink-0 mt-1">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Pengerjaan Presisi</h4>
-                            <p class="text-slate-500 dark:text-slate-400">Pola dipotong presisi untuk kekuatan maksimal.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-accent-500/10 text-accent-500 flex items-center justify-center shrink-0 mt-1">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Sistem Tracker Transparan</h4>
-                            <p class="text-slate-500 dark:text-slate-400">Pantau proses pengerjaan mobil Anda secara online kapan saja dan di mana saja.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 xl:gap-24 items-start">
 
-            <!-- Visual Side -->
-            <div class="relative" x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-                <div class="aspect-[4/5] rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-800 transition-all duration-1000 transform" :class="shown ? 'scale-100 opacity-100' : 'scale-95 opacity-0'">
-                    <img src="{{ asset('images/testimonials/customer_1.png') }}" alt="Proses pengerjaan jok mobil" class="w-full h-full object-cover">
-                    <!-- overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl">
-                        <p class="text-white font-bold mb-1">Dikerjakan oleh Profesional</p>
-                        <p class="text-white/80 text-sm">Tim kami telah menangani ratusan modifikasi interior dari berbagai tipe kendaraan.</p>
+            {{-- Left: Text content --}}
+            <div
+                x-data="{ shown: false }"
+                x-intersect.once.margin.-10%.0px="shown = true"
+            >
+                <h2
+                    class="font-display font-700 mb-8"
+                    style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.04; letter-spacing: -0.03em; color: oklch(0.93 0.012 75); text-wrap: balance; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(24px)' }"
+                >
+                    Keunggulan Jok<br>Nusantara.
+                </h2>
+
+                <p
+                    class="font-sans mb-12"
+                    style="font-size: 1.0625rem; line-height: 1.75; color: oklch(0.72 0.025 68); max-width: 44ch; transition: opacity 0.8s 0.12s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                >
+                    Dibuat khusus untuk kondisi jalan dan cuaca Indonesia. Pas buat Avanza, Innova, Xenia, Brio, Calya, Rush, Ertiga, dan masih banyak lagi — dengan pemasangan semi paten dan paten.
+                </p>
+
+                {{-- Feature list from copywriting brief --}}
+                <ol
+                    class="space-y-0"
+                    style="transition: opacity 0.8s 0.22s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                >
+                    <li style="border-top: 1px solid oklch(0.22 0.02 55); padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: flex-start;">
+                        <span class="font-display font-700 shrink-0" style="font-size: 1.25rem; color: oklch(0.67 0.13 66); line-height: 1; margin-top: 2px;">01</span>
+                        <div>
+                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Bahan Premium Double Layer</h3>
+                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Kuat, anti sobek, jahitan rapi. Nggak molor walau didudukin tiap hari — tahan lama untuk kondisi pemakaian berat sekalipun.</p>
+                        </div>
+                    </li>
+                    <li style="border-top: 1px solid oklch(0.22 0.02 55); padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: flex-start;">
+                        <span class="font-display font-700 shrink-0" style="font-size: 1.25rem; color: oklch(0.67 0.13 66); line-height: 1; margin-top: 2px;">02</span>
+                        <div>
+                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Water Resistant</h3>
+                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Tumpah kopi, air mineral, ompol anak? Tinggal lap — nggak langsung nyerap ke busa jok. Bebas was-was tiap hari.</p>
+                        </div>
+                    </li>
+                    <li style="border-top: 1px solid oklch(0.22 0.02 55); border-bottom: 1px solid oklch(0.22 0.02 55); padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: flex-start;">
+                        <span class="font-display font-700 shrink-0" style="font-size: 1.25rem; color: oklch(0.67 0.13 66); line-height: 1; margin-top: 2px;">03</span>
+                        <div>
+                            <h3 class="font-sans font-700 mb-1.5" style="font-size: 1rem; color: oklch(0.93 0.012 75);">Model Universal Nusantara</h3>
+                            <p class="font-sans text-sm leading-relaxed" style="color: oklch(0.72 0.025 68);">Pas buat hampir semua jenis mobil. Jok ori kamu tetap awet, nggak lecet, nggak kotor — nilai jual mobil second tetap tinggi.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                {{-- Benefit highlights --}}
+                <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4"
+                     style="transition: opacity 0.8s 0.35s cubic-bezier(0.16,1,0.3,1);"
+                     :style="shown ? { opacity: 1 } : { opacity: 0 }">
+                    <div class="p-4" style="background: oklch(0.67 0.13 66 / 0.07); border: 1px solid oklch(0.67 0.13 66 / 0.20);">
+                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Jok Ori Awet</p>
+                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Nggak lecet, nggak kotor</p>
+                    </div>
+                    <div class="p-4" style="background: oklch(0.67 0.13 66 / 0.07); border: 1px solid oklch(0.67 0.13 66 / 0.20);">
+                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Harga Jual Tinggi</p>
+                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Nilai mobil second tetap bagus</p>
+                    </div>
+                    <div class="p-4" style="background: oklch(0.67 0.13 66 / 0.07); border: 1px solid oklch(0.67 0.13 66 / 0.20);">
+                        <p class="font-sans font-700 text-sm mb-1" style="color: oklch(0.75 0.11 67);">Kabin Lebih Adem</p>
+                        <p class="font-sans text-xs" style="color: oklch(0.50 0.020 62);">Nyaman di cuaca Indonesia</p>
                     </div>
                 </div>
-                
-                <!-- Floating badge -->
-                <div class="absolute -top-6 -right-6 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 transition-all duration-700 delay-500 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">
+            </div>
+
+            {{-- Right: Image --}}
+            <div
+                class="relative"
+                x-data="{ shown: false }"
+                x-intersect.once.margin.-10%.0px="shown = true"
+            >
+                <div
+                    class="overflow-hidden"
+                    style="aspect-ratio: 4/5; transition: opacity 0.9s 0.2s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                >
+                    <img
+                        src="{{ asset('images/testimonials/customer_1.png') }}"
+                        alt="Proses pengerjaan jok mobil di Bengkel Jok Nusantara Magetan"
+                        class="w-full h-full object-cover"
+                        style="filter: contrast(1.04) saturate(0.85);"
+                    >
+                </div>
+
+                <div
+                    class="mt-5 flex items-start gap-4"
+                    style="transition: opacity 0.8s 0.45s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                >
+                    <div style="width: 2px; height: 2.5rem; background: oklch(0.67 0.13 66); flex-shrink: 0; margin-top: 3px;"></div>
+                    <div>
+                        <p class="font-sans font-700 text-sm" style="color: oklch(0.93 0.012 75);">Dikerjakan di Magetan, Jawa Timur</p>
+                        <p class="font-sans text-xs mt-1 leading-relaxed" style="color: oklch(0.50 0.020 62);">Ratusan mobil sudah dikerjakan. Pemasangan semi paten dan paten tersedia.</p>
+                    </div>
+                </div>
+
+                {{-- Material swatches --}}
+                <div
+                    class="mt-8"
+                    style="transition: opacity 0.8s 0.55s cubic-bezier(0.16,1,0.3,1);"
+                    :style="shown ? { opacity: 1 } : { opacity: 0 }"
+                >
+                    <p class="font-sans text-xs uppercase tracking-[0.14em] mb-4" style="color: oklch(0.50 0.020 62);">Pilihan Warna</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <div class="group flex flex-col items-center gap-1.5">
+                            <div class="w-10 h-10 cursor-pointer transition-transform duration-200 group-hover:scale-110"
+                                 style="background: oklch(0.25 0.05 55); border: 1px solid oklch(0.35 0.03 55);" title="Hitam"></div>
+                            <span class="font-sans text-[0.6rem] uppercase tracking-wider" style="color: oklch(0.38 0.03 60);">Hitam</span>
                         </div>
-                        <div>
-                            <p class="text-slate-900 dark:text-white font-black leading-none">5 Tahun</p>
-                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-1 uppercase tracking-wider font-bold">Berpengalaman</p>
+                        <div class="group flex flex-col items-center gap-1.5">
+                            <div class="w-10 h-10 cursor-pointer transition-transform duration-200 group-hover:scale-110"
+                                 style="background: oklch(0.42 0.07 55); border: 1px solid oklch(0.50 0.04 55);" title="Cokelat Tua"></div>
+                            <span class="font-sans text-[0.6rem] uppercase tracking-wider" style="color: oklch(0.38 0.03 60);">Cokelat</span>
+                        </div>
+                        <div class="group flex flex-col items-center gap-1.5">
+                            <div class="w-10 h-10 cursor-pointer transition-transform duration-200 group-hover:scale-110"
+                                 style="background: oklch(0.67 0.13 66); border: 1px solid oklch(0.75 0.11 67);" title="Cognac"></div>
+                            <span class="font-sans text-[0.6rem] uppercase tracking-wider" style="color: oklch(0.38 0.03 60);">Cognac</span>
+                        </div>
+                        <div class="group flex flex-col items-center gap-1.5">
+                            <div class="w-10 h-10 cursor-pointer transition-transform duration-200 group-hover:scale-110"
+                                 style="background: oklch(0.78 0.03 80); border: 1px solid oklch(0.70 0.03 80);" title="Krem"></div>
+                            <span class="font-sans text-[0.6rem] uppercase tracking-wider" style="color: oklch(0.38 0.03 60);">Krem</span>
                         </div>
                     </div>
                 </div>
@@ -67,3 +141,7 @@
         </div>
     </div>
 </section>
+
+
+
+

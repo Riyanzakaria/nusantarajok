@@ -1,52 +1,105 @@
-<section class="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-24 pb-12 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-    <!-- Editorial Background -->
+<section
+    class="relative min-h-[100svh] flex flex-col justify-end overflow-hidden"
+    style="background: oklch(0.12 0.018 55);"
+>
+    {{-- Full-bleed background image --}}
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/hero_jok_premium.png') }}" alt="Premium Leather Car Seat" class="w-full h-full object-cover opacity-60 dark:opacity-50 contrast-125" />
-        <!-- Side fade to ensure text readability on the left -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-50/95 via-slate-50/70 to-slate-50/20 dark:from-slate-900/95 dark:via-slate-900/80 dark:to-slate-900/40"></div>
-        <!-- Bottom fade to blend with next section -->
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent dark:from-slate-900"></div>
+        <img
+            src="{{ asset('images/hero_jok_premium.png') }}"
+            alt=""
+            aria-hidden="true"
+            class="w-full h-full object-cover"
+            style="opacity: 0.30; mix-blend-mode: luminosity;"
+        />
+        <div class="absolute inset-0" style="background: linear-gradient(to top, oklch(0.12 0.018 55) 0%, oklch(0.12 0.018 55 / 0.85) 35%, oklch(0.12 0.018 55 / 0.40) 65%, oklch(0.12 0.018 55 / 0.20) 100%);"></div>
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%220.04%22/%3E%3C/svg%3E'); opacity: 0.6;"></div>
     </div>
 
-    <div class="relative z-10 container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-8" x-data="{ mounted: false }" x-init="setTimeout(() => mounted = true, 100)">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-accent-50 text-accent-600 dark:bg-accent-500/10 dark:text-accent-400 text-xs font-bold tracking-widest uppercase border border-accent-100 dark:border-accent-500/20 transition-all duration-700 ease-out transform" :class="mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">
-                Spesialis Jok Mobil Premium
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-display font-black text-slate-900 dark:text-white leading-[1.05] tracking-tight transition-all duration-700 delay-100 ease-out transform" :class="mounted ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">
-                Kenyamanan & Wibawa<br/>
-                <span class="text-accent-500">Dalam Satu Kabin.</span>
+    {{-- Content — bottom-anchored --}}
+    <div class="relative z-10 container mx-auto px-6 max-w-6xl pt-32 pb-20 md:pb-28">
+
+        <div
+            x-data="{ animateIn: false }"
+            x-init="requestAnimationFrame(() => requestAnimationFrame(() => animateIn = true))"
+        >
+            <h1
+                class="font-display font-700 mb-6"
+                style="font-size: clamp(2.8rem, 7.5vw, 5.5rem); line-height: 1.0; letter-spacing: -0.035em; color: oklch(0.93 0.012 75); text-wrap: balance; transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);"
+                :style="animateIn ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(28px)' }"
+            >
+                Bosan Jok Kotor,<br>
+                <span style="color: oklch(0.67 0.13 66);">Gerah &amp; Gampang Sobek?</span>
             </h1>
-            
-            <p class="text-base md:text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed max-w-lg transition-all duration-700 delay-200 ease-out transform" :class="mounted ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">
-                Bukan sekadar sarung jok. Kami membangun ulang interior mobil Anda dengan material autentik dan standar manufaktur pabrik.
+
+            <p
+                class="font-sans mb-10"
+                style="font-size: 1.075rem; line-height: 1.75; color: oklch(0.68 0.022 65); max-width: 50ch; font-weight: 400; transition: opacity 0.9s 0.15s cubic-bezier(0.16,1,0.3,1), transform 0.9s 0.15s cubic-bezier(0.16,1,0.3,1);"
+                :style="animateIn ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(20px)' }"
+            >
+                Bengkel Jok Nusantara hadir dengan solusi khusus kondisi jalan &amp; cuaca Indonesia — panas terik, hujan, debu, anak tumpahkan minuman? Aman.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-6 transition-all duration-700 delay-300 ease-out transform" :class="mounted ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">
-                <a href="#kalkulator" class="touch-target px-8 py-4 rounded-none border-2 border-accent-500 text-base font-bold w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-accent-500 text-white hover:bg-accent-600 hover:border-accent-600 transition-all duration-300">
-                    Mulai Estimasi
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            {{-- CTAs --}}
+            <div
+                class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+                style="transition: opacity 0.9s 0.28s cubic-bezier(0.16,1,0.3,1), transform 0.9s 0.28s cubic-bezier(0.16,1,0.3,1);"
+                :style="animateIn ? { opacity: 1, transform: 'translateY(0)' } : { opacity: 0, transform: 'translateY(16px)' }"
+            >
+                <a
+                    href="#kalkulator"
+                    class="touch-target inline-flex items-center justify-center gap-3 px-8 py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-300"
+                    style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55); border: 2px solid oklch(0.67 0.13 66);"
+                    onmouseover="this.style.background='oklch(0.75 0.11 67)'; this.style.borderColor='oklch(0.75 0.11 67)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='oklch(0.67 0.13 66)'; this.style.borderColor='oklch(0.67 0.13 66)'; this.style.transform='translateY(0)'"
+                >
+                    Cek Estimasi Harga
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
-                <a href="#solusi" class="touch-target px-8 py-4 rounded-none text-base font-bold w-full sm:w-auto inline-flex items-center justify-center bg-transparent border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-all duration-300">
-                    Cara Kerja Kami
+                <a
+                    href="https://wa.me/6281234567890"
+                    target="_blank"
+                    rel="noopener"
+                    class="touch-target inline-flex items-center justify-center gap-3 px-8 py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-300"
+                    style="background: transparent; color: oklch(0.93 0.012 75); border: 1px solid oklch(0.38 0.03 60);"
+                    onmouseover="this.style.borderColor='oklch(0.93 0.012 75)'; this.style.background='oklch(0.93 0.012 75 / 0.05)'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.borderColor='oklch(0.38 0.03 60)'; this.style.background='transparent'; this.style.transform='translateY(0)'"
+                >
+                    Chat WhatsApp Sekarang
                 </a>
             </div>
-        </div>
-        
-        <!-- Trust Indicators right side -->
-        <div class="hidden md:block relative z-10" x-data="{ mounted: false }" x-init="setTimeout(() => mounted = true, 400)">
-            <div class="grid grid-cols-1 gap-6 max-w-sm ml-auto transition-all duration-700 ease-out transform" :class="mounted ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'">
-                <!-- Editorial brutalist card style -->
-                <div class="bg-white dark:bg-slate-950 border-l-4 border-accent-500 p-6 shadow-2xl">
-                    <h3 class="font-display font-black text-2xl text-slate-900 dark:text-white mb-2 uppercase tracking-wide">Material Asli</h3>
-                    <p class="text-base text-slate-600 dark:text-slate-400">Garansi keaslian 100% pada setiap lembar material kulit yang kami gunakan.</p>
+
+            {{-- Stat bar --}}
+            <div
+                class="flex flex-wrap items-center gap-x-10 gap-y-4 mt-16 pt-8"
+                style="border-top: 1px solid oklch(0.28 0.025 55); transition: opacity 0.9s 0.45s cubic-bezier(0.16,1,0.3,1);"
+                :style="animateIn ? { opacity: 1 } : { opacity: 0 }"
+            >
+                <div>
+                    <p class="font-display font-600" style="font-size: 2rem; color: oklch(0.93 0.012 75); line-height: 1;">500+</p>
+                    <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color: oklch(0.50 0.020 62);">Kendaraan Selesai</p>
                 </div>
-                <div class="bg-slate-900 dark:bg-slate-800 border-l-4 border-white dark:border-slate-500 p-6 shadow-2xl transform translate-x-8">
-                    <h3 class="font-display font-black text-2xl text-white mb-2 uppercase tracking-wide">Presisi Pabrik</h3>
-                    <p class="text-base text-slate-300 dark:text-slate-400">Pola potongan dan jahitan *double-stitch* yang mengikuti standar manufaktur.</p>
+                <div style="width: 1px; height: 2.5rem; background: oklch(0.28 0.025 55);"></div>
+                <div>
+                    <p class="font-display font-600" style="font-size: 2rem; color: oklch(0.93 0.012 75); line-height: 1;">5+ Thn</p>
+                    <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color: oklch(0.50 0.020 62);">Pengalaman</p>
+                </div>
+                <div style="width: 1px; height: 2.5rem; background: oklch(0.28 0.025 55);"></div>
+                <div>
+                    <p class="font-display font-600" style="font-size: 2rem; color: oklch(0.93 0.012 75); line-height: 1;">Magetan</p>
+                    <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color: oklch(0.50 0.020 62);">Jawa Timur</p>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- Scroll cue --}}
+    <div class="absolute bottom-8 right-8 z-10 hidden md:flex flex-col items-center gap-2"
+         style="color: oklch(0.38 0.03 60);">
+        <span class="font-sans text-[0.6rem] uppercase tracking-[0.2em]" style="writing-mode: vertical-rl; transform: rotate(180deg);">Scroll</span>
+        <div style="width: 1px; height: 48px; background: linear-gradient(to bottom, oklch(0.38 0.03 60), transparent);"></div>
+    </div>
 </section>
+
+
+
+

@@ -45,6 +45,9 @@ Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logo
 
 // ── Admin Routes (RBAC Protected) ──────────────────────────────
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('vehicle-categories', \App\Http\Controllers\Admin\VehicleCategoryController::class)->except(['show', 'create', 'edit', 'update']);
+    Route::get('schedule', [\App\Http\Controllers\Admin\ScheduleController::class, 'index'])->name('schedule.index');
+    
     Route::resource('pricelist', \App\Http\Controllers\Admin\PricelistController::class)
         ->except(['show', 'create', 'edit'])
         ->parameters(['pricelist' => 'pricelist']);

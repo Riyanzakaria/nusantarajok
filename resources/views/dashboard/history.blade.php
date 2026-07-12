@@ -1,134 +1,137 @@
-<x-layout title="Riwayat & Analisis — Nusantara Jok">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative">
-    <div class="absolute -top-40 right-0 w-[40rem] h-[40rem] bg-accent-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+{{-- Admin shared design tokens via inline CSS variables --}}
+@php
+    $bg       = 'oklch(0.12 0.018 55)';
+    $bgCard   = 'oklch(0.155 0.022 55)';
+    $border   = 'oklch(0.22 0.02 55)';
+    $inkPri   = 'oklch(0.93 0.012 75)';
+    $inkSec   = 'oklch(0.68 0.022 65)';
+    $inkMute  = 'oklch(0.50 0.020 62)';
+    $gold     = 'oklch(0.67 0.13 66)';
+    $goldHov  = 'oklch(0.75 0.11 67)';
+@endphp
+<x-layout title="Riwayat & Analisis — Admin BJN">
+    <div class="min-h-screen" style="background: {{ $bg }}; padding: 8rem 0 8rem;">
+        <div class="max-w-7xl mx-auto px-6">
 
-    {{-- Header --}}
-    <div class="relative flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4 z-10">
-        <div>
-            <div class="flex items-center gap-3 mb-2">
-                <a href="{{ route('dashboard.index') }}" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                </a>
-                <h1 class="font-display text-3xl font-bold text-slate-900 dark:text-white tracking-tight drop-shadow-md">Riwayat & Analisis</h1>
-            </div>
-            <p class="text-slate-500 dark:text-slate-400 mt-1">Laporan lengkap seluruh pesanan dan progres bengkel.</p>
-        </div>
-        <div>
-            <a href="{{ route('dashboard.work-orders.export') }}"
-               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-900 dark:text-white font-bold text-sm hover:bg-emerald-400 border border-emerald-400/50 hover:-translate-y-0.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all duration-200 active:scale-95">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                Download CSV
-            </a>
-        </div>
-    </div>
-
-    {{-- Analytics Widgets --}}
-    <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-        <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-white/10 p-6 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.3)]">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-blue-500/20 border border-blue-500/30 rounded-xl flex items-center justify-center text-blue-400 shrink-0">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+            {{-- Header --}}
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4"
+                 style="border-bottom: 1px solid {{ $border }}; padding-bottom: 1.5rem;">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <a href="{{ route('dashboard.index') }}"
+                           class="w-8 h-8 flex items-center justify-center transition-colors duration-200"
+                           style="color: {{ $inkMute }}; border: 1px solid {{ $border }};"
+                           onmouseover="this.style.color='{{ $goldHov }}'; this.style.borderColor='{{ $goldHov }}'"
+                           onmouseout="this.style.color='{{ $inkMute }}'; this.style.borderColor='{{ $border }}'">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        </a>
+                        <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: {{ $inkPri }}; line-height: 1.1;">Riwayat &amp; Analisis</h1>
+                    </div>
+                    <p class="font-sans text-sm mt-1" style="color: {{ $inkMute }};">Laporan lengkap seluruh pesanan dan progres bengkel.</p>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Pesanan</p>
-                    <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1">{{ $totalOrders }} <span class="text-sm font-medium text-slate-500">Unit</span></h3>
+                    <a href="{{ route('dashboard.work-orders.export') }}"
+                       class="inline-flex items-center gap-2 px-5 py-2.5 font-sans font-700 text-sm transition-all duration-200 active:scale-95"
+                       style="background: oklch(0.62 0.14 155); color: {{ $bg }}; border: 1px solid oklch(0.62 0.14 155);"
+                       onmouseover="this.style.background='oklch(0.68 0.16 155)'"
+                       onmouseout="this.style.background='oklch(0.62 0.14 155)'"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download CSV
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-white/10 p-6 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.3)]">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-emerald-500/20 border border-emerald-500/30 rounded-xl flex items-center justify-center text-emerald-400 shrink-0">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <div>
-                    <p class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Telah Selesai</p>
-                    <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1">{{ $completedOrders }} <span class="text-sm font-medium text-slate-500">Unit</span></h3>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-white/10 p-6 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.3)]">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-amber-500/20 border border-amber-500/30 rounded-xl flex items-center justify-center text-amber-400 shrink-0">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <div>
-                    <p class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estimasi Pendapatan</p>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white mt-1">Rp {{ number_format($revenue, 0, ',', '.') }}</h3>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    {{-- History Table --}}
-    <div class="relative z-10 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                        <th class="px-6 py-4 whitespace-nowrap">Tgl Jadwal</th>
-                        <th class="px-6 py-4 whitespace-nowrap">Plat Nomor</th>
-                        <th class="px-6 py-4 whitespace-nowrap">Pelanggan</th>
-                        <th class="px-6 py-4 whitespace-nowrap">Kendaraan</th>
-                        <th class="px-6 py-4 whitespace-nowrap">Harga / Material</th>
-                        <th class="px-6 py-4 text-center whitespace-nowrap">Status</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200 dark:divide-slate-700/50">
-                    @forelse($workOrders as $order)
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">
-                                {{ $order->scheduled_at->format('d M Y') }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="font-mono font-bold text-slate-900 dark:text-white">{{ $order->raw_plat }}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <p class="text-sm font-bold text-slate-900 dark:text-white">{{ $order->lead->customer_name ?? '-' }}</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">{{ $order->lead->whatsapp_number ?? '-' }}</p>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">
-                                {{ $order->vehicle_type }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                @if($order->lead)
-                                    <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Rp {{ number_format($order->lead->calculated_price ?? 0, 0, ',', '.') }}</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400">{{ $order->lead->material_selected }}</p>
-                                @else
-                                    <span class="text-slate-400">-</span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center">
-                                @if($order->current_status === 'selesai')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border-emerald-500/30">
-                                        Selesai
-                                    </span>
-                                @elseif($order->current_status === 'proses')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border bg-amber-500/20 text-amber-600 dark:text-amber-300 border-amber-500/30">
-                                        Proses
-                                    </span>
-                                @else
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-600">
-                                        Antrian
-                                    </span>
-                                @endif
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400 text-sm">
-                                Belum ada data riwayat pesanan.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        {{-- Pagination --}}
-        @if($workOrders->hasPages())
-            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700">
-                {{ $workOrders->links() }}
+            {{-- Analytics Widgets --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+                <div class="p-6" style="background: {{ $bgCard }}; border: 1px solid {{ $border }};">
+                    <p class="font-sans text-xs uppercase tracking-[0.14em] mb-2" style="color: {{ $inkMute }};">Total Pesanan</p>
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-display font-700 text-3xl" style="color: {{ $inkPri }};">{{ $totalOrders }}</span>
+                        <span class="font-sans text-xs uppercase tracking-wider" style="color: {{ $inkMute }};">Unit</span>
+                    </div>
+                </div>
+                <div class="p-6" style="background: {{ $bgCard }}; border: 1px solid {{ $border }};">
+                    <p class="font-sans text-xs uppercase tracking-[0.14em] mb-2" style="color: {{ $inkMute }};">Telah Selesai</p>
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-display font-700 text-3xl" style="color: {{ $inkPri }};">{{ $completedOrders }}</span>
+                        <span class="font-sans text-xs uppercase tracking-wider" style="color: {{ $inkMute }};">Unit</span>
+                    </div>
+                </div>
+                <div class="p-6" style="background: {{ $bgCard }}; border: 1px solid {{ $border }};">
+                    <p class="font-sans text-xs uppercase tracking-[0.14em] mb-2" style="color: {{ $inkMute }};">Estimasi Pendapatan</p>
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-mono font-700 text-2xl" style="color: {{ $gold }};">Rp {{ number_format($revenue, 0, ',', '.') }}</span>
+                    </div>
+                </div>
             </div>
-        @endif
+
+            {{-- History Table --}}
+            <div style="background: {{ $bgCard }}; border: 1px solid {{ $border }}; overflow-x-auto;">
+                <div class="flex items-center min-w-[900px] gap-px" style="background: {{ $border }};">
+                    <div class="w-32 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em]" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Tgl Jadwal</div>
+                    <div class="w-32 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em]" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Plat Nomor</div>
+                    <div class="flex-1 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em]" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Pelanggan</div>
+                    <div class="flex-1 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em]" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Kendaraan</div>
+                    <div class="w-48 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em] text-right" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Harga &amp; Material</div>
+                    <div class="w-32 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em] text-center" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Status</div>
+                </div>
+
+                @forelse($workOrders as $order)
+                    <div class="flex items-center min-w-[900px] gap-px transition-colors duration-200"
+                         style="background: {{ $border }}; border-top: 1px solid {{ $border }};"
+                         onmouseover="this.querySelector('.row-bg').style.background='{{ $bg }}'"
+                         onmouseout="this.querySelector('.row-bg').style.background='{{ $bgCard }}'">
+
+                        <div class="row-bg w-32 px-5 py-4 font-sans text-sm" style="background: {{ $bgCard }}; color: {{ $inkSec }};">
+                            {{ $order->scheduled_at->format('d M Y') }}
+                        </div>
+                        <div class="row-bg w-32 px-5 py-4 font-mono font-700 text-sm tracking-wide" style="background: {{ $bgCard }}; color: {{ $inkPri }};">
+                            {{ $order->raw_plat }}
+                        </div>
+                        <div class="row-bg flex-1 px-5 py-4" style="background: {{ $bgCard }};">
+                            <p class="font-sans font-700 text-sm" style="color: {{ $inkPri }};">{{ $order->lead->customer_name ?? '—' }}</p>
+                            <p class="font-sans text-xs mt-0.5" style="color: {{ $inkMute }};">{{ $order->lead->whatsapp_number ?? '—' }}</p>
+                        </div>
+                        <div class="row-bg flex-1 px-5 py-4 font-sans text-sm" style="background: {{ $bgCard }}; color: {{ $inkSec }};">
+                            {{ $order->vehicle_type }}
+                        </div>
+                        <div class="row-bg w-48 px-5 py-4 text-right" style="background: {{ $bgCard }};">
+                            @if($order->lead)
+                                <p class="font-mono font-700 text-sm" style="color: {{ $gold }};">Rp {{ number_format($order->lead->calculated_price ?? 0, 0, ',', '.') }}</p>
+                                <p class="font-sans text-[0.65rem] uppercase tracking-wider mt-0.5" style="color: {{ $inkMute }};">{{ $order->lead->material_selected }}</p>
+                            @else
+                                <span style="color: {{ $inkMute }};">—</span>
+                            @endif
+                        </div>
+                        <div class="row-bg w-32 px-5 py-4 text-center" style="background: {{ $bgCard }};">
+                            @if($order->current_status === 'selesai')
+                                <span class="font-sans text-[0.65rem] font-700 uppercase tracking-widest px-2 py-1"
+                                      style="background: oklch(0.62 0.14 155 / 0.12); color: oklch(0.62 0.14 155); border: 1px solid oklch(0.62 0.14 155 / 0.30);">Selesai</span>
+                            @elseif($order->current_status === 'proses')
+                                <span class="font-sans text-[0.65rem] font-700 uppercase tracking-widest px-2 py-1"
+                                      style="background: oklch(0.67 0.13 66 / 0.12); color: oklch(0.67 0.13 66); border: 1px solid oklch(0.67 0.13 66 / 0.30);">Proses</span>
+                            @else
+                                <span class="font-sans text-[0.65rem] font-700 uppercase tracking-widest px-2 py-1"
+                                      style="background: oklch(0.60 0.04 250 / 0.12); color: oklch(0.72 0.025 68); border: 1px solid oklch(0.60 0.04 250 / 0.30);">Antrian</span>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <div class="px-6 py-16 text-center" style="background: {{ $bgCard }};">
+                        <p class="font-sans font-700 text-sm mb-1" style="color: {{ $inkPri }};">Belum ada riwayat pesanan.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            {{-- Pagination --}}
+            @if($workOrders->hasPages())
+                <div class="px-6 py-4 mt-4" style="background: {{ $bgCard }}; border: 1px solid {{ $border }};">
+                    {{ $workOrders->links() }}
+                </div>
+            @endif
+
+        </div>
     </div>
-</div>
 </x-layout>
+

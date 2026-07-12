@@ -1,158 +1,290 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth" x-data="{ theme: localStorage.getItem('theme') || 'dark' }" :class="{ 'dark': theme === 'dark' }" x-init="$watch('theme', val => localStorage.setItem('theme', val))">
+<html lang="id" class="scroll-smooth dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Nusantara Jok' }}</title>
+    <title>{{ $title ?? 'Bengkel Jok Nusantara Magetan — Jok Mobil Premium Anti Kotor & Tahan Lama' }}</title>
+    <meta name="description" content="BJN Magetan — bengkel jok mobil dengan bahan double layer, water resistant, model universal. Pas buat Avanza, Innova, Xenia, Brio, Calya, Rush, Ertiga & banyak lagi. Hubungi sekarang!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- Preload fonts if possible or just rely on CSS -->
-    <script>
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-300 antialiased min-h-screen flex flex-col selection:bg-accent-500/30 selection:text-accent-300" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
-    <!-- Sleek Navbar V4: Dual Theme Glass -->
-    <header 
-        class="fixed top-0 w-full z-50 transition-all duration-300 border-b"
-        :class="scrolled ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-slate-200 dark:border-white/10 py-3 shadow-lg' : 'bg-transparent border-transparent py-5'"
+<body
+    class="antialiased min-h-screen flex flex-col overflow-x-hidden"
+    style="background-color: oklch(0.12 0.018 55); color: oklch(0.93 0.012 75);"
+    x-data="{ scrolled: false, mobileMenuOpen: false }"
+    @scroll.window="scrolled = (window.pageYOffset > 40)"
+    @keydown.escape.window="mobileMenuOpen = false"
+>
+
+    {{-- ═══════════════════════════════════════════
+         NAVBAR — Dark artisan, no theme toggle
+    ═══════════════════════════════════════════ --}}
+    <header
+        class="fixed top-0 w-full z-[200] transition-all duration-500"
+        :class="scrolled
+            ? 'border-b py-3'
+            : 'border-b border-transparent py-5'"
+        :style="scrolled
+            ? 'background: oklch(0.10 0.015 55 / 0.96); backdrop-filter: blur(20px); border-color: oklch(0.22 0.02 55);'
+            : 'background: transparent;'"
     >
         <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-slate-900 dark:text-white group flex items-center gap-2">
-                <svg class="w-8 h-8 text-accent-500 group-hover:rotate-12 transition-transform duration-300 ease-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                </svg>
-                <div class="flex flex-col">
-                    <span class="leading-none text-xl">BJN</span>
-                    <span class="text-[0.6rem] font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mt-0.5">Bengkel Jok Nusantara</span>
-                </div>
-            </a>
-            
-            <div class="flex items-center gap-6 lg:gap-8">
-                <!-- Theme Toggle Button -->
-                <button @click="theme = theme === 'dark' ? 'light' : 'dark'" class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-white/20 transition-colors" title="Toggle Theme">
-                    <svg x-show="theme === 'light'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    <svg x-show="theme === 'dark'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                </button>
 
-                <a href="{{ route('home') }}#layanan" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors hidden md:block">Layanan</a>
-                <a href="{{ route('home') }}#kalkulator" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors hidden md:block">Estimasi</a>
-                <a href="{{ route('tracker.index') }}" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors hidden md:block">Lacak Progres</a>
-                
+            {{-- Wordmark --}}
+            <a href="{{ route('home') }}" class="flex items-baseline gap-3 group" aria-label="Bengkel Jok Nusantara">
+                <span
+                    class="font-display font-bold text-[1.6rem] leading-none transition-colors duration-300"
+                    style="color: oklch(0.93 0.012 75);"
+                >BJN</span>
+                <span class="hidden sm:inline text-[0.65rem] font-sans font-500 tracking-[0.18em] uppercase transition-colors duration-300"
+                    style="color: oklch(0.50 0.020 62);"
+                >Jok Nusantara — Magetan</span>
+            </a>
+
+            {{-- Nav items --}}
+            <div class="flex items-center gap-7 lg:gap-10">
+                <a href="{{ route('home') }}#gallery"
+                   class="hidden md:block text-sm font-sans font-medium transition-colors duration-200 hover:opacity-100"
+                   style="color: oklch(0.72 0.025 68); opacity: 0.85;"
+                   onmouseover="this.style.color='oklch(0.75 0.11 67)'"
+                   onmouseout="this.style.color='oklch(0.72 0.025 68)'">Galeri</a>
+
+                <a href="{{ route('home') }}#kalkulator"
+                   class="hidden md:block text-sm font-sans font-medium transition-colors duration-200"
+                   style="color: oklch(0.72 0.025 68); opacity: 0.85;"
+                   onmouseover="this.style.color='oklch(0.75 0.11 67)'"
+                   onmouseout="this.style.color='oklch(0.72 0.025 68)'">Estimasi Harga</a>
+
+                <a href="{{ route('tracker.index') }}"
+                   class="hidden md:block text-sm font-sans font-medium transition-colors duration-200"
+                   style="color: oklch(0.72 0.025 68); opacity: 0.85;"
+                   onmouseover="this.style.color='oklch(0.75 0.11 67)'"
+                   onmouseout="this.style.color='oklch(0.72 0.025 68)'">Lacak Progres</a>
+
                 @auth
-                <div class="flex items-center gap-4 border-l border-slate-300 dark:border-white/20 pl-6 ml-2">
-                    <div class="flex flex-col items-end hidden sm:flex">
-                        <span class="text-sm font-bold text-slate-900 dark:text-white">{{ Auth::user()->name }}</span>
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ Auth::user()->role }}</span>
+                <div class="flex items-center gap-4 pl-6 ml-2" style="border-left: 1px solid oklch(0.28 0.025 55);">
+                    <div class="hidden sm:flex flex-col items-end">
+                        <span class="text-sm font-sans font-600" style="color: oklch(0.93 0.012 75);">{{ Auth::user()->name }}</span>
+                        <span class="text-[0.65rem] font-sans font-500 tracking-wider uppercase" style="color: oklch(0.50 0.020 62);">{{ Auth::user()->role }}</span>
                     </div>
+                    <a href="{{ route('dashboard.index') }}"
+                       class="touch-target px-4 py-2 text-xs font-sans font-700 uppercase tracking-wider transition-all duration-200"
+                       style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55); border: 1px solid oklch(0.67 0.13 66);"
+                       onmouseover="this.style.background='oklch(0.75 0.11 67)'; this.style.borderColor='oklch(0.75 0.11 67)'"
+                       onmouseout="this.style.background='oklch(0.67 0.13 66)'; this.style.borderColor='oklch(0.67 0.13 66)'">
+                        Dashboard
+                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="touch-target rounded-full bg-slate-200 dark:bg-white/10 border border-slate-300 dark:border-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-700 dark:text-white p-2.5 transition-colors shadow-sm" title="Keluar">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        <button type="submit"
+                            class="touch-target w-9 h-9 flex items-center justify-center transition-colors duration-200"
+                            style="color: oklch(0.50 0.020 62); border: 1px solid oklch(0.28 0.025 55);"
+                            onmouseover="this.style.color='oklch(0.93 0.012 75)'; this.style.borderColor='oklch(0.38 0.03 60)'"
+                            onmouseout="this.style.color='oklch(0.50 0.020 62)'; this.style.borderColor='oklch(0.28 0.025 55)'"
+                            title="Keluar">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
                         </button>
                     </form>
                 </div>
                 @endauth
+
                 @guest
-                    <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors">Login Admin</a>
+                <a href="{{ route('login') }}"
+                   class="hidden md:inline-flex touch-target px-4 py-2 text-xs font-sans font-700 uppercase tracking-wider transition-all duration-200"
+                   style="color: oklch(0.67 0.13 66); border: 1px solid oklch(0.38 0.03 60);"
+                   onmouseover="this.style.borderColor='oklch(0.67 0.13 66)'; this.style.background='oklch(0.67 0.13 66 / 0.08)'"
+                   onmouseout="this.style.borderColor='oklch(0.38 0.03 60)'; this.style.background='transparent'">
+                    Login
+                </a>
                 @endguest
+
+                {{-- Hamburger — mobile only --}}
+                <button
+                    @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="md:hidden w-9 h-9 flex items-center justify-center transition-colors duration-200"
+                    style="color: oklch(0.72 0.025 68); border: 1px solid oklch(0.28 0.025 55);"
+                    :style="mobileMenuOpen ? 'color: oklch(0.93 0.012 75); border-color: oklch(0.38 0.03 60);' : ''"
+                    aria-label="Buka menu"
+                >
+                    <svg x-show="!mobileMenuOpen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg x-show="mobileMenuOpen" x-cloak class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
         </nav>
-    </header>
 
-    <!-- Spacer to offset fixed header -->
-    <div class="h-24"></div>
+        {{-- Mobile Menu Drawer --}}
+        <div
+            x-show="mobileMenuOpen"
+            x-cloak
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="md:hidden"
+            style="background: oklch(0.10 0.015 55 / 0.98); backdrop-filter: blur(20px); border-top: 1px solid oklch(0.22 0.02 55);"
+        >
+            <nav class="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-1">
+                <a href="{{ route('home') }}#gallery"
+                   @click="mobileMenuOpen = false"
+                   class="flex items-center gap-3 px-4 py-3.5 font-sans font-700 text-sm transition-colors duration-200"
+                   style="color: oklch(0.72 0.025 68); border-bottom: 1px solid oklch(0.18 0.02 55);"
+                   onmouseover="this.style.color='oklch(0.93 0.012 75)'"
+                   onmouseout="this.style.color='oklch(0.72 0.025 68)'">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Galeri Pekerjaan
+                </a>
+                <a href="{{ route('home') }}#kalkulator"
+                   @click="mobileMenuOpen = false"
+                   class="flex items-center gap-3 px-4 py-3.5 font-sans font-700 text-sm transition-colors duration-200"
+                   style="color: oklch(0.72 0.025 68); border-bottom: 1px solid oklch(0.18 0.02 55);"
+                   onmouseover="this.style.color='oklch(0.93 0.012 75)'"
+                   onmouseout="this.style.color='oklch(0.72 0.025 68)'">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Estimasi Harga
+                </a>
+                <a href="{{ route('tracker.index') }}"
+                   @click="mobileMenuOpen = false"
+                   class="flex items-center gap-3 px-4 py-3.5 font-sans font-700 text-sm transition-colors duration-200"
+                   style="color: oklch(0.72 0.025 68); border-bottom: 1px solid oklch(0.18 0.02 55);"
+                   onmouseover="this.style.color='oklch(0.93 0.012 75)'"
+                   onmouseout="this.style.color='oklch(0.72 0.025 68)'">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Lacak Progres
+                </a>
+                @guest
+                <a href="{{ route('login') }}"
+                   class="flex items-center gap-3 px-4 py-3.5 font-sans font-700 text-sm mt-2 transition-all duration-200"
+                   style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55);">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                    Login Admin
+                </a>
+                @endguest
+            </nav>
+        </div>
+    </header>
 
     <main class="flex-grow flex flex-col">
         {{ $slot }}
     </main>
 
-    <!-- Minimalist Footer V4: Dual Theme Glass -->
-    <footer class="border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900 mt-auto relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-10 dark:opacity-30 z-0"></div>
-        <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div class="col-span-1 md:col-span-2">
-                    <a href="{{ route('home') }}" class="font-display text-2xl font-black tracking-tighter text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                        <svg class="w-8 h-8 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                            <path d="M2 17l10 5 10-5"></path>
-                            <path d="M2 12l10 5 10-5"></path>
-                        </svg>
-                        <div class="flex flex-col">
-                            <span class="leading-none text-xl">BJN</span>
-                            <span class="text-[0.6rem] font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mt-0.5">Bengkel Jok Nusantara</span>
-                        </div>
+    {{-- ═══════════════════════════════════════════
+         FOOTER — Artisan workshop
+    ═══════════════════════════════════════════ --}}
+    <footer style="border-top: 1px solid oklch(0.22 0.02 55); background: oklch(0.10 0.015 55);">
+
+        {{-- Stitch divider --}}
+        <div style="height: 1px; background: repeating-linear-gradient(to right, oklch(0.28 0.025 55) 0, oklch(0.28 0.025 55) 6px, transparent 6px, transparent 12px);"></div>
+
+        <div class="max-w-7xl mx-auto px-6 py-14 md:py-20">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
+
+                {{-- Brand block --}}
+                <div class="md:col-span-5">
+                    <a href="{{ route('home') }}" class="flex items-baseline gap-3 mb-6 group w-fit">
+                        <span class="font-display font-bold text-2xl leading-none" style="color: oklch(0.93 0.012 75);">BJN</span>
+                        <span class="text-[0.6rem] font-sans font-500 tracking-[0.18em] uppercase" style="color: oklch(0.50 0.020 62);">Bengkel Jok Nusantara</span>
                     </a>
-                    <p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-sm">
-                        Modifikasi interior artisan dengan fokus pada kualitas, transparansi digital, dan kepuasan pelanggan kelas atas.
+                    <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: oklch(0.50 0.020 62);">
+                        Interior artisan untuk kendaraan Anda. Material asli, pengerjaan presisi, dan transparansi digital dari konsultasi hingga selesai.
                     </p>
+                    {{-- Social --}}
+                    <div class="flex items-center gap-3">
+                        <a href="#"
+                           class="w-9 h-9 flex items-center justify-center text-xs font-sans font-700 transition-all duration-200"
+                           style="color: oklch(0.50 0.020 62); border: 1px solid oklch(0.28 0.025 55);"
+                           onmouseover="this.style.color='oklch(0.67 0.13 66)'; this.style.borderColor='oklch(0.67 0.13 66)'"
+                           onmouseout="this.style.color='oklch(0.50 0.020 62)'; this.style.borderColor='oklch(0.28 0.025 55)'"
+                           aria-label="Instagram">IG</a>
+                        <a href="#"
+                           class="w-9 h-9 flex items-center justify-center text-xs font-sans font-700 transition-all duration-200"
+                           style="color: oklch(0.50 0.020 62); border: 1px solid oklch(0.28 0.025 55);"
+                           onmouseover="this.style.color='oklch(0.67 0.13 66)'; this.style.borderColor='oklch(0.67 0.13 66)'"
+                           onmouseout="this.style.color='oklch(0.50 0.020 62)'; this.style.borderColor='oklch(0.28 0.025 55)'"
+                           aria-label="WhatsApp">WA</a>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider text-sm dark:drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Navigasi</h4>
-                    <ul class="space-y-3">
-                        <li><a href="{{ route('home') }}#layanan" class="text-slate-600 dark:text-slate-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors font-medium">Layanan Kami</a></li>
-                        <li><a href="{{ route('home') }}#kalkulator" class="text-slate-600 dark:text-slate-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors font-medium">Kalkulator Harga</a></li>
-                        <li><a href="{{ route('tracker.index') }}" class="text-slate-600 dark:text-slate-400 hover:text-accent-500 dark:hover:text-accent-400 transition-colors font-medium">Tracker Progres</a></li>
+
+                {{-- Nav links --}}
+                <div class="md:col-span-3">
+                    <p class="label-caps mb-5" style="color: oklch(0.38 0.03 60);">Navigasi</p>
+                    <ul class="space-y-4">
+                        <li><a href="{{ route('home') }}#gallery" class="text-sm font-sans transition-colors duration-200" style="color: oklch(0.50 0.020 62);" onmouseover="this.style.color='oklch(0.75 0.11 67)'" onmouseout="this.style.color='oklch(0.50 0.020 62)'">Galeri Pekerjaan</a></li>
+                        <li><a href="{{ route('home') }}#kalkulator" class="text-sm font-sans transition-colors duration-200" style="color: oklch(0.50 0.020 62);" onmouseover="this.style.color='oklch(0.75 0.11 67)'" onmouseout="this.style.color='oklch(0.50 0.020 62)'">Estimasi Harga</a></li>
+                        <li><a href="{{ route('tracker.index') }}" class="text-sm font-sans transition-colors duration-200" style="color: oklch(0.50 0.020 62);" onmouseover="this.style.color='oklch(0.75 0.11 67)'" onmouseout="this.style.color='oklch(0.50 0.020 62)'">Lacak Progres</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider text-sm dark:drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Kontak</h4>
-                    <ul class="space-y-3">
-                        <li class="text-slate-600 dark:text-slate-400 font-medium flex items-center gap-2">
-                            <svg class="w-4 h-4 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Jl. Artisan No. 99, Jakarta
+
+                {{-- Contact --}}
+                <div class="md:col-span-4">
+                    <p class="label-caps mb-5" style="color: oklch(0.38 0.03 60);">Kontak</p>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="https://maps.app.goo.gl/ksmwqYfaw64oFbzs6"
+                               target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-start gap-2 text-sm font-sans transition-colors duration-200 group"
+                               style="color: oklch(0.50 0.020 62);"
+                               onmouseover="this.style.color='oklch(0.75 0.11 67)'"
+                               onmouseout="this.style.color='oklch(0.50 0.020 62)'"
+                            >
+                                <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                Magetan, Jawa Timur<br>
+                                <span class="text-xs" style="color: oklch(0.42 0.025 60);">Lihat di Google Maps ↗</span>
+                            </a>
                         </li>
-                        <li class="text-slate-600 dark:text-slate-400 font-medium flex items-center gap-2">
-                            <svg class="w-4 h-4 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            +62 812-3456-7890
+                        <li>
+                            <a href="tel:+6281234567890" class="text-sm font-sans transition-colors duration-200" style="color: oklch(0.50 0.020 62);" onmouseover="this.style.color='oklch(0.75 0.11 67)'" onmouseout="this.style.color='oklch(0.50 0.020 62)'">+62 812-3456-7890</a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener"
+                               class="inline-flex items-center gap-2 text-xs font-sans font-700 uppercase tracking-wider px-4 py-2.5 mt-2 transition-all duration-200"
+                               style="color: oklch(0.12 0.018 55); background: oklch(0.67 0.13 66); border: 1px solid oklch(0.67 0.13 66);"
+                               onmouseover="this.style.background='oklch(0.75 0.11 67)'; this.style.borderColor='oklch(0.75 0.11 67)'"
+                               onmouseout="this.style.background='oklch(0.67 0.13 66)'; this.style.borderColor='oklch(0.67 0.13 66)'">
+                                Tanya / Pesan via WA
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-slate-200 dark:border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-slate-500 dark:text-slate-500 font-medium">
-                    &copy; {{ date('Y') }} BJN (Bengkel Jok Nusantara). All rights reserved.
+
+            {{-- Stitch bottom divider --}}
+            <div class="mt-14 mb-8" style="height: 1px; background: repeating-linear-gradient(to right, oklch(0.22 0.02 55) 0, oklch(0.22 0.02 55) 6px, transparent 6px, transparent 12px);"></div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs font-sans" style="color: oklch(0.35 0.015 60);">
+                    &copy; {{ date('Y') }} Bengkel Jok Nusantara. All rights reserved.
                 </p>
-                <div class="flex gap-4">
-                    <!-- Social icons placeholder -->
-                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-accent-500 hover:border-accent-500 hover:text-white dark:hover:bg-accent-500 dark:hover:border-accent-500 dark:hover:text-white dark:hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300">
-                        IG
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-accent-500 hover:border-accent-500 hover:text-white dark:hover:bg-accent-500 dark:hover:border-accent-500 dark:hover:text-white dark:hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300">
-                        WA
-                    </a>
-                </div>
+                <p class="text-xs font-sans" style="color: oklch(0.35 0.015 60);">
+                    Handcrafted with precision.
+                </p>
             </div>
         </div>
     </footer>
+
     @stack('scripts')
 
-    {{-- ================================================================
-         WhatsApp Floating Button & Greeting Popup
-         Muncul di semua halaman publik untuk konversi langsung ke WA.
-         Nomor WA: ganti di variabel waNumber di bawah.
-         ================================================================ --}}
+    {{-- ═══════════════════════════════════════════
+         WhatsApp Floating Button
+    ═══════════════════════════════════════════ --}}
     <script>
     (function () {
-        const waNumber  = '6281234567890'; // ← Ganti dengan nomor WhatsApp admin
-        const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Admin BJN, saya ingin konsultasi modifikasi interior kendaraan saya. 🚗')}`;
+        const waNumber  = '6281234567890';
+        const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Bengkel Jok Nusantara, saya mau tanya-tanya soal pemasangan jok mobil. Bisa minta info harga dan jadwalnya?')}`;
 
-
-        // ── 1. Inject styles ────────────────────────────────────────────
         const css = `
-        /* Floating WA Button */
         #wa-float {
             position: fixed;
             bottom: 28px;
             right: 28px;
-            z-index: 9999;
+            z-index: 600;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -160,126 +292,115 @@
             text-decoration: none;
         }
         #wa-float-btn {
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            border-radius: 0;
             background: #25D366;
-            box-shadow: 0 6px 24px rgba(37,211,102,.45);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform .25s ease, box-shadow .25s ease;
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease;
             flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.30);
         }
         #wa-float:hover #wa-float-btn {
-            transform: scale(1.1) translateY(-2px);
-            box-shadow: 0 10px 32px rgba(37,211,102,.55);
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 8px 28px rgba(37,211,102,0.45);
         }
         #wa-float-label {
-            background: #fff;
-            color: #1a1a1a;
-            font-size: 13px;
+            background: oklch(0.155 0.022 55);
+            color: oklch(0.93 0.012 75);
+            font-size: 12px;
             font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             padding: 8px 14px;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0,0,0,.10);
+            border: 1px solid oklch(0.28 0.025 55);
             white-space: nowrap;
             opacity: 0;
             transform: translateX(8px);
-            transition: opacity .25s ease, transform .25s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
             pointer-events: none;
         }
         #wa-float:hover #wa-float-label {
             opacity: 1;
             transform: translateX(0);
         }
-        /* Pulse ring */
         #wa-float-btn::before {
             content: '';
             position: absolute;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: rgba(37,211,102,.35);
-            animation: waPulse 2.2s ease-out infinite;
+            width: 54px;
+            height: 54px;
+            background: rgba(37,211,102,0.25);
+            animation: waPulse 2.4s ease-out infinite;
         }
         @keyframes waPulse {
             0%   { transform: scale(1);   opacity: 1; }
-            100% { transform: scale(2.2); opacity: 0; }
+            100% { transform: scale(2.4); opacity: 0; }
         }
-
-        /* Popup */
         #wa-popup {
             position: fixed;
-            bottom: 100px;
+            bottom: 96px;
             right: 28px;
-            z-index: 9998;
-            width: 300px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 12px 48px rgba(0,0,0,.15);
+            z-index: 599;
+            width: calc(100vw - 40px);
+            max-width: 288px;
+            background: oklch(0.155 0.022 55);
+            border: 1px solid oklch(0.28 0.025 55);
+            border-radius: 0;
+            box-shadow: 0 12px 48px rgba(0,0,0,.5);
             overflow: hidden;
             opacity: 0;
-            transform: translateY(20px) scale(.95);
-            transition: opacity .35s ease, transform .35s ease;
+            transform: translateY(16px);
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             pointer-events: none;
         }
         #wa-popup.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
             pointer-events: auto;
         }
         #wa-popup-header {
             background: #075E54;
-            padding: 14px 16px;
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         #wa-popup-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            border-radius: 0;
             background: #25D366;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        #wa-popup-name { color:#fff; font-weight:800; font-size:14px; line-height:1.2; }
-        #wa-popup-status { color:rgba(255,255,255,.65); font-size:11px; margin-top:2px; }
+        #wa-popup-name { color:#fff; font-weight:800; font-size:13px; font-family:'DM Sans',sans-serif; }
+        #wa-popup-status { color:rgba(255,255,255,.6); font-size:10px; margin-top:1px; font-family:'DM Sans',sans-serif; }
         #wa-popup-close {
             margin-left: auto;
             background: transparent;
             border: none;
-            color: rgba(255,255,255,.7);
+            color: rgba(255,255,255,.6);
             cursor: pointer;
             padding: 4px;
             line-height: 0;
-            border-radius: 6px;
             transition: color .2s;
         }
         #wa-popup-close:hover { color:#fff; }
-        #wa-popup-body {
-            padding: 16px;
-        }
+        #wa-popup-body { padding: 14px; }
         #wa-popup-bubble {
-            background: #f0f4f7;
-            border-radius: 0 14px 14px 14px;
+            background: oklch(0.22 0.025 55);
+            border: 1px solid oklch(0.28 0.025 55);
             padding: 12px 14px;
             font-size: 13px;
-            color: #1a1a1a;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            position: relative;
-        }
-        #wa-popup-bubble::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -7px;
-            border: 7px solid transparent;
-            border-top-color: #f0f4f7;
-            border-right-color: #f0f4f7;
+            font-family: 'DM Sans', sans-serif;
+            color: oklch(0.72 0.025 68);
+            line-height: 1.55;
+            margin-bottom: 10px;
         }
         #wa-popup-cta {
             display: flex;
@@ -287,23 +408,24 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             background: #25D366;
             color: #fff;
             font-weight: 800;
-            font-size: 14px;
-            border-radius: 12px;
+            font-size: 12px;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: background .2s, transform .2s;
+            transition: background .2s;
         }
-        #wa-popup-cta:hover { background:#1ebe5d; transform: translateY(-1px); }
-        #wa-popup-time { text-align:right; font-size:11px; color:#aaa; margin-top:6px; }
+        #wa-popup-cta:hover { background:#1ebe5d; }
+        #wa-popup-time { text-align:right; font-size:10px; color:oklch(0.38 0.03 60); margin-top:6px; font-family:'DM Sans',sans-serif; }
         `;
         const style = document.createElement('style');
         style.textContent = css;
         document.head.appendChild(style);
 
-        // ── 2. Build floating button ────────────────────────────────────
         const floatEl = document.createElement('a');
         floatEl.id   = 'wa-float';
         floatEl.href = waDefault;
@@ -311,9 +433,9 @@
         floatEl.rel    = 'noopener noreferrer';
         floatEl.setAttribute('aria-label', 'Chat WhatsApp');
         floatEl.innerHTML = `
-            <span id="wa-float-label">Chat dengan Kami</span>
+            <span id="wa-float-label">Chat Sekarang</span>
             <span id="wa-float-btn">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                     <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.934 1.399 5.61L0 24l6.545-1.376A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.371l-.359-.214-3.733.979.998-3.648-.234-.374A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
                 </svg>
@@ -321,50 +443,42 @@
         `;
         document.body.appendChild(floatEl);
 
-        // ── 3. Build popup ──────────────────────────────────────────────
-        const now    = new Date();
+        const now     = new Date();
         const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
-        const popup = document.createElement('div');
-        popup.id    = 'wa-popup';
+        const popup   = document.createElement('div');
+        popup.id      = 'wa-popup';
         popup.innerHTML = `
             <div id="wa-popup-header">
                 <span id="wa-popup-avatar">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                         <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.934 1.399 5.61L0 24l6.545-1.376A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.371l-.359-.214-3.733.979.998-3.648-.234-.374A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
                     </svg>
                 </span>
                 <div>
-                    <div id="wa-popup-name">BJN CS</div>
-                    <div id="wa-popup-status">● Online sekarang</div>
+                    <div id="wa-popup-name">BJN — Admin</div>
+                    <div id="wa-popup-status">● Tersedia sekarang</div>
                 </div>
                 <button id="wa-popup-close" aria-label="Tutup">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
                 </button>
             </div>
             <div id="wa-popup-body">
                 <div id="wa-popup-bubble">
-                    Halo! 👋 Selamat datang di <strong>Bengkel Jok Nusantara (BJN)</strong>.<br>
-                    Ada yang bisa kami bantu untuk kebutuhan modifikasi interior kendaraan Anda?
+                    Halo! Selamat datang di <strong>Bengkel Jok Nusantara</strong> — Magetan.<br>Mau tanya-tanya soal jok atau langsung order? Chat aja, kami siap bantu!
                 </div>
                 <div id="wa-popup-time">${timeStr} ✓✓</div>
                 <a href="${waDefault}" target="_blank" rel="noopener noreferrer" id="wa-popup-cta">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.934 1.399 5.61L0 24l6.545-1.376A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.371l-.359-.214-3.733.979.998-3.648-.234-.374A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-                    Mulai Chat WhatsApp
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.934 1.399 5.61L0 24l6.545-1.376A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.371l-.359-.214-3.733.979.998-3.648-.234-.374A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                    Mulai Chat
                 </a>
             </div>
         `;
         document.body.appendChild(popup);
 
-        // ── 4. Logic: show once per session, auto-show after 5s ─────────
         const SEEN_KEY = 'wa_popup_seen';
-
         function showPopup()  { popup.classList.add('visible'); }
-        function closePopup() {
-            popup.classList.remove('visible');
-            sessionStorage.setItem(SEEN_KEY, '1');
-        }
+        function closePopup() { popup.classList.remove('visible'); sessionStorage.setItem(SEEN_KEY, '1'); }
 
         popup.querySelector('#wa-popup-close').addEventListener('click', closePopup);
         popup.querySelector('#wa-popup-cta').addEventListener('click', closePopup);
@@ -373,9 +487,12 @@
             setTimeout(showPopup, 5000);
         }
 
-        // Clicking the float button also closes popup if open
         floatEl.addEventListener('click', function () {
             if (popup.classList.contains('visible')) closePopup();
         });
     })();
     </script>
+</body>
+</html>
+
+

@@ -1,124 +1,161 @@
 @props(['vehicleCategories' => [], 'calendar' => []])
 
-<section class="py-16 md:py-24 bg-slate-100 dark:bg-slate-950 relative border-t border-slate-200 dark:border-slate-800" id="kalkulator" x-data="calculatorApp()">
-    <div class="container mx-auto px-6 max-w-5xl relative z-10">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6" x-data="{ shown: false }" x-intersect.once.margin.-10%.0px="shown = true">
-            <div class="max-w-xl">
-                <h2 class="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 transition-all duration-700 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">PENAWARAN SPESIAL</h2>
-                <h3 class="text-3xl md:text-5xl font-display font-black text-slate-900 dark:text-white leading-tight transition-all duration-700 delay-100 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">Estimasi Biaya <br/><span class="text-accent-500">Transparan.</span></h3>
-            </div>
-            <div class="max-w-md">
-                <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 font-medium transition-all duration-700 delay-200 transform" :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">Pilih material dan kapasitas kendaraan Anda untuk mendapatkan perkiraan harga seketika. Tanpa biaya tersembunyi.</p>
-            </div>
+<section
+    class="relative overflow-hidden"
+    id="kalkulator"
+    x-data="calculatorApp()"
+    style="padding: 7rem 0 8rem; background: oklch(0.155 0.022 55); border-top: 1px solid oklch(0.22 0.02 55);"
+>
+    <div class="container mx-auto px-6 max-w-5xl">
+
+        {{-- Section header — no eyebrow --}}
+        <div
+            class="mb-12"
+            x-data="{ shown: false }"
+            x-intersect.once.margin.-10%.0px="shown = true"
+        >
+            <h2
+                class="font-display font-700 mb-4"
+                style="font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.04; letter-spacing: -0.03em; color: oklch(0.93 0.012 75); text-wrap: balance; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1);"
+                :style="shown ? { opacity: 1 } : { opacity: 0 }"
+            >
+                Estimasi Harga Langsung.
+            </h2>
+            <p
+                class="font-sans"
+                style="font-size: 1rem; color: oklch(0.72 0.025 68); max-width: 46ch; line-height: 1.7; transition: opacity 0.8s 0.1s cubic-bezier(0.16,1,0.3,1);"
+                :style="shown ? { opacity: 1 } : { opacity: 0 }"
+            >
+                Pilih jenis kendaraan dan material — estimasi harga keluar seketika. Nggak ribet, nggak ada biaya tersembunyi.
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800">
-            
-            <!-- Options Panel -->
-            <div class="lg:col-span-7 flex flex-col gap-10 p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800">
-                <!-- Vehicle Category Selection -->
+        {{-- Main panel --}}
+        <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-px"
+            style="background: oklch(0.22 0.02 55); border: 1px solid oklch(0.22 0.02 55);"
+        >
+            {{-- Options Panel --}}
+            <div class="lg:col-span-7 flex flex-col gap-10 p-8 md:p-12" style="background: oklch(0.12 0.018 55);">
+
+                {{-- Step 1: Vehicle Category --}}
                 <div>
-                    <h4 class="text-slate-900 dark:text-white font-black mb-4 flex items-center gap-3 uppercase tracking-tight text-sm">
-                        <span class="w-8 h-8 rounded-none bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center text-sm font-bold">1</span>
-                        Kategori Kendaraan
-                    </h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="flex items-center gap-3 mb-6" style="border-bottom: 1px solid oklch(0.22 0.02 55); padding-bottom: 1rem;">
+                        <span class="font-display font-600" style="font-size: 1.25rem; color: oklch(0.67 0.13 66);">01</span>
+                        <h3 class="font-sans font-700 text-sm uppercase tracking-wider" style="color: oklch(0.93 0.012 75);">Kategori Kendaraan</h3>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                         <template x-for="cat in vehicleCategories" :key="cat.id">
-                            <button 
+                            <button
                                 @click="selectedCategory = cat.id; updateMaterials()"
-                                class="touch-target py-3 px-4 rounded-none border-2 transition-all duration-200 font-bold text-center text-sm md:text-base"
-                                :class="selectedCategory === cat.id ? 'border-accent-500 bg-accent-50 text-accent-600 dark:bg-accent-500/10 dark:text-accent-400' : 'border-slate-200 dark:border-slate-700 bg-transparent text-slate-600 dark:text-slate-400 hover:border-slate-400 dark:hover:border-slate-500'"
+                                class="touch-target py-3 px-4 text-left font-sans font-700 text-sm transition-all duration-200"
+                                :style="selectedCategory === cat.id
+                                    ? 'background: oklch(0.67 0.13 66 / 0.12); border: 1px solid oklch(0.67 0.13 66); color: oklch(0.75 0.11 67);'
+                                    : 'background: transparent; border: 1px solid oklch(0.28 0.025 55); color: oklch(0.72 0.025 68);'"
                                 x-text="cat.name"
-                            >
-                            </button>
+                            ></button>
                         </template>
                     </div>
                 </div>
 
-                <!-- Material Selection -->
-                <div x-show="materials.length > 0">
-                    <h4 class="text-slate-900 dark:text-white font-black mb-4 flex items-center gap-3 uppercase tracking-tight text-sm">
-                        <span class="w-8 h-8 rounded-none bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center text-sm font-bold">2</span>
-                        Pilihan Material
-                    </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {{-- Step 2: Material --}}
+                <div x-show="materials.length > 0" x-cloak>
+                    <div class="flex items-center gap-3 mb-6" style="border-bottom: 1px solid oklch(0.22 0.02 55); padding-bottom: 1rem;">
+                        <span class="font-display font-600" style="font-size: 1.25rem; color: oklch(0.67 0.13 66);">02</span>
+                        <h3 class="font-sans font-700 text-sm uppercase tracking-wider" style="color: oklch(0.93 0.012 75);">Pilihan Material</h3>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <template x-for="material in materials" :key="material.id">
-                            <button 
+                            <button
                                 @click="selectedMaterial = material.id; calculateTotal()"
-                                class="touch-target text-left p-4 rounded-none border-2 transition-all duration-200 group"
-                                :class="selectedMaterial === material.id ? 'border-accent-500 bg-accent-50 dark:bg-accent-500/5' : 'border-slate-200 dark:border-slate-700 bg-transparent hover:border-slate-400 dark:hover:border-slate-500'"
+                                class="touch-target text-left p-4 transition-all duration-200"
+                                :style="selectedMaterial === material.id
+                                    ? 'background: oklch(0.67 0.13 66 / 0.10); border: 1px solid oklch(0.67 0.13 66);'
+                                    : 'background: transparent; border: 1px solid oklch(0.28 0.025 55);'"
                             >
-                                <div class="flex justify-between items-start mb-2">
-                                    <div class="font-bold" :class="selectedMaterial === material.id ? 'text-accent-600 dark:text-accent-400' : 'text-slate-900 dark:text-white'" x-text="material.item_name"></div>
-                                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                                         :class="selectedMaterial === material.id ? 'border-accent-500' : 'border-slate-300 dark:border-slate-600'">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-accent-500 transition-transform duration-300"
-                                             :class="selectedMaterial === material.id ? 'scale-100' : 'scale-0'"></div>
-                                    </div>
-                                </div>
-                                <div class="text-sm font-medium font-mono" :class="selectedMaterial === material.id ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500'">Rp <span x-text="formatNumber(material.price)"></span></div>
+                                <div
+                                    class="font-sans font-700 text-sm mb-1"
+                                    :style="selectedMaterial === material.id ? 'color: oklch(0.75 0.11 67)' : 'color: oklch(0.93 0.012 75)'"
+                                    x-text="material.item_name"
+                                ></div>
+                                <div
+                                    class="font-mono text-xs"
+                                    :style="selectedMaterial === material.id ? 'color: oklch(0.67 0.13 66)' : 'color: oklch(0.50 0.020 62)'"
+                                >Rp <span x-text="formatNumber(material.price)"></span></div>
                             </button>
                         </template>
                     </div>
                 </div>
 
-                <!-- Booking Calendar (Tersedia / Sisa 1 / Penuh) -->
+                {{-- Booking Calendar --}}
                 <x-home.booking-calendar :calendar="$calendar" />
             </div>
 
-            <!-- Price Panel -->
-            <div class="lg:col-span-5 flex flex-col justify-center bg-slate-50 dark:bg-slate-950 p-6 md:p-10 relative overflow-hidden">
-                <p class="text-slate-400 font-black uppercase tracking-widest text-xs mb-4">ESTIMASI BIAYA</p>
-                
-                <!-- Odometer Price Animation -->
-                <div class="flex items-start text-slate-900 dark:text-white font-display mb-6">
-                    <span class="text-xl font-bold mt-2 mr-2 opacity-50">Rp</span>
-                    <span class="text-4xl md:text-5xl font-black tracking-tight" x-text="formatNumber(animatedPrice)"></span>
+            {{-- Price Panel --}}
+            <div
+                class="lg:col-span-5 flex flex-col justify-center p-8 md:p-12 relative overflow-hidden"
+                style="background: oklch(0.10 0.015 55);"
+            >
+                {{-- Price display --}}
+                <p class="font-sans text-xs uppercase tracking-[0.14em] mb-4" style="color: oklch(0.38 0.03 60);">Estimasi Biaya</p>
+                <div class="flex items-start mb-8">
+                    <span class="font-sans font-500 text-lg mt-1 mr-2" style="color: oklch(0.50 0.020 62);">Rp</span>
+                    <span
+                        class="font-display font-600"
+                        style="font-size: clamp(2.5rem, 4vw, 3.5rem); color: oklch(0.93 0.012 75); letter-spacing: -0.02em; line-height: 1.1;"
+                        x-text="formatNumber(animatedPrice)"
+                    ></span>
                 </div>
-                
-                <div class="h-px w-full bg-slate-200 dark:bg-slate-700 mb-6"></div>
 
-                <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300 mb-8">
-                    <li class="flex items-start gap-3">
-                        <svg class="w-5 h-5 text-accent-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span>Kendaraan: <strong class="text-slate-900 dark:text-white" x-text="vehicleCategories.find(c => c.id === selectedCategory)?.name || '-'"></strong></span>
+                <div style="height: 1px; background: oklch(0.22 0.02 55); margin-bottom: 1.75rem;"></div>
+
+                {{-- Summary --}}
+                <ul class="space-y-3 mb-8">
+                    <li class="flex justify-between items-center text-sm">
+                        <span class="font-sans" style="color: oklch(0.50 0.020 62);">Kendaraan</span>
+                        <span class="font-sans font-700" style="color: oklch(0.93 0.012 75);" x-text="vehicleCategories.find(c => c.id === selectedCategory)?.name || '—'"></span>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <svg class="w-5 h-5 text-accent-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span>Material: <strong class="text-slate-900 dark:text-white" x-text="materials.find(m => m.id === selectedMaterial)?.item_name || '-'"></strong></span>
+                    <li class="flex justify-between items-center text-sm">
+                        <span class="font-sans" style="color: oklch(0.50 0.020 62);">Material</span>
+                        <span class="font-sans font-700" style="color: oklch(0.93 0.012 75);" x-text="materials.find(m => m.id === selectedMaterial)?.item_name || '—'"></span>
                     </li>
-                    <li class="flex items-start gap-3 opacity-70">
-                        <svg class="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span class="text-xs">Harga dapat berubah jika ada penambahan busa (retouch) atau motif *custom*.</span>
+                    <li class="text-xs mt-2" style="color: oklch(0.38 0.03 60); padding-top: 0.75rem; border-top: 1px solid oklch(0.22 0.02 55);">
+                        * Harga dapat berubah untuk penambahan busa atau motif custom.
                     </li>
                 </ul>
 
-                <!-- Optional Contact Fields -->
+                {{-- Contact inputs --}}
                 <div class="space-y-3 mb-6">
                     <input
                         type="text"
                         x-model="customerName"
                         placeholder="Nama Anda (Opsional)"
-                        class="w-full px-4 py-3 rounded-none border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:ring-0 focus:border-accent-500 outline-none transition-colors"
+                        class="input-field"
+                        style="background: oklch(0.155 0.022 55); border-color: oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);"
                     >
                     <input
                         type="tel"
                         x-model="customerWa"
                         placeholder="Nomor WhatsApp (Opsional)"
-                        class="w-full px-4 py-3 rounded-none border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:ring-0 focus:border-accent-500 outline-none transition-colors"
+                        class="input-field"
+                        style="background: oklch(0.155 0.022 55); border-color: oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);"
                     >
                 </div>
 
-                <!-- CTA to WA -->
-                <button 
+                {{-- CTA --}}
+                <button
                     @click="sendToWhatsApp()"
-                    class="touch-target w-full bg-accent-500 hover:bg-accent-600 text-white font-bold py-4 rounded-none flex items-center justify-center gap-2 transition-colors duration-200"
+                    class="touch-target w-full flex items-center justify-center gap-2.5 py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-250"
+                    style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55); border: none;"
+                    onmouseover="this.style.background='oklch(0.75 0.11 67)'"
+                    onmouseout="this.style.background='oklch(0.67 0.13 66)'"
                 >
-                    <span>Pesan via WhatsApp</span>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.934 1.399 5.61L0 24l6.545-1.376A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.371l-.359-.214-3.733.979.998-3.648-.234-.374A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                    Pesan via WhatsApp
                 </button>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -164,9 +201,7 @@
             calculateTotal() {
                 let newPrice = 0;
                 const mat = this.materials.find(m => m.id === this.selectedMaterial);
-                if (mat) {
-                    newPrice = parseFloat(mat.price);
-                }
+                if (mat) { newPrice = parseFloat(mat.price); }
                 this.animateValue(this.animatedPrice, newPrice, 600);
                 this.currentPrice = newPrice;
             },
@@ -178,23 +213,19 @@
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
                     this.animatedPrice = Math.floor(easeOut * (end - start) + start);
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    } else {
-                        this.animatedPrice = end;
-                    }
+                    if (progress < 1) { window.requestAnimationFrame(step); }
+                    else { this.animatedPrice = end; }
                 };
                 window.requestAnimationFrame(step);
             },
 
             formatNumber(num) {
-                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             },
 
             async sendToWhatsApp() {
                 const cat = this.vehicleCategories.find(c => c.id === this.selectedCategory);
                 const mat = this.materials.find(m => m.id === this.selectedMaterial);
-
                 try {
                     fetch('/leads', {
                         method: 'POST',
@@ -204,24 +235,25 @@
                             'Accept': 'application/json'
                         },
                         body: JSON.stringify({
-                            customer_name:    this.customerName || null,
-                            whatsapp_number:  this.customerWa   || null,
-                            material:         mat ? mat.item_name : '-',
-                            capacity:         cat ? cat.name     : '-',
-                            price:            this.currentPrice
+                            customer_name:   this.customerName || null,
+                            whatsapp_number: this.customerWa   || null,
+                            material:        mat ? mat.item_name : '-',
+                            capacity:        cat ? cat.name     : '-',
+                            price:           this.currentPrice
                         })
                     });
-                } catch (e) {
-                    console.error('Failed to capture lead', e);
-                }
+                } catch(e) { console.error('Failed to capture lead', e); }
 
-                const namaDisplay = this.customerName ? `*${this.customerName}* — ` : '';
+                const namaDisplay = this.customerName ? `*${this.customerName}*\n` : '';
                 const dateDisplay = this.customerDate ? `%0A- Rencana Jadwal: *${this.dateFormatted} (${this.customerDate})*` : '';
-                const text = `Halo Admin *BJN*, ${namaDisplay}saya ingin konsultasi modifikasi interior kendaraan saya.%0A%0A*Detail Estimasi:*%0A- Kendaraan: ${cat ? cat.name : '-'}%0A- Material: ${mat ? mat.item_name : '-'}${dateDisplay}%0A- Estimasi Harga: *Rp ${this.formatNumber(this.currentPrice)}*%0A%0AMohon info lebih lanjut mengenai jadwal pengerjaan. Terima kasih!`;
-
+                const text = `Halo Bengkel Jok Nusantara!%0A${namaDisplay ? encodeURIComponent(namaDisplay) : ''}Saya mau tanya-tanya dan pesan jok mobil.%0A%0A*Detail Kendaraan:*%0A- Tipe Kendaraan: ${cat ? cat.name : '-'}%0A- Material yang diminati: ${mat ? mat.item_name : '-'}${dateDisplay}%0A- Estimasi Harga: *Rp ${this.formatNumber(this.currentPrice)}*%0A%0ABisa dibantu info lebih lanjut dan jadwal pemasangannya? Terima kasih!`;
                 window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
             }
         }));
     });
 </script>
 @endpush
+
+
+
+

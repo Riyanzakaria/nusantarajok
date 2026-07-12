@@ -9,7 +9,7 @@
     $gold     = 'oklch(0.67 0.13 66)';
     $goldHov  = 'oklch(0.75 0.11 67)';
 @endphp
-<x-layout title="Kategori Galeri — Admin BJN">
+<x-layout title="Kategori Kendaraan — Admin BJN">
     <div class="min-h-screen" style="background: {{ $bg }}; padding: 8rem 0 8rem;">
         <div class="max-w-6xl mx-auto px-6">
 
@@ -18,7 +18,7 @@
                  style="border-bottom: 1px solid {{ $border }}; padding-bottom: 1.5rem;">
                 <div>
                     <p class="font-sans text-xs uppercase tracking-[0.14em] mb-2" style="color: {{ $inkMute }};">Admin</p>
-                    <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: {{ $inkPri }}; line-height: 1.1;">Kategori Galeri</h1>
+                    <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: {{ $inkPri }}; line-height: 1.1;">Kategori Kendaraan (Pricelist)</h1>
                 </div>
                 <a href="{{ route('dashboard.index') }}"
                    class="inline-flex items-center gap-2 font-sans text-sm font-700 uppercase tracking-wider transition-colors duration-200"
@@ -39,6 +39,14 @@
                 </div>
             @endif
 
+            @if(session('error'))
+                <div class="mb-8 flex items-center gap-3 px-5 py-4 font-sans text-sm"
+                     style="background: oklch(0.60 0.20 25 / 0.08); border: 1px solid oklch(0.60 0.20 25 / 0.30); color: oklch(0.60 0.20 25);">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
                 {{-- Form panel --}}
@@ -47,14 +55,14 @@
                         <h2 class="font-sans font-700 mb-6" style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.12em; color: {{ $inkMute }};">
                             Tambah Kategori
                         </h2>
-                        <form action="{{ route('admin.categories.store') }}" method="POST" class="flex flex-col gap-4">
+                        <form action="{{ route('admin.vehicle-categories.store') }}" method="POST" class="flex flex-col gap-4">
                             @csrf
                             <div>
-                                <label class="block font-sans text-xs uppercase tracking-wider mb-2" style="color: {{ $inkMute }};">Nama Kategori</label>
+                                <label class="block font-sans text-xs uppercase tracking-wider mb-2" style="color: {{ $inkMute }};">Kapasitas Baris/Jenis</label>
                                 <input
                                     type="text"
                                     name="name"
-                                    placeholder="Sedan, SUV, MPV..."
+                                    placeholder="cth: 2 Baris, 3 Baris, Pick Up"
                                     required
                                     class="w-full font-sans text-sm px-4 py-3 outline-none transition-colors duration-200"
                                     style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};"
@@ -92,8 +100,8 @@
                                 <div class="col-span-5 px-5 py-4 font-sans font-700 text-sm" style="background: {{ $bgCard }}; color: {{ $inkPri }};">{{ $category->name }}</div>
                                 <div class="col-span-5 px-5 py-4 font-mono text-xs hidden sm:block" style="background: {{ $bgCard }}; color: {{ $inkMute }};">{{ $category->slug }}</div>
                                 <div class="col-span-2 px-5 py-4 text-right" style="background: {{ $bgCard }};">
-                                    <form action="{{ route('admin.categories.destroy', $category) }}" method="POST"
-                                          onsubmit="return confirm('Hapus kategori ini? Semua foto di dalamnya ikut terhapus.');">
+                                    <form action="{{ route('admin.vehicle-categories.destroy', $category) }}" method="POST"
+                                          onsubmit="return confirm('Hapus kategori ini? Pastikan tidak ada data pricelist yang menggunakannya.');">
                                         @csrf @method('DELETE')
                                         <button type="submit"
                                                 class="font-sans text-xs font-700 uppercase tracking-wider transition-colors duration-200"
@@ -118,5 +126,3 @@
         </div>
     </div>
 </x-layout>
-
-

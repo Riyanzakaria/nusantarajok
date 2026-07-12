@@ -11,3 +11,5 @@
     
     <x-home.calculator :vehicleCategories="$vehicleCategories" :calendar="$calendar" />
 </x-layout>
+
+
