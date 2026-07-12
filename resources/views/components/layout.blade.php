@@ -27,23 +27,23 @@
     {{-- JSON-LD Structured Data for LocalBusiness & Nationwide Service --}}
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "AutoRepair",
+      "@@context": "https://schema.org",
+      "@@type": "AutoRepair",
       "name": "Bengkel Jok Nusantara",
       "image": "{{ asset('images/logo.png') }}",
-      "@id": "{{ url('/') }}",
+      "@@id": "{{ url('/') }}",
       "url": "{{ url('/') }}",
       "telephone": "+6281234567890",
       "description": "Spesialis jok mobil custom racing dan PNP dengan jangkauan pengiriman ke seluruh Indonesia.",
       "address": {
-        "@type": "PostalAddress",
+        "@@type": "PostalAddress",
         "streetAddress": "Magetan",
         "addressLocality": "Magetan",
         "addressRegion": "Jawa Timur",
         "addressCountry": "ID"
       },
       "areaServed": {
-        "@type": "Country",
+        "@@type": "Country",
         "name": "Indonesia"
       },
       "priceRange": "$$"
