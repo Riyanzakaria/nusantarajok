@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C19557' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5h6a2 2 0 0 1 2 2v1H7V7a2 2 0 0 1 2-2z'/%3E%3Cline x1='10' y1='8' x2='10' y2='10'/%3E%3Cline x1='14' y1='8' x2='14' y2='10'/%3E%3Cpath d='M6.5 10h11A2.5 2.5 0 0 1 20 12.5v5.5H4v-5.5A2.5 2.5 0 0 1 6.5 10z'/%3E%3Cpath d='M3 18h18a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z'/%3E%3Cpath d='M9 10v8'/%3E%3Cpath d='M15 10v8'/%3E%3C/svg%3E">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body
@@ -33,15 +34,24 @@
     >
         <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
-            {{-- Wordmark --}}
-            <a href="{{ route('home') }}" class="flex items-baseline gap-3 group" aria-label="Bengkel Jok Nusantara">
-                <span
-                    class="font-display font-bold text-[1.6rem] leading-none transition-colors duration-300"
-                    style="color: oklch(0.93 0.012 75);"
-                >BJN</span>
-                <span class="hidden sm:inline text-[0.65rem] font-sans font-500 tracking-[0.18em] uppercase transition-colors duration-300"
-                    style="color: oklch(0.50 0.020 62);"
-                >Jok Nusantara — Magetan</span>
+            {{-- Wordmark with Logo --}}
+            <a href="{{ route('home') }}" class="flex items-center gap-3 group" aria-label="Bengkel Jok Nusantara">
+                <div class="flex items-center justify-center w-8 h-8 rounded-sm transition-transform duration-300 group-hover:scale-105"
+                     style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55);">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 5h6a2 2 0 0 1 2 2v1H7V7a2 2 0 0 1 2-2z" />
+                        <line x1="10" y1="8" x2="10" y2="10" />
+                        <line x1="14" y1="8" x2="14" y2="10" />
+                        <path d="M6.5 10h11A2.5 2.5 0 0 1 20 12.5v5.5H4v-5.5A2.5 2.5 0 0 1 6.5 10z" />
+                        <path d="M3 18h18a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z" />
+                        <path d="M9 10v8" />
+                        <path d="M15 10v8" />
+                    </svg>
+                </div>
+                <div class="flex items-baseline gap-2.5">
+                    <span class="font-display font-bold text-[1.6rem] leading-none transition-colors duration-300" style="color: oklch(0.93 0.012 75);">BJN</span>
+                    <span class="hidden sm:inline text-[0.65rem] font-sans font-500 tracking-[0.18em] uppercase transition-colors duration-300" style="color: oklch(0.50 0.020 62);">Jok Nusantara — Magetan</span>
+                </div>
             </a>
 
             {{-- Nav items --}}
@@ -187,9 +197,23 @@
 
                 {{-- Brand block --}}
                 <div class="md:col-span-5">
-                    <a href="{{ route('home') }}" class="flex items-baseline gap-3 mb-6 group w-fit">
-                        <span class="font-display font-bold text-2xl leading-none" style="color: oklch(0.93 0.012 75);">BJN</span>
-                        <span class="text-[0.6rem] font-sans font-500 tracking-[0.18em] uppercase" style="color: oklch(0.50 0.020 62);">Bengkel Jok Nusantara</span>
+                    <a href="{{ route('home') }}" class="flex items-center gap-3 mb-6 group w-fit">
+                        <div class="flex items-center justify-center w-8 h-8 rounded-sm"
+                             style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55);">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 5h6a2 2 0 0 1 2 2v1H7V7a2 2 0 0 1 2-2z" />
+                                <line x1="10" y1="8" x2="10" y2="10" />
+                                <line x1="14" y1="8" x2="14" y2="10" />
+                                <path d="M6.5 10h11A2.5 2.5 0 0 1 20 12.5v5.5H4v-5.5A2.5 2.5 0 0 1 6.5 10z" />
+                                <path d="M3 18h18a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z" />
+                                <path d="M9 10v8" />
+                                <path d="M15 10v8" />
+                            </svg>
+                        </div>
+                        <div class="flex items-baseline gap-2.5">
+                            <span class="font-display font-bold text-2xl leading-none" style="color: oklch(0.93 0.012 75);">BJN</span>
+                            <span class="text-[0.6rem] font-sans font-500 tracking-[0.18em] uppercase" style="color: oklch(0.50 0.020 62);">Bengkel Jok Nusantara</span>
+                        </div>
                     </a>
                     <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: oklch(0.50 0.020 62);">
                         Interior artisan untuk kendaraan Anda. Material asli, pengerjaan presisi, dan transparansi digital dari konsultasi hingga selesai.
