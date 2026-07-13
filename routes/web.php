@@ -17,6 +17,12 @@ use App\Http\Controllers\WebhookController;
 */
 
 // ── Public Routes ──────────────────────────────────────────────
+Route::get('/clear-cache', function() {
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    return 'Cache cleared successfully!';
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');

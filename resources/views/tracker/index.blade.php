@@ -174,7 +174,7 @@
         {{-- Footer CTA --}}
         <div class="px-8 py-6" style="border-top: 1px solid oklch(0.22 0.02 55); background: oklch(0.12 0.018 55);">
             <a
-                href="https://wa.me/{{ env('WA_BUSINESS_NUMBER', '6281234567890') }}"
+                href="https://wa.me/{{ env('WA_BUSINESS_NUMBER', '6281259645665') }}"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-200"

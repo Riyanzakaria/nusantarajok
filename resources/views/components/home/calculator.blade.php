@@ -247,7 +247,7 @@
                 const namaDisplay = this.customerName ? `*${this.customerName}*\n` : '';
                 const dateDisplay = this.customerDate ? `%0A- Rencana Jadwal: *${this.dateFormatted} (${this.customerDate})*` : '';
                 const text = `Halo Bengkel Jok Nusantara!%0A${namaDisplay ? encodeURIComponent(namaDisplay) : ''}Saya mau tanya-tanya dan pesan jok mobil.%0A%0A*Detail Kendaraan:*%0A- Tipe Kendaraan: ${cat ? cat.name : '-'}%0A- Material yang diminati: ${mat ? mat.item_name : '-'}${dateDisplay}%0A- Estimasi Harga: *Rp ${this.formatNumber(this.currentPrice)}*%0A%0ABisa dibantu info lebih lanjut dan jadwal pemasangannya? Terima kasih!`;
-                window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
+                window.open(`https://wa.me/6281259645665?text=${text}`, '_blank');
             }
         }));
     });

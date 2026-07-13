@@ -21,7 +21,7 @@ class ShippingService
      */
     public function getFallbackMessage(string $province): string
     {
-        $adminWa = env('WA_BUSINESS_NUMBER', '6281234567890');
+        $adminWa = env('WA_BUSINESS_NUMBER', '6281259645665');
         $text = urlencode("Halo min, saya mau tanya ongkir untuk Jok Racing PNP ke provinsi {$province}. Kira-kira berapa ya?");
         return "https://wa.me/{$adminWa}?text={$text}";
     }

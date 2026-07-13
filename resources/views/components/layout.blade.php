@@ -33,7 +33,7 @@
       "image": "{{ asset('images/logo.png') }}",
       "@@id": "{{ url('/') }}",
       "url": "{{ url('/') }}",
-      "telephone": "+6281234567890",
+      "telephone": "+6281259645665",
       "description": "Spesialis jok mobil custom racing dan PNP dengan jangkauan pengiriman ke seluruh Indonesia.",
       "address": {
         "@@type": "PostalAddress",
@@ -271,10 +271,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="tel:+6281234567890" class="text-sm font-sans transition-colors duration-200" style="color: oklch(0.50 0.020 62);" onmouseover="this.style.color='oklch(0.75 0.11 67)'" onmouseout="this.style.color='oklch(0.50 0.020 62)'">+62 812-3456-7890</a>
+                            <a href="tel:+6281259645665" class="text-sm font-sans transition-colors duration-200" style="color: oklch(0.50 0.020 62);" onmouseover="this.style.color='oklch(0.75 0.11 67)'" onmouseout="this.style.color='oklch(0.50 0.020 62)'">+62 812-5964-5665</a>
                         </li>
                         <li>
-                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener"
+                            <a href="https://wa.me/6281259645665" target="_blank" rel="noopener"
                                class="inline-flex items-center gap-2 text-xs font-sans font-700 uppercase tracking-wider px-4 py-2.5 mt-2 transition-all duration-200"
                                style="color: oklch(0.12 0.018 55); background: oklch(0.67 0.13 66); border: 1px solid oklch(0.67 0.13 66);"
                                onmouseover="this.style.background='oklch(0.75 0.11 67)'; this.style.borderColor='oklch(0.75 0.11 67)'"
@@ -308,7 +308,7 @@
     ═══════════════════════════════════════════ --}}
     <script>
     (function () {
-        const waNumber  = '6281234567890';
+        const waNumber  = '6281259645665';
         const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Bengkel Jok Nusantara, saya mau tanya-tanya soal pemasangan jok mobil. Bisa minta info harga dan jadwalnya?')}`;
 
         const css = `

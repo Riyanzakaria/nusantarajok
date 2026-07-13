@@ -56,7 +56,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
                 <a
-                    href="https://wa.me/6281234567890"
+                    href="https://wa.me/6281259645665"
                     target="_blank"
                     rel="noopener"
                     class="touch-target inline-flex items-center justify-center gap-3 px-8 py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-300"
