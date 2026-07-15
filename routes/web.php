@@ -79,6 +79,11 @@ Route::get('/rescue-files', function() {
     return empty($results) ? "No files to rescue." : implode("<br>", $results);
 });
 
+Route::get('/find-file', function() {
+    $out = shell_exec('find /home/u868045307/domains/bengkeljoknusantara.com -name "k3HGKKjaLhCAoKWbrB7IZRDbPBM2gLDxVV0jg4SQ.png" 2>&1');
+    return "<pre>" . print_r($out, true) . "</pre>";
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
