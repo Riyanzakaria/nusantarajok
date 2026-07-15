@@ -38,6 +38,7 @@ Route::get('/debug-path', function() {
         'files' => is_dir(public_path('uploads/galleries')) ? scandir(public_path('uploads/galleries')) : [],
         'fallback_dir_exists' => is_dir(base_path('public/uploads/galleries')),
         'fallback_files' => is_dir(base_path('public/uploads/galleries')) ? scandir(base_path('public/uploads/galleries')) : [],
+        'db_galleries' => \App\Models\Gallery::latest()->take(3)->get(['id', 'image_url']),
     ]);
 });
 
