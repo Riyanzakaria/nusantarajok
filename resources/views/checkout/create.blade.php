@@ -155,7 +155,7 @@
             </div>
 
             <!-- RIGHT COLUMN: Summary (Sticky) -->
-            <div class="w-full md:w-[340px] lg:w-[380px] hidden md:block sticky top-28 z-10 shrink-0">
+            <div class="w-full hidden md:block sticky z-10 shrink-0" style="top: 7rem; width: 360px; max-width: 40%;">
                 <!-- Desktop Sidebar -->
                 <div class="flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
                     <p class="font-sans text-xs font-700 uppercase tracking-wider mb-6" style="color: {{ $inkPri }};">Ringkasan Pesanan</p>
@@ -227,8 +227,8 @@
              x-show="true" x-transition>
              
             <!-- Slide-up Details Panel -->
-            <div class="absolute bottom-full left-0 right-0 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t"
-                 style="background: {{ $surface }}; border-color: {{ $border }};"
+            <div class="absolute left-0 right-0 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t"
+                 style="bottom: 100%; background: {{ $surface }}; border-color: {{ $border }};"
                  x-show="showDetails" x-transition.opacity.duration.300ms>
                 
                 <div class="p-6 pb-8">
