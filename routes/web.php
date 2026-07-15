@@ -20,6 +20,7 @@ use App\Http\Controllers\WebhookController;
 Route::get('/clear-cache', function() {
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('storage:link');
     return 'Cache cleared and storage linked successfully!';
 });
