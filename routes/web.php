@@ -25,6 +25,16 @@ Route::get('/clear-cache', function() {
     return 'Cache cleared and storage linked successfully!';
 });
 
+Route::get('/debug-path', function() {
+    return response()->json([
+        'base_path' => base_path(),
+        'public_path' => public_path(),
+        'storage_path' => storage_path(),
+        'document_root' => $_SERVER['DOCUMENT_ROOT'] ?? 'unknown',
+        'script_filename' => $_SERVER['SCRIPT_FILENAME'] ?? 'unknown',
+    ]);
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
