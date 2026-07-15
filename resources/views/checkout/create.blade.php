@@ -17,10 +17,10 @@
         <div class="min-h-screen pt-32 pb-32 sm:pb-24 px-4 sm:px-6 lg:px-8"
              style="background: {{ $bg }};">
              
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 items-start">
             
             <!-- LEFT COLUMN: Form -->
-            <div class="md:col-span-7 lg:col-span-8 space-y-8">
+            <div class="flex-1 min-w-0 space-y-8">
                 
                 {{-- Header --}}
                 <div class="mb-8">
@@ -155,9 +155,9 @@
             </div>
 
             <!-- RIGHT COLUMN: Summary (Sticky) -->
-            <div class="md:col-span-5 lg:col-span-4 relative hidden md:block h-full">
+            <div class="w-full md:w-[340px] lg:w-[380px] hidden md:block sticky top-28 z-10 shrink-0">
                 <!-- Desktop Sidebar -->
-                <div class="sticky top-28 flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
+                <div class="flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
                     <p class="font-sans text-xs font-700 uppercase tracking-wider mb-6" style="color: {{ $inkPri }};">Ringkasan Pesanan</p>
                     
                     <div class="flex gap-4 mb-6">
@@ -224,7 +224,7 @@
 
         <!-- MOBILE STICKY BOTTOM BAR -->
         <div class="fixed bottom-0 left-0 right-0 z-[500] md:hidden"
-             x-data="{ showDetails: false }" x-show="true" x-transition>
+             x-show="true" x-transition>
              
             <!-- Slide-up Details Panel -->
             <div class="absolute bottom-full left-0 right-0 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t"
@@ -320,6 +320,7 @@
                 priceAdjustment: 0,
                 shippingCost: 0,
                 grandTotal: 0,
+                showDetails: false,
 
                 hasRow2: false,
                 hasRow3: false,
