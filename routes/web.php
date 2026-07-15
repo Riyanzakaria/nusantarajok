@@ -20,7 +20,8 @@ use App\Http\Controllers\WebhookController;
 Route::get('/clear-cache', function() {
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
-    return 'Cache cleared successfully!';
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return 'Cache cleared and storage linked successfully!';
 });
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
