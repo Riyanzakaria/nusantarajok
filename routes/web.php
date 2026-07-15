@@ -22,7 +22,11 @@ Route::get('/debug-path', function() {
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     
+    $logFile = storage_path('logs/laravel.log');
+    $logTail = file_exists($logFile) ? shell_exec('tail -n 30 ' . escapeshellarg($logFile)) : 'No log';
+
     return response()->json([
+        'log' => $logTail,
         'base_path' => base_path(),
         'public_path' => public_path(),
         'storage_path' => storage_path(),
