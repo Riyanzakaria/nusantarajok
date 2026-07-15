@@ -34,6 +34,10 @@ Route::get('/debug-path', function() {
         'script_filename' => $_SERVER['SCRIPT_FILENAME'] ?? 'unknown',
         'storage_url_test' => \Illuminate\Support\Facades\Storage::disk('public')->url('test.jpg'),
         'disk_root' => config('filesystems.disks.public.root'),
+        'directory_exists' => is_dir(public_path('uploads/galleries')),
+        'files' => is_dir(public_path('uploads/galleries')) ? scandir(public_path('uploads/galleries')) : [],
+        'fallback_dir_exists' => is_dir(base_path('public/uploads/galleries')),
+        'fallback_files' => is_dir(base_path('public/uploads/galleries')) ? scandir(base_path('public/uploads/galleries')) : [],
     ]);
 });
 
