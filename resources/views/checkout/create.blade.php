@@ -1,5 +1,5 @@
-<x-layout>
     <x-slot:title>Checkout | Bengkel Jok Nusantara</x-slot:title>
+    <x-slot:hideWaButton>true</x-slot:hideWaButton>
 
     @php
         $bg      = 'oklch(0.12 0.018 55)';
@@ -16,10 +16,10 @@
         <div class="min-h-screen pt-32 pb-32 sm:pb-24 px-4 sm:px-6 lg:px-8"
              style="background: {{ $bg }};">
              
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
             
             <!-- LEFT COLUMN: Form -->
-            <div class="lg:col-span-7 xl:col-span-8 space-y-8">
+            <div class="md:col-span-7 lg:col-span-8 space-y-8">
                 
                 {{-- Header --}}
                 <div class="mb-8">
@@ -154,7 +154,7 @@
             </div>
 
             <!-- RIGHT COLUMN: Summary (Sticky) -->
-            <div class="lg:col-span-5 xl:col-span-4 relative hidden lg:block">
+            <div class="md:col-span-5 lg:col-span-4 relative hidden md:block">
                 <!-- Desktop Sidebar -->
                 <div class="sticky top-28 flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
                     <p class="font-sans text-xs font-700 uppercase tracking-wider mb-6" style="color: {{ $inkPri }};">Ringkasan Pesanan</p>
@@ -223,25 +223,70 @@
     </div>
 
         <!-- MOBILE STICKY BOTTOM BAR -->
-        <div class="fixed bottom-0 left-0 right-0 z-50 lg:hidden py-4 px-4 sm:px-6 flex items-center justify-between"
-             style="background: oklch(0.10 0.015 55 / 0.85); backdrop-filter: blur(12px); border-top: 1px solid {{ $border }}; box-shadow: 0 -4px 24px rgba(0,0,0,0.4);"
-             x-show="true" x-transition>
-            <div class="flex flex-col">
-                <span class="font-sans text-[10px] font-700 uppercase tracking-wider" style="color: {{ $inkMut }};">Total Bayar</span>
-                <div class="flex items-baseline gap-1 mt-0.5">
-                    <span class="font-sans font-700 text-xs" style="color: {{ $gold }};">Rp</span>
-                    <span class="font-display font-700 text-xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
+        <div class="fixed bottom-0 left-0 right-0 z-[500] md:hidden"
+             x-data="{ showDetails: false }" x-show="true" x-transition>
+             
+            <!-- Slide-up Details Panel -->
+            <div class="absolute bottom-full left-0 right-0 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-all duration-300 origin-bottom"
+                 style="background: {{ $surface }}; border-top: 1px solid {{ $border }};"
+                 :class="showDetails ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'">
+                
+                <div class="p-6 pb-8">
+                    <div class="flex justify-between items-center mb-5">
+                        <h4 class="font-sans font-700 text-sm" style="color: {{ $inkPri }};">Rincian Pembayaran</h4>
+                        <button type="button" @click="showDetails = false" class="p-1 rounded-md" style="color: {{ $inkMut }}; background: {{ $bg }}; border: 1px solid {{ $border }};">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    
+                    <ul class="space-y-3.5 font-sans text-xs">
+                        <li class="flex justify-between items-center">
+                            <span style="color: {{ $inkSec }};">Harga Produk</span>
+                            <span class="font-700" style="color: {{ $inkPri }};" x-text="formatRupiah({{ $product->base_price }})"></span>
+                        </li>
+                        <li class="flex justify-between items-center" x-show="priceAdjustment > 0" style="display:none;">
+                            <span style="color: {{ $inkSec }};">Penyesuaian Mobil</span>
+                            <span class="font-700" style="color: {{ $gold }};" x-text="'+ ' + formatRupiah(priceAdjustment)"></span>
+                        </li>
+                        <li class="flex justify-between items-center" x-show="priceAdjustment < 0" style="display:none;">
+                            <span style="color: {{ $inkSec }};">Penyesuaian Mobil</span>
+                            <span class="font-700" style="color: oklch(0.62 0.14 155);" x-text="'- ' + formatRupiah(Math.abs(priceAdjustment))"></span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span style="color: {{ $inkSec }};">Ongkir (Kargo Darat)</span>
+                            <span class="font-700" style="color: {{ $inkPri }};" x-text="shippingCost > 0 ? formatRupiah(shippingCost) : '-'"></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <button 
-                type="submit" 
-                form="checkout-form" 
-                class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-700 text-xs uppercase tracking-wider transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" 
-                style="background: {{ $gold }}; color: oklch(0.12 0.018 55); border: none;"
-                :disabled="grandTotal === 0 || !selectedProvince || !selectedRow || !selectedVariantId">
-                Beli
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </button>
+
+            <!-- Main Bottom Bar -->
+            <div class="relative z-10 py-4 px-4 sm:px-6 flex items-center justify-between"
+                 style="background: oklch(0.10 0.015 55); border-top: 1px solid {{ $border }};">
+                
+                <div class="flex flex-col cursor-pointer group" @click="showDetails = !showDetails">
+                    <span class="font-sans text-[10px] font-700 uppercase tracking-wider flex items-center gap-1.5 transition-colors" style="color: {{ $inkMut }};" onmouseover="this.style.color='{{ $inkPri }}'" onmouseout="this.style.color='{{ $inkMut }}'">
+                        Total Bayar
+                        <div class="w-4 h-4 rounded-full flex items-center justify-center transition-all" :class="showDetails ? 'rotate-180 bg-[oklch(0.67_0.13_66/0.2)] text-[oklch(0.67_0.13_66)]' : 'bg-[oklch(0.22_0.02_55)]'">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
+                        </div>
+                    </span>
+                    <div class="flex items-baseline gap-1 mt-0.5">
+                        <span class="font-sans font-700 text-xs" style="color: {{ $gold }};">Rp</span>
+                        <span class="font-display font-700 text-xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
+                    </div>
+                </div>
+
+                <button 
+                    type="submit" 
+                    form="checkout-form" 
+                    class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-700 text-xs uppercase tracking-wider transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" 
+                    style="background: {{ $gold }}; color: oklch(0.12 0.018 55); border: none;"
+                    :disabled="grandTotal === 0 || !selectedProvince || !selectedRow || !selectedVariantId">
+                    Beli
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+            </div>
         </div>
     </div>
 

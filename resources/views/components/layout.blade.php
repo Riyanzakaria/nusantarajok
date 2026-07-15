@@ -310,6 +310,7 @@
     {{-- ═══════════════════════════════════════════
          WhatsApp Floating Button
     ═══════════════════════════════════════════ --}}
+    @if(empty($hideWaButton))
     <script>
     (function () {
         const waNumber  = '6281259645665';
@@ -528,6 +529,7 @@
         });
     })();
     </script>
+    @endif
 </body>
 </html>
 
