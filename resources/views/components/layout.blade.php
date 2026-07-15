@@ -203,7 +203,7 @@
         </div>
     </header>
 
-    <main class="flex-grow w-full overflow-x-hidden">
+    <main class="flex-grow w-full">
         {{ $slot }}
     </main>
 
