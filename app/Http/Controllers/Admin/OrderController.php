@@ -95,4 +95,13 @@ class OrderController extends Controller
 
         return redirect()->route('admin.orders.index')->with('success', "Pesanan {$invoice} berhasil dihapus dari riwayat.");
     }
+
+    /**
+     * Cetak Label Pengiriman (Surat Jalan)
+     */
+    public function printLabel(Order $order)
+    {
+        $order->load(['product', 'carVariant']);
+        return view('admin.orders.print-label', compact('order'));
+    }
 }

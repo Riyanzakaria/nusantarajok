@@ -22,15 +22,24 @@
                     </h1>
                     <p class="text-sm mt-1" style="color: {{ $inkMute }};">Dibuat {{ $order->created_at->isoFormat('D MMMM YYYY, HH:mm') }}</p>
                 </div>
-                <a href="{{ route('admin.orders.index') }}"
-                   class="inline-flex items-center gap-2 font-sans text-sm font-700 uppercase tracking-wider transition-colors duration-200"
-                   style="color: {{ $inkMute }};"
-                   onmouseover="this.style.color='{{ $goldHov }}'"
-                   onmouseout="this.style.color='{{ $inkMute }}'">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                    Semua Pesanan
-                </a>
-            </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('admin.orders.print-label', $order->id) }}" target="_blank"
+                       class="inline-flex items-center gap-2 px-4 py-2 font-sans text-sm font-700 transition-colors duration-200 rounded-lg shadow-sm"
+                       style="background: {{ $gold }}; color: oklch(0.12 0.018 55);"
+                       onmouseover="this.style.background='{{ $goldHov }}'"
+                       onmouseout="this.style.background='{{ $gold }}'">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        Cetak Label
+                    </a>
+                    <a href="{{ route('admin.orders.index') }}"
+                       class="inline-flex items-center gap-2 font-sans text-sm font-700 uppercase tracking-wider transition-colors duration-200"
+                       style="color: {{ $inkMute }};"
+                       onmouseover="this.style.color='{{ $goldHov }}'"
+                       onmouseout="this.style.color='{{ $inkMute }}'">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        Kembali
+                    </a>
+                </div>
 
             {{-- Success Alert --}}
             @if(session('success'))
