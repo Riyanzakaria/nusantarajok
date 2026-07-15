@@ -43,6 +43,15 @@ Route::get('/debug-path', function() {
     ]);
 });
 
+Route::get('/fix-db', function() {
+    $galleries = \App\Models\Gallery::where('image_url', 'LIKE', '/storage/%')->get();
+    foreach($galleries as $g) {
+        $g->image_url = str_replace('/storage/', '/uploads/', $g->image_url);
+        $g->save();
+    }
+    return "DB Fixed! " . $galleries->count() . " rows updated.";
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
