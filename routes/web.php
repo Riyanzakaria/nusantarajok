@@ -99,6 +99,10 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('h
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
 
+// Katalog Produk Publik
+Route::get('/produk', [\App\Http\Controllers\ProductCatalogController::class, 'index'])->name('products.index');
+Route::get('/produk/{slug}', [\App\Http\Controllers\ProductCatalogController::class, 'show'])->name('products.show');
+
 // Checkout Flow
 Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');

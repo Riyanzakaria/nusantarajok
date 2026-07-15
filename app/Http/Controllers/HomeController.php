@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->take(6)
             ->get();
             
-        $products = \App\Models\ProductModel::active()->get();
+        $products = \App\Models\ProductModel::active()->take(3)->get();
             
         $vehicleCategories = VehicleCategory::with('pricelists')->get();
         $calendar = $scheduleService->getAvailability(14); // Tampilkan 14 hari ke depan saja agar ringkas di kalender

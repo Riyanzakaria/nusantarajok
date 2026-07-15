@@ -10,7 +10,17 @@
             <!-- LEFT COLUMN: Form -->
             <div class="lg:col-span-8 space-y-10">
                 <div class="mb-12">
-                    <h1 class="font-display font-700 mb-4" style="font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.03em; color: oklch(0.93 0.012 75); line-height: 1.1;">
+                    <div class="mb-4">
+                    <a href="{{ route('products.show', $product->slug) }}"
+                       class="inline-flex items-center gap-2 font-sans text-xs font-700 uppercase tracking-wider transition-colors"
+                       style="color: oklch(0.50 0.020 62);"
+                       onmouseover="this.style.color='oklch(0.67 0.13 66)'"
+                       onmouseout="this.style.color='oklch(0.50 0.020 62)'">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        Kembali ke Detail Produk
+                    </a>
+                </div>
+                <h1 class="font-display font-700 mb-4" style="font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.03em; color: oklch(0.93 0.012 75); line-height: 1.1;">
                         Selesaikan Pesanan.
                     </h1>
                     <p class="font-sans text-lg" style="color: oklch(0.68 0.022 65);">
