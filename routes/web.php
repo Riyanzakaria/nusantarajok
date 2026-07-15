@@ -43,6 +43,7 @@ Route::get('/debug-path', function() {
         'db_products' => \App\Models\ProductModel::latest()->take(3)->get(['id', 'primary_image']),
         'products_dir_exists' => is_dir(public_path('uploads/products')),
         'product_files' => is_dir(public_path('uploads/products')) ? scandir(public_path('uploads/products')) : [],
+        'test_url' => \Illuminate\Support\Facades\Storage::url('products/Cu4VyVomIOPDYubLEPIEoVPia2q3kAOLIJfYuzyP.jpg'),
     ]);
 });
 
