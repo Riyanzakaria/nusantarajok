@@ -34,7 +34,7 @@
       "@@id": "{{ url('/') }}",
       "url": "{{ url('/') }}",
       "telephone": "+6281259645665",
-      "description": "Spesialis jok mobil custom racing dan PNP dengan jangkauan pengiriman ke seluruh Indonesia.",
+      "description": "Spesialis jok mobil custom racing PNP dan restorasi interior dengan jangkauan pengiriman ke seluruh Indonesia.",
       "address": {
         "@@type": "PostalAddress",
         "streetAddress": "Magetan",
