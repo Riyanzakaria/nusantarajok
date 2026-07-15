@@ -51,7 +51,7 @@
     </script>
 </head>
 <body
-    class="antialiased min-h-screen flex flex-col overflow-x-hidden"
+    class="antialiased min-h-screen flex flex-col"
     style="background-color: oklch(0.12 0.018 55); color: oklch(0.93 0.012 75);"
     x-data="{ scrolled: false, mobileMenuOpen: false }"
     @scroll.window="scrolled = (window.pageYOffset > 40)"

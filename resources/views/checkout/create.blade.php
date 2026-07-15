@@ -79,7 +79,7 @@
                                             <option value="{{ $p->province_name }}" style="background: {{ $surface }};">{{ $p->province_name }}</option>
                                         @endforeach
                                     </select>
-                                    <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $inkMut }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                    <svg class="w-4 h-4 pointer-events-none" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: {{ $inkMut }};" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                                 </div>
                             </div>
                             <div>
@@ -117,7 +117,7 @@
                                             </optgroup>
                                         @endforeach
                                     </select>
-                                    <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $inkMut }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                    <svg class="w-4 h-4 pointer-events-none" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: {{ $inkMut }};" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                                 </div>
                                 @error('car_variant_id') <p class="mt-2 text-[11px]" style="color: oklch(0.60 0.20 25);">{{ $message }}</p> @enderror
                             </div>
@@ -131,7 +131,7 @@
                                         <option value="1,2" x-show="hasRow2" style="background: {{ $surface }};">Baris Depan + Tengah</option>
                                         <option value="1,2,3" x-show="hasRow3" style="background: {{ $surface }};">Full Set (3 Baris)</option>
                                     </select>
-                                    <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $inkMut }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                    <svg class="w-4 h-4 pointer-events-none" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: {{ $inkMut }};" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                                 </div>
                                 @error('seat_row') <p class="mt-2 text-[11px]" style="color: oklch(0.60 0.20 25);">{{ $message }}</p> @enderror
                             </div>
@@ -287,6 +287,8 @@
                 </button>
             </div>
         </div>
+
+    </div> <!-- CLOSING DIV FOR checkoutForm() -->
     </div>
 
     <!-- Scripts for dynamic pricing -->
