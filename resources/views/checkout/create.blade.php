@@ -155,9 +155,9 @@
             </div>
 
             <!-- RIGHT COLUMN: Summary (Sticky) -->
-            <div class="md:col-span-5 lg:col-span-4 hidden md:block sticky top-28 self-start h-fit z-10">
+            <div class="md:col-span-5 lg:col-span-4 relative hidden md:block h-full">
                 <!-- Desktop Sidebar -->
-                <div class="flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
+                <div class="sticky top-28 flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
                     <p class="font-sans text-xs font-700 uppercase tracking-wider mb-6" style="color: {{ $inkPri }};">Ringkasan Pesanan</p>
                     
                     <div class="flex gap-4 mb-6">
@@ -227,9 +227,9 @@
              x-data="{ showDetails: false }" x-show="true" x-transition>
              
             <!-- Slide-up Details Panel -->
-            <div class="absolute bottom-full left-0 right-0 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-all duration-300 origin-bottom"
-                 style="background: {{ $surface }}; border-top: 1px solid {{ $border }};"
-                 :class="showDetails ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'">
+            <div class="absolute bottom-full left-0 right-0 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t"
+                 style="background: {{ $surface }}; border-color: {{ $border }};"
+                 x-show="showDetails" x-transition.opacity.duration.300ms>
                 
                 <div class="p-6 pb-8">
                     <div class="flex justify-between items-center mb-5">
