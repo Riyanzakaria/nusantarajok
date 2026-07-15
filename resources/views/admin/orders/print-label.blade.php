@@ -60,9 +60,15 @@
             <p class="font-bold text-sm mb-2">{{ $order->customer_wa }}</p>
             <p class="text-sm text-gray-800 leading-snug">{{ $order->shipping_address }}</p>
             
-            <div class="mt-3 p-2 bg-gray-100 rounded border border-gray-300">
-                <p class="text-[0.65rem] font-bold uppercase text-gray-500">Provinsi Tujuan:</p>
-                <p class="font-bold text-sm uppercase">{{ $order->shipping_province }}</p>
+            <div class="mt-3 p-2 bg-gray-100 rounded border border-gray-300 grid grid-cols-2 gap-2">
+                <div>
+                    <p class="text-[0.65rem] font-bold uppercase text-gray-500">Kota / Kabupaten:</p>
+                    <p class="font-bold text-sm uppercase">{{ $order->shipping_city }}</p>
+                </div>
+                <div>
+                    <p class="text-[0.65rem] font-bold uppercase text-gray-500">Provinsi Tujuan:</p>
+                    <p class="font-bold text-sm uppercase">{{ $order->shipping_province }}</p>
+                </div>
             </div>
         </div>
 
