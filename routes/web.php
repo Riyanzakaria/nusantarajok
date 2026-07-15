@@ -80,17 +80,21 @@ Route::get('/rescue-files', function() {
 });
 
 Route::get('/find-file', function() {
-    $fallback = base_path('public/uploads/products');
-    $files = is_dir($fallback) ? scandir($fallback) : "Dir not found: $fallback";
-    
-    $old = storage_path('app/public/products');
-    $old_files = is_dir($old) ? scandir($old) : "Dir not found: $old";
+    try {
+        $fallback = base_path('public/uploads/products');
+        $files = is_dir($fallback) ? scandir($fallback) : "Dir not found: $fallback";
+        
+        $old = storage_path('app/public/products');
+        $old_files = is_dir($old) ? scandir($old) : "Dir not found: $old";
 
-    return [
-        'fallback' => $files,
-        'old' => $old_files,
-        'public_html' => is_dir(public_path('uploads/products')) ? scandir(public_path('uploads/products')) : [],
-    ];
+        return response()->json([
+            'fallback' => $files,
+            'old' => $old_files,
+            'public_html' => is_dir(public_path('uploads/products')) ? scandir(public_path('uploads/products')) : [],
+        ]);
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
 });
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
