@@ -17,15 +17,11 @@ use App\Http\Controllers\WebhookController;
 */
 
 // ── Public Routes ──────────────────────────────────────────────
-Route::get('/clear-cache', function() {
+Route::get('/debug-path', function() {
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
-    \Illuminate\Support\Facades\Artisan::call('config:clear');
-    \Illuminate\Support\Facades\Artisan::call('storage:link');
-    return 'Cache cleared and storage linked successfully!';
-});
-
-Route::get('/debug-path', function() {
+    
     return response()->json([
         'base_path' => base_path(),
         'public_path' => public_path(),
