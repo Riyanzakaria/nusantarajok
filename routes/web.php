@@ -55,6 +55,30 @@ Route::get('/fix-db', function() {
     return "DB Fixed! " . $galleries->count() . " rows updated.";
 });
 
+Route::get('/rescue-files', function() {
+    $results = [];
+    foreach(['products', 'galleries'] as $folder) {
+        $src = storage_path('app/public/' . $folder);
+        $dest = public_path('uploads/' . $folder);
+        if (!is_dir($dest)) @mkdir($dest, 0755, true);
+        
+        if (is_dir($src)) {
+            $files = scandir($src);
+            foreach($files as $f) {
+                if ($f !== '.' && $f !== '..') {
+                    $s = $src . '/' . $f;
+                    $d = $dest . '/' . $f;
+                    if (is_file($s) && !file_exists($d)) {
+                        copy($s, $d);
+                        $results[] = "Rescued: $folder/$f";
+                    }
+                }
+            }
+        }
+    }
+    return empty($results) ? "No files to rescue." : implode("<br>", $results);
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/galeri', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
