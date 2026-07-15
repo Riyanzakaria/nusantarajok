@@ -261,4 +261,15 @@ class DashboardController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
+    /**
+     * Hard-delete a work order record (admin action).
+     */
+    public function destroyWorkOrder(WorkOrder $workOrder)
+    {
+        $plat = $workOrder->raw_plat;
+        $workOrder->delete();
+
+        return back()->with('success', "Riwayat pesanan/pengerjaan dengan plat \"{$plat}\" berhasil dihapus.");
+    }
 }

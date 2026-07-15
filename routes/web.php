@@ -151,6 +151,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
     Route::patch('orders/{order}/status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
+    Route::delete('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('orders.destroy');
 
     // --- E-Commerce Master Data ---
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except('show');
@@ -169,10 +170,14 @@ Route::middleware(['auth', 'role:admin,technician'])->prefix('dashboard')->name(
     // Work order status update (technician action)
     Route::patch('/work-orders/{work_order}/status', [\App\Http\Controllers\DashboardController::class, 'updateStatus'])->name('work-orders.update-status');
 
-    // ── Admin: Manual Order Entry (Offline POS) ─────────────────
+    // ── Admin: Manual Order Entry & Delete ──────────────────────
     Route::post('/work-orders', [\App\Http\Controllers\DashboardController::class, 'storeOrder'])
         ->middleware('role:admin')
         ->name('work-orders.store');
+    
+    Route::delete('/work-orders/{workOrder}', [\App\Http\Controllers\DashboardController::class, 'destroyWorkOrder'])
+        ->middleware('role:admin')
+        ->name('work-orders.destroy');
 
     // ── Admin: Leads Pipeline ───────────────────────────────────
     Route::get('/leads', [\App\Http\Controllers\DashboardController::class, 'leads'])

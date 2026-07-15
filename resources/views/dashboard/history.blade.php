@@ -75,6 +75,7 @@
                     <div class="flex-1 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em]" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Kendaraan</div>
                     <div class="w-48 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em] text-right" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Harga &amp; Material</div>
                     <div class="w-32 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em] text-center" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Status</div>
+                    <div class="w-24 px-5 py-3 font-sans text-xs uppercase tracking-[0.12em] text-center" style="background: {{ $bgCard }}; color: {{ $inkMute }};">Aksi</div>
                 </div>
 
                 @forelse($workOrders as $order)
@@ -115,6 +116,15 @@
                                 <span class="font-sans text-[0.65rem] font-700 uppercase tracking-widest px-2 py-1"
                                       style="background: oklch(0.60 0.04 250 / 0.12); color: oklch(0.72 0.025 68); border: 1px solid oklch(0.60 0.04 250 / 0.30);">Antrian</span>
                             @endif
+                        </div>
+                        <div class="row-bg w-24 px-5 py-4 flex items-center justify-center" style="background: {{ $bgCard }};">
+                            <form action="{{ route('dashboard.work-orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan {{ $order->raw_plat }} secara permanen?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-sans text-[0.65rem] font-700 uppercase tracking-widest px-2 py-1 text-red-500 hover:text-red-400 transition">
+                                    Hapus
+                                </button>
+                            </form>
                         </div>
                     </div>
                 @empty

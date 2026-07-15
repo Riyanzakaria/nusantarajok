@@ -84,4 +84,15 @@ class OrderController extends Controller
 
         return back()->with('success', "Status pesanan {$order->invoice_number} berhasil diperbarui.");
     }
+
+    /**
+     * Hapus pesanan (Admin Only)
+     */
+    public function destroy(Order $order)
+    {
+        $invoice = $order->invoice_number;
+        $order->delete();
+
+        return redirect()->route('admin.orders.index')->with('success', "Pesanan {$invoice} berhasil dihapus dari riwayat.");
+    }
 }

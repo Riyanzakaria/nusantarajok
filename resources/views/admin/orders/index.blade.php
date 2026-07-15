@@ -129,12 +129,19 @@
                             <td class="px-5 py-4 hidden sm:table-cell">
                                 <span class="text-xs font-medium">{{ $order->production_status->label() }}</span>
                             </td>
-                            <td class="px-5 py-4 text-right">
+                            <td class="px-5 py-4 text-right flex items-center justify-end gap-3">
                                 <a href="{{ route('admin.orders.show', $order->id) }}"
                                    class="text-xs font-bold uppercase tracking-wider transition"
                                    style="color: {{ $gold }};"
                                    onmouseover="this.style.color='{{ $goldHov }}'"
                                    onmouseout="this.style.color='{{ $gold }}'">Detail →</a>
+                                <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan ini secara permanen?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-xs font-bold uppercase tracking-wider transition text-red-500 hover:text-red-400">
+                                        Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @empty
