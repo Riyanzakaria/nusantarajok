@@ -41,6 +41,8 @@ Route::get('/debug-path', function() {
         'db_galleries' => \App\Models\Gallery::latest()->take(3)->get(['id', 'image_url']),
         'disk_config' => config('filesystems.disks.public'),
         'db_products' => \App\Models\ProductModel::latest()->take(3)->get(['id', 'primary_image']),
+        'products_dir_exists' => is_dir(public_path('uploads/products')),
+        'product_files' => is_dir(public_path('uploads/products')) ? scandir(public_path('uploads/products')) : [],
     ]);
 });
 
