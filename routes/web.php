@@ -21,6 +21,7 @@ Route::get('/debug-path', function() {
     \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
     
     return response()->json([
         'base_path' => base_path(),
