@@ -157,7 +157,7 @@
             <!-- RIGHT COLUMN: Summary (Sticky) -->
             <div class="md:col-span-5 lg:col-span-4 relative hidden md:block">
                 <!-- Desktop Sidebar -->
-                <div class="sticky top-28 flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
+                <div class="sticky top-28 h-fit flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
                     <p class="font-sans text-xs font-700 uppercase tracking-wider mb-6" style="color: {{ $inkPri }};">Ringkasan Pesanan</p>
                     
                     <div class="flex gap-4 mb-6">
