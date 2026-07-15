@@ -32,6 +32,7 @@ Route::get('/debug-path', function() {
         'storage_path' => storage_path(),
         'document_root' => $_SERVER['DOCUMENT_ROOT'] ?? 'unknown',
         'script_filename' => $_SERVER['SCRIPT_FILENAME'] ?? 'unknown',
+        'storage_url_test' => \Illuminate\Support\Facades\Storage::disk('public')->url('test.jpg'),
     ]);
 });
 
