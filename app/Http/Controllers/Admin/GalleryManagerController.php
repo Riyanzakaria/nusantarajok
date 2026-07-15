@@ -30,7 +30,7 @@ class GalleryManagerController extends Controller
 
         Gallery::create([
             'category_id' => $request->category_id,
-            'image_url' => '/storage/' . $path,
+            'image_url' => Storage::url($path),
             'title' => $request->title,
             'is_featured' => $request->boolean('is_featured')
         ]);
@@ -40,7 +40,11 @@ class GalleryManagerController extends Controller
 
     public function destroy(Gallery $gallery)
     {
-        $path = str_replace('/storage/', '', $gallery->image_url);
+        // Extract relative path from URL (e.g. /uploads/galleries/xxx -> galleries/xxx)
+        // Storage::url() prefix is config('filesystems.disks.public.url')
+        $prefix = Storage::url('');
+        $path = str_replace($prefix, '', $gallery->image_url);
+        
         Storage::disk('public')->delete($path);
         
         $gallery->delete();
