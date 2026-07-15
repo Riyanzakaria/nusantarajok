@@ -40,6 +40,7 @@ Route::get('/debug-path', function() {
         'fallback_files' => is_dir(base_path('public/uploads/galleries')) ? scandir(base_path('public/uploads/galleries')) : [],
         'db_galleries' => \App\Models\Gallery::latest()->take(3)->get(['id', 'image_url']),
         'disk_config' => config('filesystems.disks.public'),
+        'db_products' => \App\Models\ProductModel::latest()->take(3)->get(['id', 'primary_image']),
     ]);
 });
 
