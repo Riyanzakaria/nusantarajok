@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Bengkel Jok Nusantara — Spesialis Jok Custom Racing PNP Se-Indonesia' }}</title>
     <meta name="description" content="Bengkel Jok Nusantara melayani pembuatan jok mobil custom racing, PNP (Plug and Play), dan restorasi interior dengan pengiriman ke seluruh Indonesia.">
-    <meta name="keywords" content="jok racing custom, jok mobil PNP, bengkel jok magetan, kirim jok seluruh indonesia, jok mobil custom murah, modifikasi interior mobil">
+    <meta name="keywords" content="jok racing custom,jok mobil magetan, jok mobil karesidenan madiun, bengkel jok mobil madiun, jok mobil ngawi, jok mobil ponorogo, interior mobil magetan, interior mobil karesidenan madiun, interior mobil ngawi, interior mobil ponorogo, jok mobil PNP, bengkel jok magetan, kirim jok seluruh indonesia, jok mobil custom murah, modifikasi interior mobil">
     
     {{-- Canonical URL --}}
     <link rel="canonical" href="{{ url()->current() }}" />
