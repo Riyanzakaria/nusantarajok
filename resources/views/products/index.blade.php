@@ -33,7 +33,7 @@
                 <p class="text-lg font-semibold">Belum ada produk yang tersedia saat ini.</p>
             </div>
         @else
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             @foreach($products as $product)
             <a href="{{ route('products.show', $product->slug) }}"
                class="group flex flex-col overflow-hidden transition-all duration-300"
@@ -64,25 +64,22 @@
                 </div>
 
                 {{-- Info --}}
-                <div class="p-6 flex-1 flex flex-col">
-                    <h2 class="font-display font-700 text-lg mb-1 leading-tight" style="color: {{ $inkPri }};">
+                <div class="p-4 sm:p-6 flex-1 flex flex-col">
+                    <h2 class="font-display font-700 text-sm sm:text-lg mb-1 leading-tight" style="color: {{ $inkPri }};">
                         {{ $product->name }}
                     </h2>
-                    <p class="font-sans text-sm mb-4 flex-1 line-clamp-2" style="color: {{ $inkSec }};">
-                        {{ $product->description ?? 'Jok racing kustomisasi PNP.' }}
-                    </p>
-
-                    <div class="flex items-center justify-between mt-auto pt-4" style="border-top: 1px solid {{ $border }};">
+                    
+                    <div class="flex items-center justify-between mt-auto pt-3 sm:pt-4" style="border-top: 1px solid {{ $border }}; margin-top: auto;">
                         <div>
-                            <span class="font-sans text-xs uppercase tracking-wider" style="color: {{ $inkMut }};">Mulai dari</span>
-                            <p class="font-display font-700 text-lg leading-tight" style="color: {{ $gold }};">
+                            <span class="font-sans text-[10px] sm:text-xs uppercase tracking-wider" style="color: {{ $inkMut }};">Mulai dari</span>
+                            <p class="font-display font-700 text-sm sm:text-lg leading-tight" style="color: {{ $gold }};">
                                 {{ $product->base_price_formatted }}
                             </p>
                         </div>
-                        <span class="font-sans text-xs font-700 uppercase tracking-wider transition-colors duration-200 flex items-center gap-1"
+                        <span class="hidden sm:flex font-sans text-xs font-700 uppercase tracking-wider transition-colors duration-200 items-center gap-1"
                               style="color: {{ $gold }};">
-                            Lihat Detail
-                            <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            Detail
+                            <svg class="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </div>
                 </div>

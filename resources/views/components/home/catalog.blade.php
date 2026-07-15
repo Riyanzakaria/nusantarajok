@@ -21,7 +21,7 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
             @foreach($products as $product)
             <a href="{{ route('products.show', $product->slug) }}"
                class="group flex flex-col overflow-hidden transition-all duration-300"
@@ -43,15 +43,15 @@
                 </div>
 
                 {{-- Info --}}
-                <div class="p-5 flex-1 flex flex-col">
-                    <h3 class="font-display font-700 text-base mb-1 leading-tight" style="color: var(--color-heading);">
+                <div class="p-4 sm:p-5 flex-1 flex flex-col">
+                    <h3 class="font-display font-700 text-sm sm:text-base mb-1 leading-tight" style="color: var(--color-heading);">
                         {{ $product->name }}
                     </h3>
-                    <p class="font-sans text-xs mb-4 flex-1" style="color: oklch(0.68 0.022 65);">
-                        Mulai dari <strong style="color: var(--color-primary);">{{ $product->base_price_formatted }}</strong>
+                    <p class="font-sans text-[10px] sm:text-xs mb-3 sm:mb-4 flex-1" style="color: oklch(0.68 0.022 65);">
+                        Mulai dari <strong style="color: var(--color-primary); font-size: 1.1em;">{{ $product->base_price_formatted }}</strong>
                     </p>
-                    <span class="font-sans text-xs font-700 uppercase tracking-wider flex items-center gap-1 transition-colors" style="color: var(--color-primary);">
-                        Lihat Detail
+                    <span class="hidden sm:flex font-sans text-xs font-700 uppercase tracking-wider items-center gap-1 transition-colors" style="color: var(--color-primary);">
+                        Detail
                         <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </span>
                 </div>

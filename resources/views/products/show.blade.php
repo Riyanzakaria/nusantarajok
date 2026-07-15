@@ -91,61 +91,52 @@
 
             {{-- RIGHT: Info & CTA --}}
             <div class="lg:col-span-5 flex flex-col">
-                <h1 class="font-display font-700 mb-3 leading-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; color: {{ $inkPri }}; text-wrap: balance;">
-                    {{ $product->name }}
-                </h1>
+                <div class="mb-8">
+                    <h1 class="font-display font-700 mb-4 leading-tight" style="font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.03em; color: {{ $inkPri }}; text-wrap: balance;">
+                        {{ $product->name }}
+                    </h1>
 
-                <div class="mb-6">
-                    <span class="font-sans text-xs uppercase tracking-wider" style="color: {{ $inkMut }};">Harga mulai dari</span>
-                    <p class="font-display font-700 leading-none mt-1" style="font-size: clamp(2rem, 3.5vw, 2.75rem); color: {{ $gold }}; letter-spacing: -0.02em;">
-                        {{ $product->base_price_formatted }}
-                    </p>
-                    <p class="font-sans text-xs mt-1" style="color: {{ $inkMut }};">
-                        Harga akhir tergantung jenis mobil &amp; jumlah baris jok.
-                    </p>
+                    <div class="inline-flex flex-col">
+                        <span class="font-sans text-xs uppercase tracking-[0.1em]" style="color: {{ $inkMut }};">Mulai dari</span>
+                        <p class="font-display font-700 leading-none mt-1.5" style="font-size: clamp(2.25rem, 4vw, 3rem); color: {{ $gold }}; letter-spacing: -0.02em;">
+                            {{ $product->base_price_formatted }}
+                        </p>
+                    </div>
                 </div>
 
-                <div class="mb-8 pt-6" style="border-top: 1px solid {{ $border }};">
-                    <h2 class="font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: {{ $inkMut }};">Tentang Produk</h2>
-                    <div class="font-sans text-base leading-relaxed" style="color: {{ $inkSec }}; max-width: 65ch;">
-                        {{ $product->description ?? 'Jok racing PNP (Plug and Play) kustom berkualitas tinggi.' }}
+                <div class="mb-10 pt-8" style="border-top: 1px solid {{ $border }}; border-bottom: 1px solid {{ $border }}; padding-bottom: 2rem;">
+                    <h2 class="font-sans text-xs font-700 uppercase tracking-wider mb-4" style="color: {{ $inkMut }};">Tentang Produk</h2>
+                    <div class="font-sans text-base sm:text-lg leading-relaxed space-y-4" style="color: {{ $inkSec }}; max-width: 65ch;">
+                        {!! nl2br(e($product->description ?? 'Jok racing kustom dengan desain premium. Sistem Plug and Play (PNP) dirancang presisi untuk dudukan baut asli bawaan mobil Anda, tanpa perlu modifikasi tambahan.')) !!}
                     </div>
                 </div>
 
                 {{-- Key Features --}}
-                <div class="mb-8 space-y-3">
+                <div class="mb-10 space-y-4">
                     @foreach([
-                        ['icon' => 'M5 13l4 4L19 7', 'text' => 'Plug & Play — pas dudukan baut bawaan mobil'],
-                        ['icon' => 'M5 13l4 4L19 7', 'text' => 'Bisa pilih warna utama & warna jahitan'],
-                        ['icon' => 'M5 13l4 4L19 7', 'text' => 'Tersedia untuk baris 1, 2, atau full set 3 baris'],
-                        ['icon' => 'M5 13l4 4L19 7', 'text' => 'Produksi 7–14 hari kerja, dikirim via kargo'],
+                        ['icon' => 'M5 13l4 4L19 7', 'text' => '<strong style="color: '.$inkPri.'">Plug & Play</strong> — Pas dudukan baut bawaan mobil, tanpa bor atau las.'],
+                        ['icon' => 'M5 13l4 4L19 7', 'text' => '<strong style="color: '.$inkPri.'">Kustomisasi Penuh</strong> — Bebas pilih warna material dan benang jahitan.'],
+                        ['icon' => 'M5 13l4 4L19 7', 'text' => '<strong style="color: '.$inkPri.'">Fleksibel</strong> — Tersedia untuk pesanan 1 baris, 2 baris, atau full set.'],
+                        ['icon' => 'M5 13l4 4L19 7', 'text' => '<strong style="color: '.$inkPri.'">Pengiriman Aman</strong> — Pengerjaan 7–14 hari kerja, dikirim via kargo ke seluruh Indonesia.'],
                     ] as $f)
-                    <div class="flex items-start gap-3">
-                        <div class="w-5 h-5 flex items-center justify-center shrink-0 mt-0.5">
+                    <div class="flex items-start gap-4">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style="background: oklch(0.67 0.13 66 / 0.15);">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $gold }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="{{ $f['icon'] }}"/></svg>
                         </div>
-                        <span class="font-sans text-sm" style="color: {{ $inkSec }};">{{ $f['text'] }}</span>
+                        <span class="font-sans text-[15px] leading-relaxed" style="color: {{ $inkSec }};">{!! $f['text'] !!}</span>
                     </div>
                     @endforeach
                 </div>
 
                 {{-- CTA --}}
-                <div class="mt-auto space-y-3">
+                <div class="mt-auto space-y-4 sticky bottom-4 z-10 p-4 lg:p-0 rounded-2xl lg:rounded-none" style="background: {{ $bg }}; border: 1px solid {{ $border }}; lg:border: none;">
                     <a href="{{ route('checkout.create', ['product' => $product->slug]) }}"
-                       class="flex items-center justify-center gap-2.5 w-full py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-200"
+                       class="flex items-center justify-center gap-3 w-full py-4 sm:py-5 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-300 shadow-lg rounded-lg lg:rounded-none lg:shadow-none"
                        style="background: {{ $gold }}; color: oklch(0.12 0.018 55);"
-                       onmouseover="this.style.background='{{ $goldH }}'"
-                       onmouseout="this.style.background='{{ $gold }}'">
-                        Beli Sekarang &amp; Sesuaikan Mobil
+                       onmouseover="this.style.background='{{ $goldH }}'; this.style.transform='translateY(-2px)'"
+                       onmouseout="this.style.background='{{ $gold }}'; this.style.transform='translateY(0)'">
+                        Mulai Pesan Sekarang
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
-                    <a href="{{ route('products.index') }}"
-                       class="flex items-center justify-center gap-2 w-full py-3.5 font-sans text-sm font-500 transition-colors duration-200"
-                       style="border: 1px solid {{ $border }}; color: {{ $inkMut }};"
-                       onmouseover="this.style.borderColor='{{ $gold }}80'; this.style.color='{{ $gold }}'"
-                       onmouseout="this.style.borderColor='{{ $border }}'; this.style.color='{{ $inkMut }}'">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        Lihat Semua Produk
                     </a>
                 </div>
 
