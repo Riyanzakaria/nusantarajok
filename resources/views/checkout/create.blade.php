@@ -1,3 +1,4 @@
+<x-layout>
     <x-slot:title>Checkout | Bengkel Jok Nusantara</x-slot:title>
     <x-slot:hideWaButton>true</x-slot:hideWaButton>
 
@@ -195,8 +196,7 @@
                     <div class="flex items-end justify-between p-4 rounded-xl mb-6" style="background: {{ $bg }}; border: 1px solid {{ $border }};">
                         <span class="font-sans text-[11px] font-700 uppercase tracking-wider" style="color: {{ $inkSec }};">Total Bayar</span>
                         <div class="text-right">
-                            <span class="font-sans font-700 text-xs mr-0.5" style="color: {{ $gold }};">Rp</span>
-                            <span class="font-display font-700 text-2xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
+                            <span class="font-display font-700 text-2xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatRupiah(grandTotal)"></span>
                         </div>
                     </div>
 
@@ -272,8 +272,7 @@
                         </div>
                     </span>
                     <div class="flex items-baseline gap-1 mt-0.5">
-                        <span class="font-sans font-700 text-xs" style="color: {{ $gold }};">Rp</span>
-                        <span class="font-display font-700 text-xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
+                        <span class="font-display font-700 text-xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatRupiah(grandTotal)"></span>
                     </div>
                 </div>
 
@@ -354,12 +353,12 @@
                     this.grandTotal = productPrice + this.shippingCost;
                 },
 
-                formatRupiah(number) {
-                    return 'Rp ' + this.formatNumber(number);
-                },
-                
                 formatNumber(num) {
                     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                },
+
+                formatRupiah(number) {
+                    return 'Rp ' + this.formatNumber(number);
                 },
 
                 init() {
