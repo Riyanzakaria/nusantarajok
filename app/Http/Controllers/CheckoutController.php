@@ -51,6 +51,7 @@ class CheckoutController extends Controller
             'shipping_city'        => 'required|string',
             'shipping_address'     => 'required|string',
             'shipping_postal_code' => 'nullable|string|max:10',
+            'notes'                => 'nullable|string|max:500',
         ]);
 
         try {

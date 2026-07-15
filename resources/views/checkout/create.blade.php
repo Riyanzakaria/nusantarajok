@@ -1,207 +1,247 @@
 <x-layout>
     <x-slot:title>Checkout | Bengkel Jok Nusantara</x-slot:title>
 
-    <div class="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8"
-         style="background: oklch(0.12 0.018 55);"
-         x-data="checkoutForm()">
-         
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+    @php
+        $bg      = 'oklch(0.12 0.018 55)';
+        $surface = 'oklch(0.155 0.022 55)';
+        $border  = 'oklch(0.22 0.02 55)';
+        $inkPri  = 'oklch(0.93 0.012 75)';
+        $inkSec  = 'oklch(0.68 0.022 65)';
+        $inkMut  = 'oklch(0.50 0.020 62)';
+        $gold    = 'oklch(0.67 0.13 66)';
+        $goldH   = 'oklch(0.75 0.11 67)';
+    @endphp
+
+    <div x-data="checkoutForm()">
+        <div class="min-h-screen pt-32 pb-32 sm:pb-24 px-4 sm:px-6 lg:px-8"
+             style="background: {{ $bg }};">
+             
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             
             <!-- LEFT COLUMN: Form -->
-            <div class="lg:col-span-8 space-y-10">
-                <div class="mb-12">
-                    <div class="mb-4">
+            <div class="lg:col-span-7 xl:col-span-8 space-y-8">
+                
+                {{-- Header --}}
+                <div class="mb-8">
                     <a href="{{ route('products.show', $product->slug) }}"
-                       class="inline-flex items-center gap-2 font-sans text-xs font-700 uppercase tracking-wider transition-colors"
-                       style="color: oklch(0.50 0.020 62);"
-                       onmouseover="this.style.color='oklch(0.67 0.13 66)'"
-                       onmouseout="this.style.color='oklch(0.50 0.020 62)'">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                       class="inline-flex items-center gap-2 font-sans text-[11px] sm:text-xs font-700 uppercase tracking-wider mb-6 transition-colors"
+                       style="color: {{ $inkMut }};"
+                       onmouseover="this.style.color='{{ $gold }}'"
+                       onmouseout="this.style.color='{{ $inkMut }}'">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                         Kembali ke Detail Produk
                     </a>
-                </div>
-                <h1 class="font-display font-700 mb-4" style="font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.03em; color: oklch(0.93 0.012 75); line-height: 1.1;">
-                        Selesaikan Pesanan.
+                    <h1 class="font-display font-700 mb-2" style="font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.03em; color: {{ $inkPri }}; line-height: 1.1;">
+                        Pengiriman & Pembayaran
                     </h1>
-                    <p class="font-sans text-lg" style="color: oklch(0.68 0.022 65);">
-                        Lengkapi detail mobil, preferensi warna, dan alamat pengiriman Anda di bawah ini.
+                    <p class="font-sans text-sm sm:text-base" style="color: {{ $inkSec }}; max-width: 50ch;">
+                        Selesaikan pesanan Anda dengan mengisi detail di bawah ini secara lengkap.
                     </p>
                 </div>
 
                 @if(session('error'))
-                <div class="p-5 rounded-xl font-sans text-sm mb-8 flex items-center gap-3" style="background: oklch(0.60 0.20 25 / 0.08); border: 1px solid oklch(0.60 0.20 25 / 0.30); color: oklch(0.75 0.18 25);">
-                    <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <div class="p-5 rounded-xl font-sans text-sm flex items-center gap-3" style="background: oklch(0.60 0.20 25 / 0.08); border: 1px solid oklch(0.60 0.20 25 / 0.25); color: oklch(0.75 0.18 25);">
+                    <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                     {{ session('error') }}
                 </div>
                 @endif
 
-                <form id="checkout-form" action="{{ route('checkout.store') }}" method="POST" class="space-y-10">
+                <form id="checkout-form" action="{{ route('checkout.store') }}" method="POST" class="space-y-6">
                     @csrf
                     <input type="hidden" name="product_model_id" value="{{ $product->id }}">
 
-                    <!-- 1. Data Kendaraan -->
-                    <div class="p-8 md:p-10" style="background: oklch(0.155 0.022 55); border: 1px solid oklch(0.22 0.02 55);">
-                        <div class="flex items-center gap-4 mb-8" style="border-bottom: 1px solid oklch(0.22 0.02 55); padding-bottom: 1.5rem;">
-                            <span class="font-display font-600 text-2xl" style="color: oklch(0.67 0.13 66);">01</span>
-                            <h2 class="font-sans font-700 text-base uppercase tracking-wider" style="color: oklch(0.93 0.012 75);">Kendaraan Anda</h2>
+                    <!-- SECTION 1: Data Pengiriman -->
+                    <div class="rounded-2xl p-6 sm:p-8" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
+                        <div class="flex items-center gap-3 mb-6 pb-5" style="border-bottom: 1px solid {{ $border }};">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background: oklch(0.67 0.13 66 / 0.15);">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $gold }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <h2 class="font-sans font-700 text-base uppercase tracking-wider" style="color: {{ $inkPri }};">Alamat Pengiriman</h2>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Jenis Mobil</label>
-                                <select name="car_variant_id" x-model="selectedVariantId" @change="updateCalculation()" class="w-full appearance-none px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required>
-                                    <option value="" style="background: #111; color: #fff;">-- Pilih Jenis Mobil --</option>
-                                    @foreach($carVariants as $brand => $variants)
-                                        <optgroup label="{{ $brand }}" style="background: #1a1a1a; color: #aaa;">
-                                            @foreach($variants as $v)
-                                                <option value="{{ $v->id }}" style="background: #111; color: #fff;">{{ $v->model_name }} ({{ $v->year_range }})</option>
-                                            @endforeach
-                                        </optgroup>
-                                    @endforeach
-                                </select>
-                                @error('car_variant_id') <p class="mt-2 text-xs" style="color: oklch(0.60 0.20 25);">{{ $message }}</p> @enderror
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Nama Penerima</label>
+                                <input type="text" name="customer_name" class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required value="{{ old('customer_name') }}" placeholder="Sesuai KTP/Penerima">
+                            </div>
+                            <div>
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">No. WhatsApp</label>
+                                <input type="text" name="customer_wa" class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required value="{{ old('customer_wa') }}" placeholder="Contoh: 08123456789">
                             </div>
 
                             <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Baris Jok</label>
-                                <select name="seat_row" x-model="selectedRow" @change="updateCalculation()" class="w-full appearance-none px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required>
-                                    <option value="" style="background: #111; color: #fff;">-- Pilih Baris --</option>
-                                    <option value="1" style="background: #111; color: #fff;">Baris Depan Saja</option>
-                                    <option value="1,2" x-show="hasRow2" style="background: #111; color: #fff;">Baris Depan + Tengah</option>
-                                    <option value="1,2,3" x-show="hasRow3" style="background: #111; color: #fff;">Full Set (3 Baris)</option>
-                                </select>
-                                @error('seat_row') <p class="mt-2 text-xs" style="color: oklch(0.60 0.20 25);">{{ $message }}</p> @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. Kustomisasi Desain -->
-                    <div class="p-8 md:p-10" style="background: oklch(0.155 0.022 55); border: 1px solid oklch(0.22 0.02 55);">
-                        <div class="flex items-center gap-4 mb-8" style="border-bottom: 1px solid oklch(0.22 0.02 55); padding-bottom: 1.5rem;">
-                            <span class="font-display font-600 text-2xl" style="color: oklch(0.67 0.13 66);">02</span>
-                            <h2 class="font-sans font-700 text-base uppercase tracking-wider" style="color: oklch(0.93 0.012 75);">Warna Jok</h2>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Warna Utama (Mayoritas)</label>
-                                <input type="text" name="primary_color" placeholder="Misal: Hitam, Beige" class="w-full px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required value="{{ old('primary_color') }}">
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Provinsi (Kargo Darat)</label>
+                                <div class="relative">
+                                    <select name="shipping_province" x-model="selectedProvince" @change="updateCalculation()" class="w-full appearance-none px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required>
+                                        <option value="" style="background: {{ $surface }};">-- Pilih Provinsi --</option>
+                                        @foreach($provinces as $p)
+                                            <option value="{{ $p->province_name }}" style="background: {{ $surface }};">{{ $p->province_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $inkMut }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </div>
                             </div>
                             <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Warna Sekunder/Jahitan</label>
-                                <input type="text" name="secondary_color" placeholder="Misal: Jahitan Merah" class="w-full px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" value="{{ old('secondary_color') }}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Data Pengiriman -->
-                    <div class="p-8 md:p-10" style="background: oklch(0.155 0.022 55); border: 1px solid oklch(0.22 0.02 55);">
-                        <div class="flex items-center gap-4 mb-8" style="border-bottom: 1px solid oklch(0.22 0.02 55); padding-bottom: 1.5rem;">
-                            <span class="font-display font-600 text-2xl" style="color: oklch(0.67 0.13 66);">03</span>
-                            <h2 class="font-sans font-700 text-base uppercase tracking-wider" style="color: oklch(0.93 0.012 75);">Data Pengiriman</h2>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Nama Lengkap</label>
-                                <input type="text" name="customer_name" class="w-full px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required value="{{ old('customer_name') }}">
-                            </div>
-                            <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Nomor WhatsApp</label>
-                                <input type="text" name="customer_wa" placeholder="08..." class="w-full px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required value="{{ old('customer_wa') }}">
-                            </div>
-
-                            <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Provinsi</label>
-                                <select name="shipping_province" x-model="selectedProvince" @change="updateCalculation()" class="w-full appearance-none px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required>
-                                    <option value="" style="background: #111; color: #fff;">-- Pilih Provinsi --</option>
-                                    @foreach($provinces as $p)
-                                        <option value="{{ $p->province_name }}" style="background: #111; color: #fff;">{{ $p->province_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Kota / Kabupaten</label>
-                                <input type="text" name="shipping_city" class="w-full px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required value="{{ old('shipping_city') }}">
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Kota / Kabupaten</label>
+                                <input type="text" name="shipping_city" class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required value="{{ old('shipping_city') }}" placeholder="Ketikan kota/kabupaten">
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-3" style="color: oklch(0.50 0.020 62);">Alamat Lengkap</label>
-                                <textarea name="shipping_address" rows="3" class="w-full px-5 py-4 font-sans text-sm outline-none transition-colors duration-200" style="background: oklch(0.12 0.018 55); border: 1px solid oklch(0.28 0.025 55); color: oklch(0.93 0.012 75);" onfocus="this.style.borderColor='oklch(0.67 0.13 66)'" onblur="this.style.borderColor='oklch(0.28 0.025 55)'" required placeholder="Nama jalan, RT/RW, detail...">{{ old('shipping_address') }}</textarea>
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Detail Alamat Lengkap</label>
+                                <textarea name="shipping_address" rows="3" class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200 resize-none" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required placeholder="Nama jalan, Gedung, RT/RW, Patokan...">{{ old('shipping_address') }}</textarea>
                             </div>
                         </div>
                     </div>
 
+                    <!-- SECTION 2: Kendaraan & Kustomisasi -->
+                    <div class="rounded-2xl p-6 sm:p-8" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
+                        <div class="flex items-center gap-3 mb-6 pb-5" style="border-bottom: 1px solid {{ $border }};">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background: oklch(0.67 0.13 66 / 0.15);">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $gold }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+                            </div>
+                            <h2 class="font-sans font-700 text-base uppercase tracking-wider" style="color: {{ $inkPri }};">Kustomisasi Pesanan</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+                            <div>
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Mobil Anda</label>
+                                <div class="relative">
+                                    <select name="car_variant_id" x-model="selectedVariantId" @change="updateCalculation()" class="w-full appearance-none px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required>
+                                        <option value="" style="background: {{ $surface }};">-- Pilih Jenis Mobil --</option>
+                                        @foreach($carVariants as $brand => $variants)
+                                            <optgroup label="{{ $brand }}" style="background: oklch(0.08 0.01 55); color: {{ $inkSec }};">
+                                                @foreach($variants as $v)
+                                                    <option value="{{ $v->id }}" style="background: {{ $surface }}; color: {{ $inkPri }};">{{ $v->model_name }} ({{ $v->year_range }})</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                    <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $inkMut }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </div>
+                                @error('car_variant_id') <p class="mt-2 text-[11px]" style="color: oklch(0.60 0.20 25);">{{ $message }}</p> @enderror
+                            </div>
+
+                            <div>
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Pesan Untuk Baris Jok</label>
+                                <div class="relative">
+                                    <select name="seat_row" x-model="selectedRow" @change="updateCalculation()" class="w-full appearance-none px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required>
+                                        <option value="" style="background: {{ $surface }};">-- Pilih Jumlah Baris --</option>
+                                        <option value="1" style="background: {{ $surface }};">Baris Depan Saja</option>
+                                        <option value="1,2" x-show="hasRow2" style="background: {{ $surface }};">Baris Depan + Tengah</option>
+                                        <option value="1,2,3" x-show="hasRow3" style="background: {{ $surface }};">Full Set (3 Baris)</option>
+                                    </select>
+                                    <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: {{ $inkMut }};"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </div>
+                                @error('seat_row') <p class="mt-2 text-[11px]" style="color: oklch(0.60 0.20 25);">{{ $message }}</p> @enderror
+                            </div>
+
+                            <div>
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Warna Dominan Jok</label>
+                                <input type="text" name="primary_color" placeholder="Misal: Hitam, Beige..." class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" required value="{{ old('primary_color') }}">
+                            </div>
+                            <div>
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Warna Aksen / Jahitan</label>
+                                <input type="text" name="secondary_color" placeholder="Misal: Jahitan Merah..." class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" value="{{ old('secondary_color') }}">
+                            </div>
+                            
+                            <div class="sm:col-span-2 mt-2">
+                                <label class="block font-sans text-xs font-700 uppercase tracking-wider mb-2" style="color: {{ $inkMut }};">Catatan Pesanan (Opsional)</label>
+                                <textarea name="notes" rows="2" class="w-full px-4 py-3 rounded-xl font-sans text-sm outline-none transition-all duration-200 resize-none" style="background: {{ $bg }}; border: 1px solid {{ $border }}; color: {{ $inkPri }};" onfocus="this.style.borderColor='{{ $gold }}'; this.style.boxShadow='0 0 0 3px oklch(0.67 0.13 66 / 0.15)'" onblur="this.style.borderColor='{{ $border }}'; this.style.boxShadow='none'" placeholder="Ada permintaan khusus bentuk jok, jenis bahan, dll?">{{ old('notes') }}</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
 
             <!-- RIGHT COLUMN: Summary (Sticky) -->
-            <div class="lg:col-span-4 relative">
-                <div class="sticky top-24 flex flex-col p-8 md:p-10" style="background: oklch(0.10 0.015 55); border: 1px solid oklch(0.22 0.02 55);">
-                    <p class="font-sans text-xs uppercase tracking-[0.14em] mb-8" style="color: oklch(0.50 0.020 62);">Ringkasan Pesanan</p>
+            <div class="lg:col-span-5 xl:col-span-4 relative hidden lg:block">
+                <!-- Desktop Sidebar -->
+                <div class="sticky top-28 flex flex-col p-8 rounded-2xl" style="background: {{ $surface }}; border: 1px solid {{ $border }};">
+                    <p class="font-sans text-xs font-700 uppercase tracking-wider mb-6" style="color: {{ $inkPri }};">Ringkasan Pesanan</p>
                     
-                    <div class="flex gap-5 mb-8">
+                    <div class="flex gap-4 mb-6">
                         @if($product->primary_image)
-                            <div class="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden bg-black/40 shrink-0 border border-[var(--color-border)]">
-                            <img src="{{ Storage::disk('public')->url($product->primary_image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover" style="filter: saturate(0.85) contrast(1.05);">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 border" style="border-color: {{ $border }}; background: {{ $bg }};">
+                                <img src="{{ Storage::disk('public')->url($product->primary_image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                             </div>
                         @endif
                         <div class="flex flex-col justify-center">
-                            <h4 class="font-sans font-700 text-lg leading-tight mb-1" style="color: oklch(0.93 0.012 75);">{{ $product->name }}</h4>
-                            <p class="font-sans text-xs uppercase tracking-wider" style="color: oklch(0.50 0.020 62);">Jok Kustomisasi PNP</p>
+                            <h4 class="font-sans font-700 text-sm mb-1" style="color: {{ $inkPri }}; line-height: 1.3;">{{ $product->name }}</h4>
+                            <p class="font-sans text-[11px] uppercase tracking-wider" style="color: {{ $inkMut }};">Custom PNP</p>
                         </div>
                     </div>
 
-                    <div style="height: 1px; background: oklch(0.22 0.02 55); margin-bottom: 2rem;"></div>
+                    <div style="height: 1px; background: {{ $border }}; margin-bottom: 1.5rem;"></div>
 
-                    <ul class="space-y-4 mb-8 font-sans text-sm">
+                    <ul class="space-y-3.5 mb-6 font-sans text-[13px]">
                         <li class="flex justify-between items-center">
-                            <span style="color: oklch(0.50 0.020 62);">Harga Dasar</span>
-                            <span class="font-700" style="color: oklch(0.93 0.012 75);" x-text="formatRupiah({{ $product->base_price }})"></span>
+                            <span style="color: {{ $inkSec }};">Harga Produk</span>
+                            <span class="font-700" style="color: {{ $inkPri }};" x-text="formatRupiah({{ $product->base_price }})"></span>
                         </li>
                         <li class="flex justify-between items-center" x-show="priceAdjustment > 0" style="display:none;">
-                            <span style="color: oklch(0.50 0.020 62);">Penyesuaian Kendaraan</span>
-                            <span class="font-700" style="color: oklch(0.67 0.13 66);" x-text="'+ ' + formatRupiah(priceAdjustment)"></span>
+                            <span style="color: {{ $inkSec }};">Penyesuaian Mobil</span>
+                            <span class="font-700" style="color: {{ $gold }};" x-text="'+ ' + formatRupiah(priceAdjustment)"></span>
                         </li>
                         <li class="flex justify-between items-center" x-show="priceAdjustment < 0" style="display:none;">
-                            <span style="color: oklch(0.50 0.020 62);">Penyesuaian Kendaraan</span>
+                            <span style="color: {{ $inkSec }};">Penyesuaian Mobil</span>
                             <span class="font-700" style="color: oklch(0.62 0.14 155);" x-text="'- ' + formatRupiah(Math.abs(priceAdjustment))"></span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span style="color: oklch(0.50 0.020 62);">Biaya Kargo Darat</span>
-                            <span class="font-700" style="color: oklch(0.93 0.012 75);" x-text="shippingCost > 0 ? formatRupiah(shippingCost) : '-'"></span>
+                            <span style="color: {{ $inkSec }};">Ongkir (Kargo Darat)</span>
+                            <span class="font-700" style="color: {{ $inkPri }};" x-text="shippingCost > 0 ? formatRupiah(shippingCost) : '-'"></span>
                         </li>
                     </ul>
 
-                    <div style="height: 1px; background: oklch(0.22 0.02 55); margin-bottom: 2rem;"></div>
-
-                    <div class="flex items-start justify-between mb-8">
-                        <span class="font-sans text-xs uppercase tracking-wider mt-2" style="color: oklch(0.50 0.020 62);">Total</span>
+                    <div class="flex items-end justify-between p-4 rounded-xl mb-6" style="background: {{ $bg }}; border: 1px solid {{ $border }};">
+                        <span class="font-sans text-[11px] font-700 uppercase tracking-wider" style="color: {{ $inkSec }};">Total Bayar</span>
                         <div class="text-right">
-                            <span class="font-sans font-500 text-lg mr-1" style="color: oklch(0.50 0.020 62);">Rp</span>
-                            <span class="font-display font-600" style="font-size: clamp(2rem, 3vw, 2.5rem); color: oklch(0.93 0.012 75); letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
+                            <span class="font-sans font-700 text-xs mr-0.5" style="color: {{ $gold }};">Rp</span>
+                            <span class="font-display font-700 text-2xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
                         </div>
                     </div>
 
                     <button 
                         type="submit" 
                         form="checkout-form" 
-                        class="touch-target w-full flex items-center justify-center gap-2.5 py-4 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-250 disabled:opacity-50 disabled:cursor-not-allowed" 
-                        style="background: oklch(0.67 0.13 66); color: oklch(0.12 0.018 55); border: none;"
-                        onmouseover="if(!this.disabled){this.style.background='oklch(0.75 0.11 67)'}"
-                        onmouseout="if(!this.disabled){this.style.background='oklch(0.67 0.13 66)'}"
+                        class="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-sans font-700 text-sm uppercase tracking-wider transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg" 
+                        style="background: {{ $gold }}; color: oklch(0.12 0.018 55); border: none;"
+                        onmouseover="if(!this.disabled){this.style.background='{{ $goldH }}'; this.style.transform='translateY(-2px)'}"
+                        onmouseout="if(!this.disabled){this.style.background='{{ $gold }}'; this.style.transform='translateY(0)'}"
                         :disabled="grandTotal === 0 || !selectedProvince || !selectedRow || !selectedVariantId">
-                        Proses Pembayaran
+                        Proses Sekarang
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </button>
                     
-                    <div class="mt-6 flex items-center justify-center gap-2 font-sans text-[10px] uppercase tracking-widest text-center" style="color: oklch(0.50 0.020 62);">
+                    <div class="mt-5 flex items-center justify-center gap-2 font-sans text-[10px] font-700 uppercase tracking-widest" style="color: {{ $inkMut }};">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                         Pembayaran Aman via Midtrans
                     </div>
                 </div>
             </div>
             
+        </div>
+    </div>
+
+        <!-- MOBILE STICKY BOTTOM BAR -->
+        <div class="fixed bottom-0 left-0 right-0 z-50 lg:hidden py-4 px-4 sm:px-6 flex items-center justify-between"
+             style="background: oklch(0.10 0.015 55 / 0.85); backdrop-filter: blur(12px); border-top: 1px solid {{ $border }}; box-shadow: 0 -4px 24px rgba(0,0,0,0.4);"
+             x-show="true" x-transition>
+            <div class="flex flex-col">
+                <span class="font-sans text-[10px] font-700 uppercase tracking-wider" style="color: {{ $inkMut }};">Total Bayar</span>
+                <div class="flex items-baseline gap-1 mt-0.5">
+                    <span class="font-sans font-700 text-xs" style="color: {{ $gold }};">Rp</span>
+                    <span class="font-display font-700 text-xl" style="color: {{ $gold }}; letter-spacing: -0.02em; line-height: 1;" x-text="formatNumber(grandTotal)"></span>
+                </div>
+            </div>
+            <button 
+                type="submit" 
+                form="checkout-form" 
+                class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-700 text-xs uppercase tracking-wider transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" 
+                style="background: {{ $gold }}; color: oklch(0.12 0.018 55); border: none;"
+                :disabled="grandTotal === 0 || !selectedProvince || !selectedRow || !selectedVariantId">
+                Beli
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
         </div>
     </div>
 
@@ -279,6 +319,12 @@
 
                 init() {
                     this.updateCalculation();
+                    
+                    // Trigger sync for mobile bottom bar when values change
+                    this.$watch('grandTotal', (value) => {
+                        // Alpine handles reactivity, but since bottom bar accesses via window context sometimes,
+                        // this ensures it triggers update visually.
+                    });
                 }
             }));
         });

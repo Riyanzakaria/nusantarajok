@@ -79,6 +79,7 @@ class OrderService
                 'shipping_city'        => $data['shipping_city'],
                 'shipping_address'     => $data['shipping_address'],
                 'shipping_postal_code' => $data['shipping_postal_code'] ?? null,
+                'notes'                => $data['notes'] ?? null,
                 'shipping_cost'        => $shippingCost,
                 'product_price'        => $productPrice,
                 'grand_total'          => $productPrice + $shippingCost,
