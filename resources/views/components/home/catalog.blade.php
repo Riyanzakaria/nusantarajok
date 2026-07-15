@@ -16,7 +16,7 @@
             <div class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-3xl overflow-hidden hover:border-[var(--color-primary)]/50 transition-colors duration-300 flex flex-col">
                 <div class="aspect-[4/3] bg-gray-900 relative overflow-hidden group">
                     @if($product->primary_image)
-                        <img src="{{ Storage::url($product->primary_image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <img src="{{ Storage::disk('public')->url($product->primary_image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     @else
                         <div class="w-full h-full flex items-center justify-center text-gray-500 font-mono text-sm">
                             [FOTO {{ strtoupper($product->name) }}]

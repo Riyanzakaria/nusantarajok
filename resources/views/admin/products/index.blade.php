@@ -50,7 +50,7 @@
                 <tr style="border-bottom: 1px solid oklch(0.22 0.02 55);">
                     <td class="px-6 py-4">
                         @if($product->primary_image)
-                            <img src="{{ Storage::url($product->primary_image) }}" alt="Foto" class="w-12 h-12 object-cover rounded-lg border border-[var(--color-border)]">
+                            <img src="{{ Storage::disk('public')->url($product->primary_image) }}" alt="Foto" class="w-12 h-12 object-cover rounded-lg border border-[var(--color-border)]">
                         @else
                             <div class="w-12 h-12 rounded-lg border border-dashed border-[var(--color-border)] flex items-center justify-center text-[10px] text-gray-500">No Img</div>
                         @endif

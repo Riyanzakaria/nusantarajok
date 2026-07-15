@@ -133,7 +133,7 @@
                     <div class="flex gap-5 mb-8">
                         @if($product->primary_image)
                             <div class="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden bg-black/40 shrink-0 border border-[var(--color-border)]">
-                            <img src="{{ Storage::url($product->primary_image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover" style="filter: saturate(0.85) contrast(1.05);">
+                            <img src="{{ Storage::disk('public')->url($product->primary_image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover" style="filter: saturate(0.85) contrast(1.05);">
                             </div>
                         @endif
                         <div class="flex flex-col justify-center">

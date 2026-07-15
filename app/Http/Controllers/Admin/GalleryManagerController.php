@@ -30,7 +30,7 @@ class GalleryManagerController extends Controller
 
         Gallery::create([
             'category_id' => $request->category_id,
-            'image_url' => Storage::url($path),
+            'image_url' => Storage::disk('public')->url($path),
             'title' => $request->title,
             'is_featured' => $request->boolean('is_featured')
         ]);
@@ -42,7 +42,7 @@ class GalleryManagerController extends Controller
     {
         // Extract relative path from URL (e.g. /uploads/galleries/xxx -> galleries/xxx)
         // Storage::url() prefix is config('filesystems.disks.public.url')
-        $prefix = Storage::url('');
+        $prefix = Storage::disk('public')->url('');
         $path = str_replace($prefix, '', $gallery->image_url);
         
         Storage::disk('public')->delete($path);
