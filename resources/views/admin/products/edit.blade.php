@@ -150,15 +150,12 @@
 
             {{-- Submit --}}
             <div class="flex items-center justify-between">
-                <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
-                      onsubmit="return confirm('Hapus produk ini secara permanen?')">
-                    @csrf @method('DELETE')
-                    <button type="submit" class="font-sans text-sm font-700 uppercase tracking-wider transition-colors"
-                            style="color: {{ $red }};"
-                            onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-                        Hapus Produk
-                    </button>
-                </form>
+                <button type="submit" form="delete-form" onclick="return confirm('Hapus produk ini secara permanen?')"
+                        class="font-sans text-sm font-700 uppercase tracking-wider transition-colors"
+                        style="color: {{ $red }};"
+                        onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                    Hapus Produk
+                </button>
 
                 <button type="submit" class="px-7 py-3 font-sans font-700 text-sm uppercase tracking-wider transition-all duration-200"
                     style="background: {{ $gold }}; color: oklch(0.12 0.018 55);"
@@ -166,6 +163,11 @@
                     Simpan Perubahan
                 </button>
             </div>
+        </form>
+
+        {{-- Delete Form (Moved out to prevent HTML nested form bug) --}}
+        <form id="delete-form" action="{{ route('admin.products.destroy', $product) }}" method="POST" class="hidden">
+            @csrf @method('DELETE')
         </form>
     </div>
 </div>
